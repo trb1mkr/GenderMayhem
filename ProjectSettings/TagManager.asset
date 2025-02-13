@@ -1,0 +1,66 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!78 &1
+TagManager:
+  serializedVersion: 2
+  tags:
+  - Weapon
+  - Obstacle
+  layers:
+  - Default
+  - TransparentFX
+  - Ignore Raycast
+  - 
+  - Water
+  - UI
+  - Ground
+  - Environment
+  - Weapons
+  - Obstacles
+  - Characters
+  - Avoid
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  m_SortingLayers:
+  - name: 
+    uniqueID: 1990410409
+    locked: 0
+  - name: 
+    uniqueID: 2795747311
+    locked: 0
+  - name: Default
+    uniqueID: 0
+    locked: 0
+  - name: Ground
+    uniqueID: 3699285863
+    locked: 0
+  - name: Environment
+    uniqueID: 3922971647
+    locked: 0
+  - name: Weapons
+    uniqueID: 639673827
+    locked: 0
+  - name: Obstacles
+    uniqueID: 2388526077
+    locked: 0
+  - name: Characters
+    uniqueID: 2434053923
+    locked: 0
