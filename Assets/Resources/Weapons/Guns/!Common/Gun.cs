@@ -4,31 +4,31 @@ using UnityEngine;
 
 public abstract class Gun : Weapon
 {
-    public AudioClip shotSound;
-    public GunUtilities gunUtilities = new GunUtilities();
-    public int ammo, spread;
+    public AudioClip ShotSound;
+    public GunUtilities GunUtilities = new GunUtilities();
+    public int Ammo, Spread;
 
-    private new void Start()
+    new void Start()
     {
         base.Start();
-        gunUtilities.shellPoint = gameObject.transform.GetChild(0).gameObject;
-        gunUtilities.bulletPoint = gameObject.transform.GetChild(1).gameObject;
-        gunUtilities.muzzleFlash = gameObject.transform.GetChild(2).gameObject;
+        GunUtilities.ShellPoint = gameObject.transform.GetChild(0).gameObject;
+        GunUtilities.BulletPoint = gameObject.transform.GetChild(1).gameObject;
+        GunUtilities.MuzzleFlash = gameObject.transform.GetChild(2).gameObject;
     }
 
-    public void Shoot() //ÌÎÆÍÎ ÆÅ ÎÂÅÐÐÀÉÄÈÒÜ È ÌÅÒÎÄÛ Ñ ÊÎÄÎÌ
+    public void Shoot()
     {
-        if (ammo > 0)
+        if (Ammo > 0)
         {
-            ammo--;
+            Ammo--;
             Fire();
-            StartCoroutine(muzzleFlash());
-            audioSource.PlayOneShot(shotSound);
+            StartCoroutine(MuzzleFlash());
+            AudioSource.PlayOneShot(ShotSound);
         }
-        if (ammo == 0)
+        if (Ammo == 0)
         {
             NoAmmo();
-            gunUtilities.magazine = null;
+            GunUtilities.Magazine = null;
         }
         return;
     }
@@ -36,37 +36,37 @@ public abstract class Gun : Weapon
     virtual public void Fire() { return; }
     virtual public void NoAmmo() { return; }
 
-    IEnumerator muzzleFlash()
+    IEnumerator MuzzleFlash()
     {
-        gunUtilities.muzzleFlash.GetComponent<SpriteRenderer>().enabled = true;
+        GunUtilities.MuzzleFlash.GetComponent<SpriteRenderer>().enabled = true;
         yield return new WaitForSeconds(0.05f);
-        gunUtilities.muzzleFlash.GetComponent<SpriteRenderer>().enabled = false;
+        GunUtilities.MuzzleFlash.GetComponent<SpriteRenderer>().enabled = false;
         yield break;
     }
 
     public void SpawnBullet()
     {
-        Instantiate(gunUtilities.bullet, gunUtilities.bulletPoint.transform.position, Quaternion.Euler(gunUtilities.bulletPoint.transform.eulerAngles + new Vector3(0, 0, Random.Range(-spread, spread))));
+        Instantiate(GunUtilities.Bullet, GunUtilities.BulletPoint.transform.position, Quaternion.Euler(GunUtilities.BulletPoint.transform.eulerAngles + new Vector3(0, 0, Random.Range(-Spread, Spread))));
     }
 
     public void SpawnShell()
     {
-        Instantiate(gunUtilities.shell, gunUtilities.shellPoint.transform.position, gunUtilities.shellPoint.transform.rotation);
+        Instantiate(GunUtilities.Shell, GunUtilities.ShellPoint.transform.position, GunUtilities.ShellPoint.transform.rotation);
     }
 
     public void SpawnMagazine()
     {
-        Instantiate(gunUtilities.magazine, gameObject.transform.position, gameObject.transform.rotation);
+        Instantiate(GunUtilities.Magazine, gameObject.transform.position, gameObject.transform.rotation);
     }
 }
 
 [System.Serializable]
 public class GunUtilities
 {
-    [HideInInspector] public GameObject bulletPoint;
-    [HideInInspector] public GameObject shellPoint;
-    [HideInInspector] public GameObject muzzleFlash;
-    public GameObject bullet;
-    public GameObject shell;
-    public GameObject magazine;
+    [HideInInspector] public GameObject BulletPoint;
+    [HideInInspector] public GameObject ShellPoint;
+    [HideInInspector] public GameObject MuzzleFlash;
+    public GameObject Bullet;
+    public GameObject Shell;
+    public GameObject Magazine;
 }

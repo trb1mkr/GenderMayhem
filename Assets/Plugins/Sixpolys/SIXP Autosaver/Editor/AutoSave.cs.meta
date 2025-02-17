@@ -3,9 +3,8 @@ guid: a756dfb0e358640b3a73177a1daf9fe9
 labels:
 - SIXPAutosaver
 - Sixpolys
-timeCreated: 1433224429
-licenseType: Store
 MonoImporter:
+  externalObjects: {}
   serializedVersion: 2
   defaultReferences: []
   executionOrder: 0

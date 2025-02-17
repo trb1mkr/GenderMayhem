@@ -2,15 +2,13 @@ using UnityEngine;
 
 public class FinishOff : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    // public void FinishOff()
+    // {
+    //     if (State == "Dead" || State == "Unconscious") return;
+    //     GameObject enemy = GetObject.GetNearest(gameObject, typeof(Enemy));
+    //     if (enemy.GetComponent<Enemy>().State == "Unconscious")
+    //     {
+    //         Rigidbody.position = enemy.transform.position;
+    //     }
+    // }
 }

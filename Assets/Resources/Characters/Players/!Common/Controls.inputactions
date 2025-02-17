@@ -24,7 +24,16 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "ThrowPickUp",
+                    "name": "PickUp",
+                    "type": "Button",
+                    "id": "3bd1bd04-55bf-4aca-ba78-3da33c19a858",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Throw",
                     "type": "Button",
                     "id": "d358336b-bf40-48bf-9b1b-b1e156169e09",
                     "expectedControlType": "",
@@ -42,9 +51,9 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "Pause",
+                    "name": "Aim",
                     "type": "Button",
-                    "id": "f7b55a4b-4573-4aac-bc4e-0c45ec688e33",
+                    "id": "2118669e-cb45-4d2b-88db-8b0dd86ccfeb",
                     "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
@@ -60,13 +69,22 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "Mouse",
+                    "name": "MousePosition",
                     "type": "Value",
                     "id": "6f4d39ac-80b7-4bb9-a0f5-238c25f50dc8",
                     "expectedControlType": "Vector2",
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": true
+                },
+                {
+                    "name": "Pause",
+                    "type": "Button",
+                    "id": "f7b55a4b-4573-4aac-bc4e-0c45ec688e33",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -143,7 +161,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "ThrowPickUp",
+                    "action": "Throw",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -176,7 +194,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Mouse",
+                    "action": "MousePosition",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -188,6 +206,28 @@
                     "processors": "",
                     "groups": "",
                     "action": "AutomaticFire",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "487b58af-9435-46e2-ad24-66f6ff50c9a8",
+                    "path": "<Keyboard>/leftShift",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Aim",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "9daeb346-9e93-45db-a429-785b836e9f29",
+                    "path": "<Mouse>/rightButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "PickUp",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

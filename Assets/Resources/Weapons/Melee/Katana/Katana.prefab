@@ -5,7 +5,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
-    serializedVersion: 2
+    serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 2117815261912771414, guid: 65e683b66d4778e458363d6c9414be2e, type: 3}
@@ -242,7 +242,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 7107519242408914698, guid: 65e683b66d4778e458363d6c9414be2e, type: 3}
+    m_RemovedGameObjects: []
     m_AddedGameObjects: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 5069647977996696477, guid: 65e683b66d4778e458363d6c9414be2e, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 377482194630554891}
   m_SourcePrefab: {fileID: 100100000, guid: 65e683b66d4778e458363d6c9414be2e, type: 3}
 --- !u!1 &4696802203991581726 stripped
 GameObject:
@@ -261,10 +266,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8aaf7fbbf22da6b43ac1eaf3172178f6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Name: Katana
-  AttackSound: {fileID: 0}
-  PickUpSound: {fileID: 0}
-  Lethal: 0
-  AttackTime: 0
-  CooldownTime: 0
-  Cooldown: 0
+  audioSource: {fileID: 0}
+  rb: {fileID: 0}
+  attackSound: {fileID: 0}
+  pickUpSound: {fileID: 0}
+  hitSound: {fileID: 0}
+  lethal: 0
+  attackTime: 0
+  cooldownTime: 0
+  cooldown: 0

@@ -1,14 +1,12 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public abstract class Melee : Weapon
 {
-    public AudioClip hitSound;
-    public bool lethal;
-    public float attackTime;
-    public float cooldownTime;
-    [HideInInspector] public bool cooldown = false;
+    public AudioClip HitSound;
+    public bool Lethal;
+    public float AttackTime;
+    public float CooldownTime;
+    [HideInInspector] public bool Cooldown = false;
 
     private new void Start()
     {
