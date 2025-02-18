@@ -17,7 +17,14 @@ public class PlayerControls : MonoBehaviour
     public void OnAttack(InputAction.CallbackContext context)
     {
         if (context.performed)
-            if (Player.Weapon != null) Player.Weapon.Attack();
+        {
+            Player.Animate.State = CharacterStateId.Attack;
+        }
+            // if (Player.Weapon != null) 
+            // {
+            //     //Player.Weapon.Attack();
+
+            // }
     }
 
     public void OnPickUp(InputAction.CallbackContext context)

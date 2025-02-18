@@ -19,11 +19,13 @@ public abstract class Character : MonoBehaviour
 
     public void Awake()
     {
-        AudioSource = GetComponent<AudioSource>();
         SpriteRenderer = GetComponent<SpriteRenderer>();
-        //WeaponPoint = transform.GetChild(0).transform;
         Rigidbody = GetComponent<Rigidbody2D>();
-        Debug.Log(Rigidbody.gameObject.name);
+        AudioSource = GetComponent<AudioSource>();
+
+        Animate = GetComponent<CharacterAnimate>();
+        Items = GetComponent<CharacterItems>();
+        //WeaponPoint = transform.GetChild(0).transform;
     }
 
     // public void Dead()

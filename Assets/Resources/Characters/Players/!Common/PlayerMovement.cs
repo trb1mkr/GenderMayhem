@@ -1,11 +1,10 @@
-using Sirenix.OdinInspector;
 using UnityEngine;
+using Sirenix.OdinInspector;
 
 public class PlayerMovement : MonoBehaviour
 {
     #region Values
     public int MovementSpeed;
-    public int RotationSpeed;
     [ReadOnly] public Vector2 MovementDirection;
     #endregion
 
@@ -21,13 +20,15 @@ public class PlayerMovement : MonoBehaviour
 
     public void Move()
     {
-        Player.Rigidbody.linearVelocity = new Vector2(MovementDirection.x * MovementSpeed, MovementDirection.y * MovementSpeed);
-        //rb.AddForce(new Vector2(movementDirection.x * movementSpeed, movementDirection.y * movementSpeed) * 1000f, ForceMode2D.Force);
+        Player.Rigidbody.AddForce(new Vector2(MovementDirection.x * MovementSpeed, MovementDirection.y * MovementSpeed) * 1000f, ForceMode2D.Force);
+        if (MovementDirection.magnitude == 0) Player.Rigidbody.linearVelocity = Vector2.zero;
     }
 
     void Rotate()
     {
         var targetPosition = Camera.main.ScreenToWorldPoint(new Vector2(Player.Controls.MousePosition.x, Player.Controls.MousePosition.y - Player.Camera.transform.position.z));
-        Player.Rigidbody.rotation = Mathf.Atan2((targetPosition.y - transform.position.y), (targetPosition.x - transform.position.x)) * Mathf.Rad2Deg;
+        var targetDirection = (targetPosition - transform.position).normalized;
+        var targetRotation = Mathf.Atan2(targetDirection.y, targetDirection.x) * Mathf.Rad2Deg;
+        Player.Rigidbody.rotation = targetRotation; //забавное поведение с .MoveRotation
     }
 }

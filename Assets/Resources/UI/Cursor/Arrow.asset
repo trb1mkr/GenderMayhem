@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8f31f3102f1dc7b43b3b9cf5fd6cfcd3, type: 3}
   m_Name: Arrow
   m_EditorClassIdentifier: 
-  Cursor: {fileID: 0}
+  Cursor: {fileID: 2800000, guid: 9322dd8a60864e241bf7272af9966ee3, type: 3}
   HotSpot: {x: 0, y: 0}

@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: Crosshair
   m_EditorClassIdentifier: 
   Cursor: {fileID: 2800000, guid: 6730deb84fd1321498695994cde1f484, type: 3}
-  HotSpot: {x: 0, y: 0}
+  HotSpot: {x: 10, y: 10}

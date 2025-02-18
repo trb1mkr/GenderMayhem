@@ -12,7 +12,7 @@ public class PolygonCollider2DAnimator : MonoBehaviour
     [FoldoutGroup("Create")] public string SerializedColliderName;
 
     [InfoBox("If Auto Save is enabled and Save Folder is changed, use of Update Current Collider will produce new files at new path")]
-    [SerializeField][PropertyOrder(1)][FoldoutGroup("Save")] private bool _autoSave;
+    [SerializeField][PropertyOrder(1)][FoldoutGroup("Save")] private bool _autoSave = true;
     [SerializeField][FolderPath][PropertyOrder(1)][FoldoutGroup("Save")] private string _saveFolder;
 
     private void FixedUpdate()
@@ -34,6 +34,7 @@ public class PolygonCollider2DAnimator : MonoBehaviour
         return colliderPaths;
     }
 
+#if UNITY_EDITOR
     private string GetUniqueName(PC2DPaths collider)
     {
         collider.name = collider.name == "" ? Colliders.Count.ToString() : collider.name;
@@ -101,6 +102,7 @@ public class PolygonCollider2DAnimator : MonoBehaviour
         for (int i = 0; i < Colliders.Count; i++)
             SaveColliderToAsset(i);
     }
+#endif
 
     [OnInspectorGUI]
     public void UpdateColliderInComponent()

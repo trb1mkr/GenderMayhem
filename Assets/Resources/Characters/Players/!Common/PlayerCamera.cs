@@ -14,7 +14,7 @@ public class PlayerCamera : MonoBehaviour
     #endregion
 
     #region References
-    public Player Player;
+    [HideInInspector] public Player Player;
     private CinemachineTargetGroup _targetGroup;
     #endregion
 

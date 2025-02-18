@@ -14,7 +14,7 @@ public class Player : Character
         base.Awake();
         Controls = GetComponent<PlayerControls>();
         Movement = GetComponent<PlayerMovement>();
-        Camera = GetComponentInChildren<PlayerCamera>();
+        Camera = transform.root.GetComponentInChildren<PlayerCamera>();
 
         Movement.Player = Controls.Player = Camera.Player = this;
 
