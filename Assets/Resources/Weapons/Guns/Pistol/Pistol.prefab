@@ -198,7 +198,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3444400883384444780, guid: 67bbc0f6e6d5656409b16086dd7ab096, type: 3}
       propertyPath: m_Mass
-      value: 26
+      value: 0.8
       objectReference: {fileID: 0}
     - target: {fileID: 4099142162061420537, guid: 67bbc0f6e6d5656409b16086dd7ab096, type: 3}
       propertyPath: m_Layer
@@ -268,21 +268,6 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 4410259472070018826}
   m_SourcePrefab: {fileID: 100100000, guid: 67bbc0f6e6d5656409b16086dd7ab096, type: 3}
---- !u!1 &1843670629491651042 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 4099142162061420537, guid: 67bbc0f6e6d5656409b16086dd7ab096, type: 3}
-  m_PrefabInstance: {fileID: 2410864783748552219}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &3706675567678583653 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1298687563788002686, guid: 67bbc0f6e6d5656409b16086dd7ab096, type: 3}
-  m_PrefabInstance: {fileID: 2410864783748552219}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &4977571898133843258 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 7234751308088531745, guid: 67bbc0f6e6d5656409b16086dd7ab096, type: 3}
-  m_PrefabInstance: {fileID: 2410864783748552219}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &8522072857297819949 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 6282909212614381366, guid: 67bbc0f6e6d5656409b16086dd7ab096, type: 3}
@@ -300,17 +285,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3ab7fa1ce2aeb2f4f9fa1250444cdb43, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  audioSource: {fileID: 0}
-  rb: {fileID: 0}
-  attackSound: {fileID: 8300000, guid: d6a902014f09b72458c0448afff655d0, type: 3}
-  pickUpSound: {fileID: 8300000, guid: f9ef1bd26a4f2ae4c87a770768743932, type: 3}
-  shotSound: {fileID: 8300000, guid: 9b8560053ff8ed640bff124d3876e56d, type: 3}
-  gunUtilities:
-    bulletPoint: {fileID: 1843670629491651042}
-    shellPoint: {fileID: 3706675567678583653}
-    muzzleFlash: {fileID: 4977571898133843258}
-    bullet: {fileID: 9041737352635034749, guid: 27105cf3d1647fb4a8f727e7e276f0e6, type: 3}
-    shell: {fileID: 7652202784644121547, guid: 03ce95344eb014341a617eb4a41e9274, type: 3}
-    magazine: {fileID: 1295682356239836410, guid: d3317f3c3c173104186731159f436ed2, type: 3}
-  ammo: 7
-  spread: 10
+  _sleepVelocity: 1
+  AttackSound: {fileID: 8300000, guid: d6a902014f09b72458c0448afff655d0, type: 3}
+  PickUpSound: {fileID: 8300000, guid: f9ef1bd26a4f2ae4c87a770768743932, type: 3}
+  Rigidbody: {fileID: 0}
+  AudioSource: {fileID: 0}
+  SpriteRenderer: {fileID: 0}
+  ShotSound: {fileID: 8300000, guid: 9b8560053ff8ed640bff124d3876e56d, type: 3}
+  GunUtilities:
+    BulletPoint: {fileID: 0}
+    ShellPoint: {fileID: 0}
+    MuzzleFlash: {fileID: 0}
+    Bullet: {fileID: 9041737352635034749, guid: 27105cf3d1647fb4a8f727e7e276f0e6, type: 3}
+    Shell: {fileID: 7652202784644121547, guid: 03ce95344eb014341a617eb4a41e9274, type: 3}
+    Magazine: {fileID: 1295682356239836410, guid: d3317f3c3c173104186731159f436ed2, type: 3}
+  Ammo: 7
+  Spread: 10

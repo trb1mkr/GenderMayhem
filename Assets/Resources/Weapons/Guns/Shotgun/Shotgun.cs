@@ -7,13 +7,12 @@ public class Shotgun : Gun
     public override void Fire()
     {
         for (int i = 0; i < 10; i++)
-        {
             SpawnBullet();
-        }
     }
-    public override void NoAmmo()
-    {
-        SpawnShell();
-        SpawnShell();
-    }
+
+    // public override void NoAmmo()
+    // {
+    //     SpawnShell();
+    //     SpawnShell();
+    // }
 }

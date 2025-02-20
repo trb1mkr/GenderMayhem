@@ -1,5 +1,3 @@
-using Unity.VisualScripting;
-using Unity.VisualScripting.FullSerializer;
 using UnityEngine;
 
 public static class GetObject
@@ -10,16 +8,16 @@ public static class GetObject
         return PickNearest(myObject, allObjects);
     }
 
-    public static GameObject GetNearest(GameObject myObject, System.Type type)
-    {
-        Object[] allObjects = Object.FindObjectsOfType(type);
-        GameObject[] allGameObjects = new GameObject[allObjects.Length];
-        for (int i = 0; i < allObjects.Length; i++)
-        {
-            allGameObjects[i] = allObjects[i].GameObject();
-        }
-        return PickNearest(myObject, allGameObjects);
-    }
+    // public static GameObject GetNearest(GameObject myObject, System.Type type)
+    // {
+    //     Object[] allObjects = Object.FindObjectsByType<>(FindObjectsSortMode.None);
+    //     GameObject[] allGameObjects = new GameObject[allObjects.Length];
+    //     for (int i = 0; i < allObjects.Length; i++)
+    //     {
+    //         allGameObjects[i] = allObjects[i].GameObject();
+    //     }
+    //     return PickNearest(myObject, allGameObjects);
+    // }
 
     private static GameObject PickNearest(GameObject myObject, GameObject[] allObjects)
     {

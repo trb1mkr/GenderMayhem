@@ -1,0 +1,124 @@
+using UnityEngine;
+using Sirenix.OdinInspector;
+using System;
+
+public class CharacterHands : MonoBehaviour
+{
+    #region Values
+    [field: ReadOnly] public WeaponId WeaponId { get; private set; }
+    [SerializeField] private float _pickUpDistance;
+    [SerializeField] private float _throwForce;
+    [SerializeField] private float _throwTorque;
+    #endregion
+
+    #region References
+    [HideInInspector] public Character Character;
+    [field: SerializeField] public Weapon Weapon { get; private set; }
+    [SerializeField] private Weapon _fists;
+    #endregion
+
+    void Awake()
+    {
+        SetWeaponId();
+    }
+
+    void SetWeaponId()
+    {
+        if (Enum.TryParse(Weapon.GetType().Name, out WeaponId weaponId))
+            WeaponId = weaponId;
+        else
+            throw new ArgumentException($"Weapon type '{Weapon.GetType().Name}' not found in WeaponId enum.");
+    }
+
+    public GameObject GetTargetWeapon()
+    {
+        // Сначала проверяем, наведён ли курсор на объект со скриптом Weapon
+        // GameObject weaponUnderCursor = GetWeaponUnderCursor();
+
+        // if (weaponUnderCursor != null)
+        // {
+        //     return weaponUnderCursor; // Возвращаем объект, на который наведён курсор
+        // }
+
+        // Если курсор не наведён на Weapon, ищем ближайший к игроку
+        return GetNearestWeapon();
+    }
+
+    // private GameObject GetWeaponUnderCursor()
+    // {
+    //     // Получаем позицию курсора мыши в мировых координатах
+    //     Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Character.Controls.MousePosition);
+    //     mousePosition.z = 0; // Обнуляем Z, так как мы работаем в 2D
+
+    //     // Используем Raycast для проверки, наведён ли курсор на объект
+    //     RaycastHit2D hit = Physics2D.Raycast(mousePosition, Vector2.zero);
+
+    //     if (hit.collider != null)
+    //     {
+    //         // Проверяем, есть ли у объекта компонент Weapon
+    //         Weapon weapon = hit.collider.GetComponent<Weapon>();
+    //         if (weapon != null)
+    //         {
+    //             return weapon.gameObject; // Возвращаем объект, на который наведён курсор
+    //         }
+    //     }
+
+    //     return null; // Если ничего не найдено
+    // }
+
+    private GameObject GetNearestWeapon()
+    {
+        GameObject nearestWeapon = null;
+        float nearestDistance = float.MaxValue;
+
+        // Получаем все объекты с компонентом Weapon
+        Weapon[] weapons = FindObjectsByType<Weapon>(FindObjectsSortMode.None);
+
+        foreach (Weapon weapon in weapons)
+        {
+            if (weapon.transform.GetComponentInParent<Player>() != null) continue;
+            // Вычисляем дистанцию между игроком и оружием
+            float distance = Vector3.Distance(transform.position, weapon.transform.position);
+
+            // Проверяем, что дистанция меньше максимальной и меньше текущей ближайшей дистанции
+            if (distance <= _pickUpDistance && distance < nearestDistance)
+            {
+                nearestWeapon = weapon.gameObject;
+                nearestDistance = distance;
+            }
+        }
+
+        return nearestWeapon; // Возвращаем ближайший объект или null
+    }
+
+    public void PickUp()
+    {
+        GameObject targetWeapon = GetTargetWeapon();
+        if (Weapon != _fists) Throw();
+        if (targetWeapon == null) return;
+
+        Weapon = targetWeapon.GetComponent<Weapon>();
+        Weapon.OnPickUp();
+        targetWeapon.transform.parent = Character.WeaponPoint;
+        targetWeapon.gameObject.transform.localPosition = Vector3.zero;
+        targetWeapon.gameObject.transform.localRotation = Quaternion.identity;
+        
+        SetWeaponId();
+    }
+
+    public void Throw()
+    {
+        if (Weapon == _fists) return;
+        
+        Character.StateId = CharacterStateId.Idle;
+        
+        Weapon.OnThrow();
+        Weapon.transform.SetParent(null, true);
+        Weapon.Rigidbody.AddForce(_throwForce * new Vector2(transform.right.x, transform.right.y).normalized, ForceMode2D.Impulse);
+        Weapon.Rigidbody.AddTorque(_throwTorque, ForceMode2D.Impulse);
+        
+        Weapon = _fists;
+
+        SetWeaponId();
+    }
+}

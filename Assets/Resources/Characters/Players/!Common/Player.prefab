@@ -8,9 +8,29 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1053901765440366096, guid: e6f260d920b23054d989265f71dc2d4d, type: 3}
+      propertyPath: m_Layer
+      value: 11
+      objectReference: {fileID: 0}
     - target: {fileID: 1171868502133147323, guid: e6f260d920b23054d989265f71dc2d4d, type: 3}
       propertyPath: m_Name
       value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 1171868502133147323, guid: e6f260d920b23054d989265f71dc2d4d, type: 3}
+      propertyPath: m_Layer
+      value: 11
+      objectReference: {fileID: 0}
+    - target: {fileID: 1636383663232479540, guid: e6f260d920b23054d989265f71dc2d4d, type: 3}
+      propertyPath: m_Layer
+      value: 11
+      objectReference: {fileID: 0}
+    - target: {fileID: 2321622072869654711, guid: e6f260d920b23054d989265f71dc2d4d, type: 3}
+      propertyPath: m_Layer
+      value: 11
+      objectReference: {fileID: 0}
+    - target: {fileID: 2905890677594492457, guid: e6f260d920b23054d989265f71dc2d4d, type: 3}
+      propertyPath: m_Layer
+      value: 11
       objectReference: {fileID: 0}
     - target: {fileID: 3718113289256693178, guid: e6f260d920b23054d989265f71dc2d4d, type: 3}
       propertyPath: m_LocalPosition.x
@@ -52,6 +72,18 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5221924395613748454, guid: e6f260d920b23054d989265f71dc2d4d, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 6476205344310350172, guid: e6f260d920b23054d989265f71dc2d4d, type: 3}
+      propertyPath: m_Layer
+      value: 11
+      objectReference: {fileID: 0}
+    - target: {fileID: 7338004492575001953, guid: e6f260d920b23054d989265f71dc2d4d, type: 3}
+      propertyPath: m_Layer
+      value: 11
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -69,6 +101,11 @@ PrefabInstance:
       insertIndex: 4
       addedObject: {fileID: 5097662434106307800}
   m_SourcePrefab: {fileID: 100100000, guid: e6f260d920b23054d989265f71dc2d4d, type: 3}
+--- !u!60 &1734346418227983438 stripped
+PolygonCollider2D:
+  m_CorrespondingSourceObject: {fileID: 5617571445286105248, guid: e6f260d920b23054d989265f71dc2d4d, type: 3}
+  m_PrefabInstance: {fileID: 6189139509873263854}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &5019100869967823445 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1171868502133147323, guid: e6f260d920b23054d989265f71dc2d4d, type: 3}
@@ -135,8 +172,8 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 4187561494834836682}
         m_TargetAssemblyTypeName: PlayerControls, Assembly-CSharp
-        m_MethodName: OnPickUp
-        m_Mode: 0
+        m_MethodName: 
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -151,8 +188,8 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 4187561494834836682}
         m_TargetAssemblyTypeName: PlayerControls, Assembly-CSharp
-        m_MethodName: OnThrow
-        m_Mode: 0
+        m_MethodName: 
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -243,6 +280,38 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: f7b55a4b-4573-4aac-bc4e-0c45ec688e33
     m_ActionName: 'Player/Pause[/Keyboard/escape]'
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 4187561494834836682}
+        m_TargetAssemblyTypeName: PlayerControls, Assembly-CSharp
+        m_MethodName: OnPickUpThrow
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 64c429df-52d2-4af2-9467-adf5ebbe610e
+    m_ActionName: 'Player/PickUpThrow[/Mouse/rightButton]'
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 4187561494834836682}
+        m_TargetAssemblyTypeName: PlayerControls, Assembly-CSharp
+        m_MethodName: OnStockAttack
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 4b94439d-999f-475e-8099-94d5f8e7e36b
+    m_ActionName: 'Player/StockAttack[/Mouse/middleButton]'
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Player
@@ -260,9 +329,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b2babd4c09e380a4a95a9215611d1aa1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  State: 
-  Weapon: {fileID: 0}
-  Fists: {fileID: 0}
+  StateId: 0
+  Dead: 0
+  Unconscious: 0
+  <BodyCollider>k__BackingField: {fileID: 1734346418227983438}
+  <AttackCollider>k__BackingField: {fileID: 6650805794334339444}
+  <AvoidCollider>k__BackingField: {fileID: 7221883433301249538}
+  <WeaponPoint>k__BackingField: {fileID: 9104556387976186618}
   PlayerSpawned:
     m_PersistentCalls:
       m_Calls:
@@ -306,3 +379,18 @@ MonoBehaviour:
   MovementSpeed: 220
   MovementDirection: {x: 0, y: 0}
   Player: {fileID: 0}
+--- !u!60 &6650805794334339444 stripped
+PolygonCollider2D:
+  m_CorrespondingSourceObject: {fileID: 695899834292155802, guid: e6f260d920b23054d989265f71dc2d4d, type: 3}
+  m_PrefabInstance: {fileID: 6189139509873263854}
+  m_PrefabAsset: {fileID: 0}
+--- !u!60 &7221883433301249538 stripped
+PolygonCollider2D:
+  m_CorrespondingSourceObject: {fileID: 3593156924925266668, guid: e6f260d920b23054d989265f71dc2d4d, type: 3}
+  m_PrefabInstance: {fileID: 6189139509873263854}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &9104556387976186618 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 3151917603023310356, guid: e6f260d920b23054d989265f71dc2d4d, type: 3}
+  m_PrefabInstance: {fileID: 6189139509873263854}
+  m_PrefabAsset: {fileID: 0}

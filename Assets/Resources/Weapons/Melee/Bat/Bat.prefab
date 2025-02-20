@@ -122,7 +122,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4514463903962764231, guid: 65e683b66d4778e458363d6c9414be2e, type: 3}
       propertyPath: m_Mass
-      value: 45
+      value: 0.9
       objectReference: {fileID: 0}
     - target: {fileID: 5069647977996696477, guid: 65e683b66d4778e458363d6c9414be2e, type: 3}
       propertyPath: m_Name
@@ -213,12 +213,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8ab53a0e3769f574a92b70f1064eedc7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  audioSource: {fileID: 0}
-  rb: {fileID: 0}
-  attackSound: {fileID: 0}
-  pickUpSound: {fileID: 0}
-  hitSound: {fileID: 0}
-  lethal: 0
-  attackTime: 0
-  cooldownTime: 0
-  cooldown: 0
+  AudioSource: {fileID: 0}
+  Rigidbody: {fileID: 0}
+  AttackSound: {fileID: 0}
+  PickUpSound: {fileID: 0}
+  HitSound: {fileID: 0}
+  Lethal: 0
+  AttackTime: 0
+  CooldownTime: 0
+  Cooldown: 0

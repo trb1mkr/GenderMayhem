@@ -1,15 +1,7 @@
-using Sirenix.OdinInspector;
 using UnityEngine;
 
 public class CharacterAnimate : MonoBehaviour
 {
-    #region Values
-    [ReadOnly] public WeaponId Weapon;
-    [ReadOnly] public CharacterStateId State;
-    [ReadOnly] public bool Dead;
-    [ReadOnly] public bool Unconscious;
-    #endregion
-
     #region References
     [HideInInspector] public Character Character;
     [SerializeField] Animator _animator;
@@ -20,12 +12,13 @@ public class CharacterAnimate : MonoBehaviour
         Animate();
     }
 
+    //[OnInspectorGUI]
     public void Animate()
     {
-        //string weaponName = Character.Items.weapon.GetType().Name;
-
-        _animator.SetInteger("Weapon", (int)Weapon);
-        _animator.SetInteger("State", (int)State);
+        _animator.SetInteger("Weapon", (int)Character.Hands.WeaponId);
+        _animator.SetInteger("State", (int)Character.StateId);
+        _animator.SetBool("Dead", Character.Dead);
+        _animator.SetBool("Unconscious", Character.Unconscious);
     }
 }
 

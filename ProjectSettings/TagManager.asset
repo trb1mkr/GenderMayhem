@@ -17,9 +17,9 @@ TagManager:
   - Environment
   - Weapons
   - Obstacles
-  - Characters
+  - Enemies
+  - Player
   - Avoid
-  - 
   - 
   - 
   - 

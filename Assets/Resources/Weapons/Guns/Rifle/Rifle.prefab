@@ -262,7 +262,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3444400883384444780, guid: 67bbc0f6e6d5656409b16086dd7ab096, type: 3}
       propertyPath: m_Mass
-      value: 61
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 4449662602738280364, guid: 67bbc0f6e6d5656409b16086dd7ab096, type: 3}
       propertyPath: Ammo
@@ -409,17 +409,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c57528d826ffee741a683cfea452ce2b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  audioSource: {fileID: 0}
-  rb: {fileID: 0}
-  attackSound: {fileID: 8300000, guid: d6a902014f09b72458c0448afff655d0, type: 3}
-  pickUpSound: {fileID: 8300000, guid: f9ef1bd26a4f2ae4c87a770768743932, type: 3}
-  shotSound: {fileID: 8300000, guid: 3be2b2a897fa64e48a84b7af02ebd6ec, type: 3}
-  gunUtilities:
-    bulletPoint: {fileID: 0}
-    shellPoint: {fileID: 0}
-    muzzleFlash: {fileID: 0}
-    bullet: {fileID: 9041737352635034749, guid: 27105cf3d1647fb4a8f727e7e276f0e6, type: 3}
-    shell: {fileID: 2920767643987161358, guid: 56e41c4af5b14194080fbebd736af473, type: 3}
-    magazine: {fileID: 1295682356239836410, guid: 94335bb893852fc4e98cae88020920cb, type: 3}
-  ammo: 20
-  spread: 20
+  _sleepVelocity: 1
+  AttackSound: {fileID: 8300000, guid: d6a902014f09b72458c0448afff655d0, type: 3}
+  PickUpSound: {fileID: 8300000, guid: f9ef1bd26a4f2ae4c87a770768743932, type: 3}
+  Rigidbody: {fileID: 0}
+  AudioSource: {fileID: 0}
+  SpriteRenderer: {fileID: 0}
+  ShotSound: {fileID: 8300000, guid: 3be2b2a897fa64e48a84b7af02ebd6ec, type: 3}
+  GunUtilities:
+    BulletPoint: {fileID: 0}
+    ShellPoint: {fileID: 0}
+    MuzzleFlash: {fileID: 0}
+    Bullet: {fileID: 9041737352635034749, guid: 27105cf3d1647fb4a8f727e7e276f0e6, type: 3}
+    Shell: {fileID: 2920767643987161358, guid: 56e41c4af5b14194080fbebd736af473, type: 3}
+    Magazine: {fileID: 1295682356239836410, guid: 94335bb893852fc4e98cae88020920cb, type: 3}
+  Ammo: 12
+  Spread: 15

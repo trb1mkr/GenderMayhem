@@ -18,8 +18,8 @@ public class Player : Character
 
         Movement.Player = Controls.Player = Camera.Player = this;
 
-        State = "Idle";
-        Weapon = Fists;
+        StateId = CharacterStateId.Idle;
+        //Hands.Weapon = Fists;
 
         PlayerSpawned.Invoke();
 	}

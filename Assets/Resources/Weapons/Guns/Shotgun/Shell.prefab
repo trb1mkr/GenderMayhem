@@ -73,6 +73,14 @@ PrefabInstance:
       value: Shell
       objectReference: {fileID: 0}
     - target: {fileID: 7168742540633687490, guid: 1c18493bb3e92424c952e09eec3762d0, type: 3}
+      propertyPath: m_Size.x
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 7168742540633687490, guid: 1c18493bb3e92424c952e09eec3762d0, type: 3}
+      propertyPath: m_Size.y
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7168742540633687490, guid: 1c18493bb3e92424c952e09eec3762d0, type: 3}
       propertyPath: m_SpriteTilingProperty.pivot.x
       value: 0.5
       objectReference: {fileID: 0}

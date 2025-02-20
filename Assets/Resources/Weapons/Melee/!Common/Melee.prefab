@@ -12,10 +12,6 @@ PrefabInstance:
       propertyPath: m_SortingLayer
       value: 3
       objectReference: {fileID: 0}
-    - target: {fileID: 7274962096950189524, guid: 7692f80963b210142909c7115e1b0a83, type: 3}
-      propertyPath: m_SortingLayerID
-      value: 639673827
-      objectReference: {fileID: 0}
     - target: {fileID: 7944614581221739865, guid: 7692f80963b210142909c7115e1b0a83, type: 3}
       propertyPath: m_Name
       value: Melee

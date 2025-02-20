@@ -9,8 +9,9 @@ public class Pistol : Gun
         SpawnBullet();
         SpawnShell();
     }
-    public override void NoAmmo()
-    {
-        SpawnMagazine();
-    }
+    
+    // public override void NoAmmo()
+    // {
+    //     SpawnMagazine();
+    // }
 }

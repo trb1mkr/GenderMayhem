@@ -18,7 +18,12 @@ public class PlayerControls : MonoBehaviour
     {
         if (context.performed)
         {
-            Player.Animate.State = CharacterStateId.Attack;
+            if (Player.Hands.Weapon is Melee)
+                Player.StateId = CharacterStateId.Attack;
+            else if (Player.Hands.Weapon is Gun)
+            {
+                Player.Hands.Weapon.Attack();
+            }
         }
             // if (Player.Weapon != null) 
             // {
@@ -27,16 +32,28 @@ public class PlayerControls : MonoBehaviour
             // }
     }
 
-    public void OnPickUp(InputAction.CallbackContext context)
+    public void OnStockAttack(InputAction.CallbackContext context)
     {
         if (context.performed)
-            Player.Items.PickUp();
+            Player.StateId = CharacterStateId.Attack;
     }
 
-    public void OnThrow(InputAction.CallbackContext context)
+    // public void OnThrow(InputAction.CallbackContext context)
+    // {
+    //     if (context.performed)
+    //         Player.Hands.Throw();
+    // }
+
+    // public void OnPickUp(InputAction.CallbackContext context)
+    // {
+    //     if (context.started)
+    //         Player.Hands.PickUp();
+    // }
+
+    public void OnPickUpThrow(InputAction.CallbackContext context)
     {
-        if (context.performed)
-            Player.Items.Throw();
+        if (context.started)
+            Player.Hands.PickUp();
     }
 
     public void OnFinishOff(InputAction.CallbackContext context) { }

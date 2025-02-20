@@ -25,16 +25,22 @@ public abstract class Gun : Weapon
             StartCoroutine(MuzzleFlash());
             AudioSource.PlayOneShot(ShotSound);
         }
-        if (Ammo == 0)
-        {
-            NoAmmo();
-            GunUtilities.Magazine = null;
-        }
-        return;
+        // if (Ammo == 0)
+        // {
+        //     NoAmmo();
+        //     GunUtilities.Magazine = null;
+        // }
+    }
+
+    public override void Attack()
+    {
+        Debug.Log("shoot");
+        Shoot();
     }
 
     virtual public void Fire() { return; }
-    virtual public void NoAmmo() { return; }
+
+    //virtual public void NoAmmo() { return; }
 
     IEnumerator MuzzleFlash()
     {

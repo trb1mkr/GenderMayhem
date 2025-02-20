@@ -1,21 +1,26 @@
 using UnityEngine;
+using Sirenix.OdinInspector;
 
 public abstract class Character : MonoBehaviour
 {
+    #region Values
+    public CharacterStateId StateId;
+    [ReadOnly] public bool Dead;
+    [ReadOnly] public bool Unconscious;
+    #endregion
+
+    #region References
     public SpriteRenderer SpriteRenderer { get; protected set; }
     public Rigidbody2D Rigidbody { get; private set; }
     public AudioSource AudioSource { get; protected set; }
-    public PolygonCollider2D BodyCollider { get; protected set; }
-    public PolygonCollider2D AttackCollider { get; protected set; } //отключать для ганов, если нет удара прикладом
-    public PolygonCollider2D AvoidCollider { get; protected set; } //отключать для мили
-    public Transform WeaponPoint { get; protected set; }
+    [field: SerializeField] public PolygonCollider2D BodyCollider { get; protected set; }
+    [field: SerializeField] public PolygonCollider2D AttackCollider { get; protected set; } //отключать для ганов, если нет удара прикладом
+    [field: SerializeField] public PolygonCollider2D AvoidCollider { get; protected set; } //отключать для мили
+    [field: SerializeField] public Transform WeaponPoint { get; protected set; }
 
     public CharacterAnimate Animate { get; private set; }
-    public CharacterItems Items { get; private set; }
-
-    public string State;
-    public Weapon Weapon;
-    public Weapon Fists;
+    public CharacterHands Hands { get; private set; }
+    #endregion
 
     public void Awake()
     {
@@ -24,8 +29,9 @@ public abstract class Character : MonoBehaviour
         AudioSource = GetComponent<AudioSource>();
 
         Animate = GetComponent<CharacterAnimate>();
-        Items = GetComponent<CharacterItems>();
-        //WeaponPoint = transform.GetChild(0).transform;
+        Hands = GetComponent<CharacterHands>();
+        
+        Animate.Character = Hands.Character = this;
     }
 
     // public void Dead()
