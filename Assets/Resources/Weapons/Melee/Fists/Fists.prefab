@@ -106,9 +106,11 @@ MonoBehaviour:
   AttackSound: {fileID: 0}
   PickUpSound: {fileID: 0}
   Rigidbody: {fileID: 0}
+  Collider: {fileID: 0}
   AudioSource: {fileID: 0}
+  SpriteRenderer: {fileID: 0}
   HitSound: {fileID: 0}
   Lethal: 0
   AttackTime: 0
-  CooldownTime: 0
-  Cooldown: 0
+  CooldownTime: 0.125
+  IsCooldown: 0

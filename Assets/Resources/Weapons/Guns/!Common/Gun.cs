@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public abstract class Gun : Weapon
@@ -25,18 +24,22 @@ public abstract class Gun : Weapon
             StartCoroutine(MuzzleFlash());
             AudioSource.PlayOneShot(ShotSound);
         }
-        // if (Ammo == 0)
-        // {
-        //     NoAmmo();
-        //     GunUtilities.Magazine = null;
-        // }
     }
 
-    public override void Attack()
+    public override void Attack() => Shoot();
+
+    public override void AltAttack()
     {
-        Debug.Log("shoot");
-        Shoot();
+        AudioSource.PlayOneShot(AttackSound);
+        //StartCoroutine(Cooldown());
     }
+
+    // IEnumerator Cooldown()
+    // {
+    //     IsCooldown = true;
+    //     yield return new WaitForSeconds(CooldownTime);
+    //     IsCooldown = false;
+    // }
 
     virtual public void Fire() { return; }
 

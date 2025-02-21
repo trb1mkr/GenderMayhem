@@ -18,7 +18,7 @@ public abstract class Character : MonoBehaviour
     [field: SerializeField] public PolygonCollider2D AvoidCollider { get; protected set; } //отключать для мили
     [field: SerializeField] public Transform WeaponPoint { get; protected set; }
 
-    public CharacterAnimate Animate { get; private set; }
+    public CharacterAnimator Animate { get; private set; }
     public CharacterHands Hands { get; private set; }
     #endregion
 
@@ -28,21 +28,35 @@ public abstract class Character : MonoBehaviour
         Rigidbody = GetComponent<Rigidbody2D>();
         AudioSource = GetComponent<AudioSource>();
 
-        Animate = GetComponent<CharacterAnimate>();
+        Animate = GetComponent<CharacterAnimator>();
         Hands = GetComponent<CharacterHands>();
         
         Animate.Character = Hands.Character = this;
     }
 
-    // public void Dead()
-    // {
-    //     State = "Dead";
-    //     Throw(new Vector2(Random.Range(-10, 10), Random.Range(-10, 10)));
-    // }
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.otherCollider == BodyCollider)
+        {
+            //Debug.Log("BodyCollider");
+            //if (collision.collider.GetComponent<Weapon>()) FallUnconscious();
+            if (collision.collider.GetComponent<Bullet>()) Die();
+        }
+    }
 
-    // public virtual void Unconscious()
-    // {
-    //     State = "Unconscious";
-    //     Throw(new Vector2(Random.Range(-10, 10), Random.Range(-10, 10)));
-    // }
+    public void Die()
+    {
+        Dead = true;
+        Hands.Throw();
+        //Throw(new Vector2(Random.Range(-10, 10), Random.Range(-10, 10)));
+    }
+
+    public void FallUnconscious()
+    {
+        Unconscious = true;
+        Hands.Throw();
+        Rigidbody.simulated = false;
+        gameObject.layer = LayerMask.NameToLayer("Ignore");
+        //Throw(new Vector2(Random.Range(-10, 10), Random.Range(-10, 10)));
+    }
 }

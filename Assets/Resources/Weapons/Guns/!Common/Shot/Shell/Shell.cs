@@ -10,6 +10,16 @@ public class Shell : MonoBehaviour
     [SerializeField] private float _directionDeviation; // Отклонение направления
 
     private Rigidbody2D _rb;
+    private float _sleepVelocity = 0.1f;
+
+    void Update()
+    {
+        if (_rb.linearVelocity.magnitude <= _sleepVelocity) 
+        {
+            gameObject.layer = LayerMask.NameToLayer("Ignore");
+            _rb.simulated = false;
+        }
+    }
 
     void Start()
     {

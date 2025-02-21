@@ -168,10 +168,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Knife
       objectReference: {fileID: 0}
-    - target: {fileID: 5069647977996696477, guid: 65e683b66d4778e458363d6c9414be2e, type: 3}
-      propertyPath: m_Layer
-      value: 8
-      objectReference: {fileID: 0}
     - target: {fileID: 5543414769202817808, guid: 65e683b66d4778e458363d6c9414be2e, type: 3}
       propertyPath: m_Size.x
       value: 10
@@ -294,12 +290,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5f2fa58bd2838f84fa143660fa2f4c13, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  AudioSource: {fileID: 0}
-  Rigidbody: {fileID: 0}
+  _sleepVelocity: 1
   AttackSound: {fileID: 0}
   PickUpSound: {fileID: 0}
+  Rigidbody: {fileID: 0}
+  Collider: {fileID: 0}
+  AudioSource: {fileID: 0}
+  SpriteRenderer: {fileID: 0}
   HitSound: {fileID: 0}
   Lethal: 0
   AttackTime: 0
-  CooldownTime: 0
-  Cooldown: 0
+  CooldownTime: 0.125
+  IsCooldown: 0

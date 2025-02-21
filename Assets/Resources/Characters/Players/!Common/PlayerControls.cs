@@ -18,24 +18,20 @@ public class PlayerControls : MonoBehaviour
     {
         if (context.performed)
         {
-            if (Player.Hands.Weapon is Melee)
-                Player.StateId = CharacterStateId.Attack;
-            else if (Player.Hands.Weapon is Gun)
-            {
-                Player.Hands.Weapon.Attack();
-            }
-        }
-            // if (Player.Weapon != null) 
-            // {
-            //     //Player.Weapon.Attack();
+            Player.Hands.Use();
+            // if (Player.Hands.Weapon is Melee)
+            //     if (Player.StateId != CharacterStateId.Attack)
+            //         Player.StateId = CharacterStateId.Attack;
 
-            // }
+            // if (Player.Hands.Weapon is Gun)
+            //     Player.Hands.Weapon.Attack();
+        }
     }
 
-    public void OnStockAttack(InputAction.CallbackContext context)
+    public void OnAltAttack(InputAction.CallbackContext context)
     {
         if (context.performed)
-            Player.StateId = CharacterStateId.Attack;
+            Player.Hands.AltUse();
     }
 
     // public void OnThrow(InputAction.CallbackContext context)
@@ -52,7 +48,7 @@ public class PlayerControls : MonoBehaviour
 
     public void OnPickUpThrow(InputAction.CallbackContext context)
     {
-        if (context.started)
+        if (context.performed)
             Player.Hands.PickUp();
     }
 
@@ -61,7 +57,11 @@ public class PlayerControls : MonoBehaviour
     public void OnAim(InputAction.CallbackContext context) =>
         Player.Camera.Aim(context.performed);
 
-    public void OnAutomaticFire(InputAction.CallbackContext context) {}
+    public void OnAutomaticFire(InputAction.CallbackContext context) 
+    {
+        //if (context.performed)
+            //Debug.Log("auto");
+    }
 
     public void OnMousePosition(InputAction.CallbackContext context) => 
         MousePosition = context.ReadValue<Vector2>();

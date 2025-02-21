@@ -300,7 +300,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 4187561494834836682}
         m_TargetAssemblyTypeName: PlayerControls, Assembly-CSharp
-        m_MethodName: OnStockAttack
+        m_MethodName: OnAltAttack
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

@@ -154,7 +154,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Character: {fileID: 0}
-  _animator: {fileID: 2280342119234328695}
+  Animator: {fileID: 2280342119234328695}
 --- !u!114 &2335699261410331719
 MonoBehaviour:
   m_ObjectHideFlags: 0

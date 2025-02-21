@@ -18,13 +18,11 @@ public class Glass : MonoBehaviour
         spriteRenderer.size = new Vector2(spriteRenderer.size.x, 16);
         GetComponent<AudioSource>().PlayOneShot(GlassBreak);
         GetComponent<BoxCollider2D>().isTrigger = true;
-        //Destroy(GetComponent<BoxCollider2D>());
     }
 
     void OnTriggerStay2D(Collider2D collider)
     {
         if (Random.value > GlassWalkPlayChance || !collider.attachedRigidbody.TryGetComponent(out Character _)) return;
-        Debug.Log("Character");
         if (collider.attachedRigidbody.linearVelocity.magnitude == 0) return; // потом если не будет работать для ии, то сделать через is
         GetComponent<AudioSource>().PlayOneShot(GlassWalk);
     }
@@ -34,5 +32,8 @@ public class Glass : MonoBehaviour
         if (collision.collider.TryGetComponent(out Weapon weapon))
             if (weapon.Rigidbody.linearVelocity.magnitude > 20)
                 BreakGlass();
+
+        if (collision.gameObject.GetComponent<Bullet>())
+            BreakGlass();
     }
 }

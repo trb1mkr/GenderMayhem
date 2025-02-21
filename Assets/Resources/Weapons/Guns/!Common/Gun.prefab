@@ -78,10 +78,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Gun
       objectReference: {fileID: 0}
-    - target: {fileID: 7944614581221739865, guid: 7692f80963b210142909c7115e1b0a83, type: 3}
-      propertyPath: m_Layer
-      value: 8
-      objectReference: {fileID: 0}
     - target: {fileID: 8447818969992200342, guid: 7692f80963b210142909c7115e1b0a83, type: 3}
       propertyPath: m_RootOrder
       value: 0

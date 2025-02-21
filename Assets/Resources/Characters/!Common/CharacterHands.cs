@@ -1,6 +1,7 @@
 using UnityEngine;
 using Sirenix.OdinInspector;
 using System;
+using System.Collections;
 
 public class CharacterHands : MonoBehaviour
 {
@@ -30,17 +31,18 @@ public class CharacterHands : MonoBehaviour
             throw new ArgumentException($"Weapon type '{Weapon.GetType().Name}' not found in WeaponId enum.");
     }
 
+    void Update()
+    {
+        //Debug.Log(Physics2D.GetIgnoreCollision(Character.BodyCollider, Weapon.Collider));
+    }
+
     public GameObject GetTargetWeapon()
     {
-        // Сначала проверяем, наведён ли курсор на объект со скриптом Weapon
         // GameObject weaponUnderCursor = GetWeaponUnderCursor();
 
         // if (weaponUnderCursor != null)
-        // {
-        //     return weaponUnderCursor; // Возвращаем объект, на который наведён курсор
-        // }
+        //     return weaponUnderCursor;
 
-        // Если курсор не наведён на Weapon, ищем ближайший к игроку
         return GetNearestWeapon();
     }
 
@@ -88,37 +90,73 @@ public class CharacterHands : MonoBehaviour
             }
         }
 
-        return nearestWeapon; // Возвращаем ближайший объект или null
+        return nearestWeapon;
+    }
+
+    public void Use()
+    {
+        if (Weapon is Melee melee)
+        {
+            if (Character.StateId != CharacterStateId.Attack && !melee.IsCooldown)
+            {
+                Character.StateId = CharacterStateId.Attack;
+                Weapon.Attack();
+            }
+        }
+        else Weapon.Attack();
+    }
+
+    public void AltUse()
+    {
+        if (Weapon is Gun)
+            if (Character.StateId != CharacterStateId.Attack)
+            {
+                Character.StateId = CharacterStateId.Attack;
+                Weapon.AltAttack();
+            }
     }
 
     public void PickUp()
     {
+        if (Character.StateId == CharacterStateId.Attack) return;
+
         GameObject targetWeapon = GetTargetWeapon();
         if (Weapon != _fists) Throw();
         if (targetWeapon == null) return;
 
         Weapon = targetWeapon.GetComponent<Weapon>();
-        Weapon.OnPickUp();
-        targetWeapon.transform.parent = Character.WeaponPoint;
-        targetWeapon.gameObject.transform.localPosition = Vector3.zero;
-        targetWeapon.gameObject.transform.localRotation = Quaternion.identity;
-        
+        Weapon.SpriteRenderer.enabled = false;
+        Weapon.Rigidbody.IgnoreCollisions(Character.Rigidbody, true);
+        Weapon.Rigidbody.simulated = false;
+        Weapon.transform.parent = Character.WeaponPoint;
+        Weapon.transform.SetLocalPositionAndRotation(Vector3.zero, Quaternion.identity);
+        Weapon.AudioSource.PlayOneShot(Weapon.PickUpSound);
+
         SetWeaponId();
     }
 
     public void Throw()
     {
+        if (Character.StateId == CharacterStateId.Attack) return;
         if (Weapon == _fists) return;
         
         Character.StateId = CharacterStateId.Idle;
         
-        Weapon.OnThrow();
+        Weapon.SpriteRenderer.enabled = true;
+        StartCoroutine(ExecuteWithDelay(() => Weapon.Rigidbody.IgnoreCollisions(Character.Rigidbody, false), 0.1f));
+        Weapon.Rigidbody.simulated = true;
         Weapon.transform.SetParent(null, true);
         Weapon.Rigidbody.AddForce(_throwForce * new Vector2(transform.right.x, transform.right.y).normalized, ForceMode2D.Impulse);
         Weapon.Rigidbody.AddTorque(_throwTorque, ForceMode2D.Impulse);
-        
+        Weapon.AudioSource.PlayOneShot(Weapon.AttackSound);
         Weapon = _fists;
 
         SetWeaponId();
+    }
+
+    IEnumerator ExecuteWithDelay(Action action, float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        action();
     }
 }

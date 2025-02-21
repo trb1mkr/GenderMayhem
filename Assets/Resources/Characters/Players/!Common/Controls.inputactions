@@ -96,7 +96,7 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "StockAttack",
+                    "name": "AltAttack",
                     "type": "Button",
                     "id": "4b94439d-999f-475e-8099-94d5f8e7e36b",
                     "expectedControlType": "",
@@ -220,7 +220,7 @@
                     "name": "",
                     "id": "7056e361-4e1b-4ec4-b555-33ca4ccf4ca0",
                     "path": "<Mouse>/leftButton",
-                    "interactions": "Hold(duration=0.01)",
+                    "interactions": "Hold(duration=0.1)",
                     "processors": "",
                     "groups": "",
                     "action": "AutomaticFire",
@@ -267,7 +267,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "StockAttack",
+                    "action": "AltAttack",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

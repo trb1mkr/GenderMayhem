@@ -11,6 +11,7 @@ abstract public class Weapon : MonoBehaviour
 
     #region References
     [HideInInspector] public Rigidbody2D Rigidbody;
+    [HideInInspector] public PolygonCollider2D Collider;
     [HideInInspector] public AudioSource AudioSource;
     [HideInInspector] public SpriteRenderer SpriteRenderer;
     #endregion
@@ -20,32 +21,19 @@ abstract public class Weapon : MonoBehaviour
         AudioSource = GetComponent<AudioSource>();
         Rigidbody = GetComponent<Rigidbody2D>();
         SpriteRenderer = GetComponent<SpriteRenderer>();
+        Collider = GetComponent<PolygonCollider2D>();
     }
 
-    virtual public void Attack() { return; }
+    virtual public void Attack() { Debug.Log("baseAttack"); }
+
+    virtual public void AltAttack() { return; }
 
     void Update()
     {
         if (Rigidbody.linearVelocity.magnitude <= _sleepVelocity) 
         {
-            gameObject.layer = LayerMask.NameToLayer("Weapons");
+            gameObject.layer = LayerMask.NameToLayer("Ignore");
             Rigidbody.simulated = false;
         }
-    }
-
-    public void OnPickUp()
-    {
-        SpriteRenderer.enabled = false;
-        Rigidbody.simulated = false;
-        AudioSource.PlayOneShot(PickUpSound);
-    }
-
-    public void OnThrow()
-    {
-        SpriteRenderer.enabled = true;
-        //Physics2D.IgnoreCollision()
-        gameObject.layer = LayerMask.NameToLayer("Enemies");
-        Rigidbody.simulated = true;
-        AudioSource.PlayOneShot(AttackSound);
     }
 }

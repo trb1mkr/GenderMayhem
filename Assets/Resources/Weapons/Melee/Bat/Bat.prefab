@@ -213,12 +213,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8ab53a0e3769f574a92b70f1064eedc7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  AudioSource: {fileID: 0}
-  Rigidbody: {fileID: 0}
+  _sleepVelocity: 1
   AttackSound: {fileID: 0}
   PickUpSound: {fileID: 0}
+  Rigidbody: {fileID: 0}
+  Collider: {fileID: 0}
+  AudioSource: {fileID: 0}
+  SpriteRenderer: {fileID: 0}
   HitSound: {fileID: 0}
   Lethal: 0
   AttackTime: 0
-  CooldownTime: 0
-  Cooldown: 0
+  CooldownTime: 0.25
+  IsCooldown: 0

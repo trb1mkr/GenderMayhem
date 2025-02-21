@@ -13,13 +13,13 @@ TagManager:
   - 
   - Water
   - UI
-  - Ground
-  - Environment
-  - Weapons
-  - Obstacles
-  - Enemies
-  - Player
-  - Avoid
+  - Ignore
+  - Collide
+  - 
+  - 
+  - 
+  - 
+  - 
   - 
   - 
   - 
@@ -52,7 +52,7 @@ TagManager:
   - name: Ground
     uniqueID: 3699285863
     locked: 0
-  - name: Environment
+  - name: Objects
     uniqueID: 3922971647
     locked: 0
   - name: Weapons
