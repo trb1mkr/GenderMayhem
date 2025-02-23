@@ -6,7 +6,7 @@ public class Player : Character
     public UnityEvent PlayerSpawned;
     public PlayerControls Controls { get; private set; }
     public PlayerMovement Movement { get; private set; }
-    public PlayerCamera Camera { get; private set; }
+    public CameraAimController Camera { get; private set; }
     //public FinishOff FinishOff { get; private set; }
 
     new void Awake()
@@ -14,7 +14,7 @@ public class Player : Character
         base.Awake();
         Controls = GetComponent<PlayerControls>();
         Movement = GetComponent<PlayerMovement>();
-        Camera = transform.root.GetComponentInChildren<PlayerCamera>();
+        Camera = transform.root.GetComponentInChildren<CameraAimController>();
 
         Movement.Player = Controls.Player = Camera.Player = this;
 

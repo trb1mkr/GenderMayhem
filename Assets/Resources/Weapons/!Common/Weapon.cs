@@ -24,7 +24,7 @@ abstract public class Weapon : MonoBehaviour
         Collider = GetComponent<PolygonCollider2D>();
     }
 
-    virtual public void Attack() { Debug.Log("baseAttack"); }
+    virtual public void Attack() { GetComponent<CameraShakeSource>().Shake(); }
 
     virtual public void AltAttack() { return; }
 
@@ -35,5 +35,6 @@ abstract public class Weapon : MonoBehaviour
             gameObject.layer = LayerMask.NameToLayer("Ignore");
             Rigidbody.simulated = false;
         }
+        else gameObject.layer = LayerMask.NameToLayer("Collide");
     }
 }

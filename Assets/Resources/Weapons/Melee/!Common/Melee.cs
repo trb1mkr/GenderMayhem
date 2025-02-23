@@ -20,6 +20,7 @@ public abstract class Melee : Weapon
         if (IsCooldown) return;
         AudioSource.PlayOneShot(AttackSound);
         StartCoroutine(Cooldown());
+        base.Attack();
     }
 
     IEnumerator Cooldown()

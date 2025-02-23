@@ -3,7 +3,7 @@ using Unity.Cinemachine;
 using DG.Tweening;
 using Sirenix.OdinInspector;
 
-public class PlayerCamera : MonoBehaviour
+public class CameraAimController : MonoBehaviour
 {
     #region Values
     [SerializeField] private float _playerWeight;

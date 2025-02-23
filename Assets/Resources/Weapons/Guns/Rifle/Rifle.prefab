@@ -262,7 +262,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3444400883384444780, guid: 67bbc0f6e6d5656409b16086dd7ab096, type: 3}
       propertyPath: m_Mass
-      value: 3
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4449662602738280364, guid: 67bbc0f6e6d5656409b16086dd7ab096, type: 3}
       propertyPath: Ammo
@@ -300,6 +300,18 @@ PrefabInstance:
       propertyPath: PickUpSound
       value: 
       objectReference: {fileID: 8300000, guid: f9ef1bd26a4f2ae4c87a770768743932, type: 3}
+    - target: {fileID: 4595233433494827977, guid: 67bbc0f6e6d5656409b16086dd7ab096, type: 3}
+      propertyPath: Duration
+      value: 0.12
+      objectReference: {fileID: 0}
+    - target: {fileID: 4595233433494827977, guid: 67bbc0f6e6d5656409b16086dd7ab096, type: 3}
+      propertyPath: Amplitude
+      value: 25
+      objectReference: {fileID: 0}
+    - target: {fileID: 4595233433494827977, guid: 67bbc0f6e6d5656409b16086dd7ab096, type: 3}
+      propertyPath: Frequency
+      value: 1.5
+      objectReference: {fileID: 0}
     - target: {fileID: 5498119874360476409, guid: 67bbc0f6e6d5656409b16086dd7ab096, type: 3}
       propertyPath: m_RootOrder
       value: 0
@@ -413,6 +425,7 @@ MonoBehaviour:
   AttackSound: {fileID: 8300000, guid: d6a902014f09b72458c0448afff655d0, type: 3}
   PickUpSound: {fileID: 8300000, guid: f9ef1bd26a4f2ae4c87a770768743932, type: 3}
   Rigidbody: {fileID: 0}
+  Collider: {fileID: 0}
   AudioSource: {fileID: 0}
   SpriteRenderer: {fileID: 0}
   ShotSound: {fileID: 8300000, guid: 3be2b2a897fa64e48a84b7af02ebd6ec, type: 3}
@@ -424,4 +437,5 @@ MonoBehaviour:
     Shell: {fileID: 2920767643987161358, guid: 56e41c4af5b14194080fbebd736af473, type: 3}
     Magazine: {fileID: 1295682356239836410, guid: 94335bb893852fc4e98cae88020920cb, type: 3}
   Ammo: 12
-  Spread: 15
+  Spread: 10
+  AutoFire: 0

@@ -2,6 +2,7 @@ using UnityEngine;
 using Sirenix.OdinInspector;
 using System;
 using System.Collections;
+using R3;
 
 public class CharacterHands : MonoBehaviour
 {
@@ -143,7 +144,7 @@ public class CharacterHands : MonoBehaviour
         Character.StateId = CharacterStateId.Idle;
         
         Weapon.SpriteRenderer.enabled = true;
-        StartCoroutine(ExecuteWithDelay(() => Weapon.Rigidbody.IgnoreCollisions(Character.Rigidbody, false), 0.1f));
+        this.Invoke(() => Weapon.Rigidbody.IgnoreCollisions(Character.Rigidbody, false), 0.1f);
         Weapon.Rigidbody.simulated = true;
         Weapon.transform.SetParent(null, true);
         Weapon.Rigidbody.AddForce(_throwForce * new Vector2(transform.right.x, transform.right.y).normalized, ForceMode2D.Impulse);
@@ -152,11 +153,5 @@ public class CharacterHands : MonoBehaviour
         Weapon = _fists;
 
         SetWeaponId();
-    }
-
-    IEnumerator ExecuteWithDelay(Action action, float delay)
-    {
-        yield return new WaitForSeconds(delay);
-        action();
     }
 }

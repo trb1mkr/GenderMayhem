@@ -6,6 +6,7 @@ public abstract class Gun : Weapon
     public AudioClip ShotSound;
     public GunUtilities GunUtilities = new GunUtilities();
     public int Ammo, Spread;
+    public bool AutoFire;
 
     new void Start()
     {
@@ -15,7 +16,7 @@ public abstract class Gun : Weapon
         GunUtilities.MuzzleFlash = gameObject.transform.GetChild(2).gameObject;
     }
 
-    public void Shoot()
+    public bool Shoot()
     {
         if (Ammo > 0)
         {
@@ -23,10 +24,16 @@ public abstract class Gun : Weapon
             Fire();
             StartCoroutine(MuzzleFlash());
             AudioSource.PlayOneShot(ShotSound);
+            return true;
         }
+        return false;
     }
 
-    public override void Attack() => Shoot();
+    public override void Attack()
+    {
+        if (Shoot())
+            base.Attack();
+    }
 
     public override void AltAttack()
     {
@@ -53,29 +60,12 @@ public abstract class Gun : Weapon
         yield break;
     }
 
-    public void SpawnBullet()
-    {
-        Instantiate(GunUtilities.Bullet, GunUtilities.BulletPoint.transform.position, Quaternion.Euler(GunUtilities.BulletPoint.transform.eulerAngles + new Vector3(0, 0, Random.Range(-Spread, Spread))));
-    }
+    public void SpawnBullet() =>
+        Instantiate(GunUtilities.Bullet, GunUtilities.BulletPoint.transform.position, Quaternion.Euler(GunUtilities.BulletPoint.transform.eulerAngles + new Vector3(0, 0, Random.Range(-Spread, Spread))), transform);
 
-    public void SpawnShell()
-    {
+    public void SpawnShell() =>
         Instantiate(GunUtilities.Shell, GunUtilities.ShellPoint.transform.position, GunUtilities.ShellPoint.transform.rotation);
-    }
 
-    public void SpawnMagazine()
-    {
+    public void SpawnMagazine() =>
         Instantiate(GunUtilities.Magazine, gameObject.transform.position, gameObject.transform.rotation);
-    }
-}
-
-[System.Serializable]
-public class GunUtilities
-{
-    [HideInInspector] public GameObject BulletPoint;
-    [HideInInspector] public GameObject ShellPoint;
-    [HideInInspector] public GameObject MuzzleFlash;
-    public GameObject Bullet;
-    public GameObject Shell;
-    public GameObject Magazine;
 }

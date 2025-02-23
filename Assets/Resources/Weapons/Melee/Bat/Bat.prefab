@@ -120,9 +120,21 @@ PrefabInstance:
       propertyPath: m_SpriteTilingProperty.adaptiveTilingThreshold
       value: 0.5
       objectReference: {fileID: 0}
+    - target: {fileID: 3364168220479637346, guid: 65e683b66d4778e458363d6c9414be2e, type: 3}
+      propertyPath: Duration
+      value: 0.15
+      objectReference: {fileID: 0}
+    - target: {fileID: 3364168220479637346, guid: 65e683b66d4778e458363d6c9414be2e, type: 3}
+      propertyPath: Amplitude
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 3364168220479637346, guid: 65e683b66d4778e458363d6c9414be2e, type: 3}
+      propertyPath: Frequency
+      value: 1.5
+      objectReference: {fileID: 0}
     - target: {fileID: 4514463903962764231, guid: 65e683b66d4778e458363d6c9414be2e, type: 3}
       propertyPath: m_Mass
-      value: 0.9
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5069647977996696477, guid: 65e683b66d4778e458363d6c9414be2e, type: 3}
       propertyPath: m_Name

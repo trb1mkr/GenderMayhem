@@ -204,6 +204,18 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 8
       objectReference: {fileID: 0}
+    - target: {fileID: 4595233433494827977, guid: 67bbc0f6e6d5656409b16086dd7ab096, type: 3}
+      propertyPath: Duration
+      value: 0.12
+      objectReference: {fileID: 0}
+    - target: {fileID: 4595233433494827977, guid: 67bbc0f6e6d5656409b16086dd7ab096, type: 3}
+      propertyPath: Amplitude
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 4595233433494827977, guid: 67bbc0f6e6d5656409b16086dd7ab096, type: 3}
+      propertyPath: Frequency
+      value: 1.5
+      objectReference: {fileID: 0}
     - target: {fileID: 5498119874360476409, guid: 67bbc0f6e6d5656409b16086dd7ab096, type: 3}
       propertyPath: m_RootOrder
       value: 0
@@ -297,4 +309,5 @@ MonoBehaviour:
     Shell: {fileID: 7652202784644121547, guid: 03ce95344eb014341a617eb4a41e9274, type: 3}
     Magazine: {fileID: 1295682356239836410, guid: d3317f3c3c173104186731159f436ed2, type: 3}
   Ammo: 7
-  Spread: 10
+  Spread: 5
+  AutoFire: 0
