@@ -27,7 +27,7 @@ public class Glass : MonoBehaviour
         GetComponent<AudioSource>().PlayOneShot(GlassWalk);
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
+    void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.collider.TryGetComponent(out Weapon weapon))
             if (weapon.Rigidbody.linearVelocity.magnitude > 20)
@@ -35,5 +35,14 @@ public class Glass : MonoBehaviour
 
         if (collision.gameObject.GetComponent<Bullet>())
             BreakGlass();
+    }
+
+    void OnTriggerEnter2D(Collider2D collider)
+    {
+        Debug.Log(collider.gameObject.name);
+        Player player = collider.GetComponentInParent<Player>();
+        if (player)
+            if (player.AttackCollider == collider && player.StateId == CharacterStateId.Attack)
+                BreakGlass();
     }
 }

@@ -9,15 +9,16 @@ public class PolygonCollider2DAnimator : MonoBehaviour
     [SerializeField] private PolygonCollider2D _colliderComponent;
     public int CurrentCollider;
     public List<PC2DPaths> Colliders = new List<PC2DPaths>();
-    [FoldoutGroup("Create")] public string SerializedColliderName;
+    [SerializeField][PropertyOrder(1)][FoldoutGroup("View", 0)] private bool _autoUpdateColliderComponent = true;
+    [FoldoutGroup("Create", 1)] public string SerializedColliderName;
 
     [InfoBox("If Auto Save is enabled and Save Folder is changed, use of Update Current Collider will produce new files at new path")]
-    [SerializeField][PropertyOrder(1)][FoldoutGroup("Save")] private bool _autoSave = true;
+    [SerializeField][PropertyOrder(1)][FoldoutGroup("Save", 2)] private bool _autoSave = true;
     [SerializeField][FolderPath][PropertyOrder(1)][FoldoutGroup("Save")] private string _saveFolder;
 
     private void FixedUpdate()
     {
-        UpdateColliderInComponent();
+        UpdateColliderComponent();
     }
 
     private PC2DPaths GetCollider()
@@ -84,10 +85,9 @@ public class PolygonCollider2DAnimator : MonoBehaviour
 
         AssetDatabase.CreateAsset(Colliders[index], savePath);
         for (int i = 0; i < Colliders[index].Paths.Count; i++)
-        {
             AssetDatabase.AddObjectToAsset(Colliders[index].Paths[i], savePath);
-            AssetDatabase.ImportAsset(savePath);
-        }
+
+        AssetDatabase.SaveAssets();
     }
 
     [Button][PropertyOrder(1)][FoldoutGroup("Save")]
@@ -105,10 +105,17 @@ public class PolygonCollider2DAnimator : MonoBehaviour
 #endif
 
     [OnInspectorGUI]
-    public void UpdateColliderInComponent()
+    private void AutoUpdateColliderComponent()
+    {
+        if (_autoUpdateColliderComponent) UpdateColliderComponent();
+    }
+
+    [Button][FoldoutGroup("View")]
+    public void UpdateColliderComponent()
     {
         if (Colliders.Count - 1 < CurrentCollider || Colliders[CurrentCollider] == null) return;
         _colliderComponent.points = new Vector2[] {};
+        if (Colliders[CurrentCollider].Paths == null) Debug.LogError($"Paths subasset is null for some reason. Fix it.");
         for (int i = 0; i < Colliders[CurrentCollider].Paths.Count; i++)
             _colliderComponent.SetPath(i, Colliders[CurrentCollider].Paths[i].Points);
     }

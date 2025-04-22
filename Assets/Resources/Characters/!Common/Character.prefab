@@ -63,7 +63,7 @@ PolygonCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
@@ -561,7 +561,7 @@ PolygonCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
@@ -746,10 +746,6 @@ PrefabInstance:
     - target: {fileID: 7320044685845426460, guid: 028d077bcd5a492459cfd067382f1161, type: 3}
       propertyPath: m_Name
       value: Fists
-      objectReference: {fileID: 0}
-    - target: {fileID: 7320044685845426460, guid: 028d077bcd5a492459cfd067382f1161, type: 3}
-      propertyPath: m_Layer
-      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 9145222723228679379, guid: 028d077bcd5a492459cfd067382f1161, type: 3}
       propertyPath: m_LocalPosition.x

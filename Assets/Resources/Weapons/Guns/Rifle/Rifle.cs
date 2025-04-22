@@ -12,6 +12,12 @@ public class Rifle : Gun
         //Instantiate(GunUtilities.Shell, GunUtilities.ShellPoint.transform.position, GunUtilities.ShellPoint.transform.rotation);
     }
 
+    // IEnumerator AutoFire()
+    // {
+    //     yield return new WaitForSeconds(_rateOfFire);
+        
+    // }
+
     // public override void NoAmmo()
     // {
     //     Instantiate(GunUtilities.Magazine, gameObject.transform.position, gameObject.transform.rotation);

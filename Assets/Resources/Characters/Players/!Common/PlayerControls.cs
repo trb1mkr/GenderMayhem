@@ -26,6 +26,7 @@ public class PlayerControls : MonoBehaviour
             // if (Player.Hands.Weapon is Gun)
             //     Player.Hands.Weapon.Attack();
         }
+        if (context.canceled) Debug.Log("cancelled");
     }
 
     public void OnAltAttack(InputAction.CallbackContext context)
