@@ -1,30 +1,36 @@
+using Sirenix.OdinInspector;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class AvoidObstacle : MonoBehaviour
 {
-    [HideInInspector] public List<Collider2D> Colliders = new List<Collider2D>();
+    [HideInInspector] public Character Character;
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    [ReadOnly] public List<Collider2D> Colliders = new List<Collider2D>();
+
+    void Start()
     {
-        Colliders.Add(collision);
+        Character = GetComponentInParent<Character>();
     }
 
-    private void OnTriggerExit2D(Collider2D collision)
+    private void OnTriggerEnter2D(Collider2D collider)
     {
-        Colliders.Remove(collision);
+        if (collider.CompareTag("Obstacle") && !collider.isTrigger)
+            Colliders.Add(collider);
     }
 
-    // void CheckObstacles()
-    // {
-    //     if (Weapon.GetType().BaseType.Name == "Melee") return;
-    //     if (PolygonColliders[2].GetComponent<Overlaping>().Colliders.Count > 0)
-    //     {
-    //         State = "Avoid";
-    //     }
-    //     else
-    //     {
-    //         State = "Idle";
-    //     }
-    // }
+    private void OnTriggerExit2D(Collider2D collider)
+    {
+        if (Colliders.Contains(collider))
+            Colliders.Remove(collider);
+    }
+
+    private void Update()
+    {
+        if (Colliders.Count > 0)
+            Character.StateId = CharacterStateId.Avoid;
+        else if (Character.StateId == CharacterStateId.Avoid)
+            Character.StateId = CharacterStateId.Idle;
+           
+    }
 }

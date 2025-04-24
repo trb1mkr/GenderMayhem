@@ -100,6 +100,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 1171868502133147323, guid: e6f260d920b23054d989265f71dc2d4d, type: 3}
       insertIndex: 4
       addedObject: {fileID: 5097662434106307800}
+    - targetCorrespondingSourceObject: {fileID: 1053901765440366096, guid: e6f260d920b23054d989265f71dc2d4d, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 3289379436359076685}
   m_SourcePrefab: {fileID: 100100000, guid: e6f260d920b23054d989265f71dc2d4d, type: 3}
 --- !u!60 &1734346418227983438 stripped
 PolygonCollider2D:
@@ -379,6 +382,24 @@ MonoBehaviour:
   MovementSpeed: 220
   MovementDirection: {x: 0, y: 0}
   Player: {fileID: 0}
+--- !u!1 &6576394025390973694 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1053901765440366096, guid: e6f260d920b23054d989265f71dc2d4d, type: 3}
+  m_PrefabInstance: {fileID: 6189139509873263854}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &3289379436359076685
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6576394025390973694}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 57305873f60738a4fa3e9ae9e6325122, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Colliders: []
 --- !u!60 &6650805794334339444 stripped
 PolygonCollider2D:
   m_CorrespondingSourceObject: {fileID: 695899834292155802, guid: e6f260d920b23054d989265f71dc2d4d, type: 3}

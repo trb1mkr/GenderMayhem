@@ -1,10 +1,8 @@
 using UnityEngine;
 using Sirenix.OdinInspector;
 using System;
-using System.Collections;
-using R3;
 
-public class CharacterHands : MonoBehaviour
+public class CharacterItemManager : MonoBehaviour
 {
     #region Values
     [field: ReadOnly] public WeaponId WeaponId { get; private set; }
@@ -94,11 +92,11 @@ public class CharacterHands : MonoBehaviour
         return nearestWeapon;
     }
 
-    public void Use()
+    public void Use() //сделать предметы, которые используются моментально и которые требует время на использование
     {
         if (Weapon is Melee melee)
         {
-            if (Character.StateId != CharacterStateId.Attack && !melee.IsCooldown)
+            if (Character.StateId == CharacterStateId.Idle && !melee.IsCooldown)
             {
                 Character.StateId = CharacterStateId.Attack;
                 Weapon.Attack();
@@ -110,11 +108,16 @@ public class CharacterHands : MonoBehaviour
     public void AltUse()
     {
         if (Weapon is Gun)
-            if (Character.StateId != CharacterStateId.Attack)
+            if (Character.StateId == CharacterStateId.Idle)
             {
                 Character.StateId = CharacterStateId.Attack;
                 Weapon.AltAttack();
             }
+    }
+
+    public void ContinuousUse() //сделать корутиной
+    {
+        //стопать из playercontrols когда cancelled
     }
 
     public void PickUp()
@@ -140,7 +143,7 @@ public class CharacterHands : MonoBehaviour
     {
         if (Character.StateId == CharacterStateId.Attack) return;
         if (Weapon == _fists) return;
-        
+
         Character.StateId = CharacterStateId.Idle;
         
         Weapon.SpriteRenderer.enabled = true;

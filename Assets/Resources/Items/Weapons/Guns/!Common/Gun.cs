@@ -6,8 +6,6 @@ public abstract class Gun : Weapon
     public AudioClip ShotSound;
     public GunUtilities GunUtilities = new GunUtilities();
     public int Ammo, Spread;
-    public bool AutoFire;
-    [SerializeField] float _rateOfFire;
 
     new void Start()
     {
@@ -35,8 +33,6 @@ public abstract class Gun : Weapon
         if (Shoot())
             base.Attack();
     }
-
-
 
     public override void AltAttack()
     {

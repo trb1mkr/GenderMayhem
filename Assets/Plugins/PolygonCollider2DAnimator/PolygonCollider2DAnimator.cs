@@ -9,22 +9,43 @@ public class PolygonCollider2DAnimator : MonoBehaviour
     [SerializeField] private PolygonCollider2D _colliderComponent;
     public int CurrentCollider;
     public List<PC2DPaths> Colliders = new List<PC2DPaths>();
-    [SerializeField][PropertyOrder(1)][FoldoutGroup("View", 0)] private bool _autoUpdateColliderComponent = true;
-    [FoldoutGroup("Create", 1)] public string SerializedColliderName;
 
-    [InfoBox("If Auto Save is enabled and Save Folder is changed, use of Update Current Collider will produce new files at new path")]
-    [SerializeField][PropertyOrder(1)][FoldoutGroup("Save", 2)] private bool _autoSave = true;
-    [SerializeField][FolderPath][PropertyOrder(1)][FoldoutGroup("Save")] private string _saveFolder;
+    [SerializeField][PropertyOrder(0)][FoldoutGroup("View", 0)] private bool _autoUpdateColliderComponent = true;
+
+    [SerializeField][PropertyOrder(1)][FoldoutGroup("Create & Edit", 0)] private string _colliderName;
+
+    [SerializeField][PropertyOrder(2)][FoldoutGroup("Save", 0)] private bool _autoSave = true;
+    [SerializeField][FolderPath][PropertyOrder(2)][FoldoutGroup("Save", 1)] private string _saveFolder;
 
     private void FixedUpdate()
     {
         UpdateColliderComponent();
     }
 
-    private PC2DPaths GetCollider()
+    [Button][PropertyOrder(0)][FoldoutGroup("View", 1)]
+    public void UpdateColliderComponent()
+    {
+        if (Colliders.Count - 1 < CurrentCollider) 
+        {
+            Debug.LogError("No such collider! Wrong index.");
+            return;
+        }
+        if (Colliders[CurrentCollider] == null) 
+        {
+            Debug.LogError("Collider asset is null!");
+            return;
+        }
+
+        _colliderComponent.points = new Vector2[] {};
+        if (Colliders[CurrentCollider].Paths == null) Debug.LogError($"Paths subasset is null for some reason. Fix it.");
+        for (int i = 0; i < Colliders[CurrentCollider].Paths.Count; i++)
+            _colliderComponent.SetPath(i, Colliders[CurrentCollider].Paths[i].Points);
+    }
+
+#if UNITY_EDITOR
+    private PC2DPaths GetColliderFromComponent()
     {
         var colliderPaths = ScriptableObject.CreateInstance<PC2DPaths>();
-        colliderPaths.name = SerializedColliderName;
         for (int i = 0; i < _colliderComponent.pathCount; i++)
         {
             var path = ScriptableObject.CreateInstance<PC2DPathPoints>();
@@ -35,88 +56,81 @@ public class PolygonCollider2DAnimator : MonoBehaviour
         return colliderPaths;
     }
 
-#if UNITY_EDITOR
-    private string GetUniqueName(PC2DPaths collider)
+    private string GetUniqueColliderName(string colliderName)
     {
-        collider.name = collider.name == "" ? Colliders.Count.ToString() : collider.name;
+        colliderName = colliderName == "" ? Colliders.Count.ToString() : colliderName;
 
-        if (Colliders.Any(x => x.name == collider.name))
+        if (Colliders.Any(x => x.name == colliderName))
         {
             int increment = 1;
-            while (Colliders.Any(x => x.name == collider.name + increment)) increment++;
-            collider.name += increment;
+            while (Colliders.Any(x => x.name == colliderName + increment)) increment++;
+            colliderName += increment;
         }
 
-        return collider.name;
+        return colliderName;
     }
 
-    [Button][FoldoutGroup("Create")]
-    private void AddCollider()
+    [Button][PropertyOrder(1)][FoldoutGroup("Create & Edit", 1)]
+    private void AddColliderToList()
     {
-        var collider = GetCollider();
-        collider.name = GetUniqueName(collider);
+        var collider = GetColliderFromComponent();
+        collider.name = GetUniqueColliderName(_colliderName);
         Colliders.Add(collider);
-        if (_autoSave) SaveColliderToAsset(Colliders.Count - 1);
-    } 
-
-    [Button][FoldoutGroup("Create")]
-    private void UpdateCurrentCollider()
-    {
-        var collider = GetCollider();
-        collider.name = Colliders[CurrentCollider].name;
-        Colliders[CurrentCollider] = collider;
-        if (!AssetDatabase.AssetPathExists($"{_saveFolder}/{collider.name}.asset") && _autoSave) SaveColliderToAsset(Colliders.Count - 1);
+        if (_autoSave) SaveColliderToAsset(Colliders[Colliders.Count - 1]);
     }
 
-    [InfoBox("Update Current Collider Name will not change name of an .asset file if it saved on disk. It can cause errors")]
-    [Button][FoldoutGroup("Create")]
-    private void UpdateCurrentColliderName() => Colliders[CurrentCollider].name = SerializedColliderName;
-
-    private void SaveColliderToAsset(int index)
+    [Button][PropertyOrder(2)][FoldoutGroup("Create & Edit", 2)]
+    private void ChangeCurrentCollider()
     {
-        var assetName = Colliders[index].name;
-        var savePath = $"{_saveFolder}/{assetName}.asset";
+        var newCollider = GetColliderFromComponent();
+        newCollider.name = Colliders[CurrentCollider].name;
 
-        if (AssetDatabase.AssetPathExists(savePath))
+        var assetPath = AssetDatabase.GetAssetPath(Colliders[CurrentCollider]);
+        if (assetPath != "") SaveColliderToAsset(newCollider, AssetDatabase.GetAssetPath(Colliders[CurrentCollider]), true);
+        Colliders[CurrentCollider] = newCollider;
+    }
+
+    [Button][PropertyOrder(2)][FoldoutGroup("Create & Edit", 3)]
+    private void ChangeCurrentColliderName()
+    {
+        var assetPath = AssetDatabase.GetAssetPath(Colliders[CurrentCollider]);
+        if (assetPath == "")
+            Colliders[CurrentCollider].name = _colliderName;
+        else AssetDatabase.RenameAsset(assetPath, _colliderName);
+    }
+
+    private void SaveColliderToAsset(PC2DPaths collider, string path = "", bool overwrite = false)
+    {
+        var assetName = collider.name;
+
+        if (!overwrite && path != "") 
         {
-            Debug.LogWarning($"Asset {assetName} already exists in {_saveFolder}. Save aborted.");
+            Debug.LogWarning($"Asset {assetName} already exists in {_saveFolder}. Overwrite = false. Save aborted.");
             return;
         }
 
-        AssetDatabase.CreateAsset(Colliders[index], savePath);
-        for (int i = 0; i < Colliders[index].Paths.Count; i++)
-            AssetDatabase.AddObjectToAsset(Colliders[index].Paths[i], savePath);
+        if (path == "") path = $"{_saveFolder}/{assetName}.asset";
+
+        AssetDatabase.CreateAsset(collider, path);
+        for (int i = 0; i < collider.Paths.Count; i++)
+            AssetDatabase.AddObjectToAsset(collider.Paths[i], path);
 
         AssetDatabase.SaveAssets();
     }
 
-    [Button][PropertyOrder(1)][FoldoutGroup("Save")]
-    private void SaveCurrentColliderFromList()
-    {
-        SaveColliderToAsset(CurrentCollider);
-    }
+    [Button][PropertyOrder(2)][FoldoutGroup("Save", 2)]
+    private void SaveCurrentColliderToAsset() =>
+        SaveColliderToAsset(Colliders[CurrentCollider]);
 
-    [Button][PropertyOrder(1)][FoldoutGroup("Save")]
-    private void SaveAllCollidersFromList()
+    [Button][PropertyOrder(2)][FoldoutGroup("Save", 3)]
+    private void SaveAllCollidersToAssets()
     {
         for (int i = 0; i < Colliders.Count; i++)
-            SaveColliderToAsset(i);
+            SaveColliderToAsset(Colliders[i]);
     }
-#endif
 
     [OnInspectorGUI]
     private void AutoUpdateColliderComponent()
-    {
-        if (_autoUpdateColliderComponent) UpdateColliderComponent();
-    }
-
-    [Button][FoldoutGroup("View")]
-    public void UpdateColliderComponent()
-    {
-        if (Colliders.Count - 1 < CurrentCollider || Colliders[CurrentCollider] == null) return;
-        _colliderComponent.points = new Vector2[] {};
-        if (Colliders[CurrentCollider].Paths == null) Debug.LogError($"Paths subasset is null for some reason. Fix it.");
-        for (int i = 0; i < Colliders[CurrentCollider].Paths.Count; i++)
-            _colliderComponent.SetPath(i, Colliders[CurrentCollider].Paths[i].Points);
-    }
+        { if (_autoUpdateColliderComponent) UpdateColliderComponent(); }
+#endif
 }

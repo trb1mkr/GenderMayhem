@@ -29,6 +29,6 @@ public class PlayerMovement : MonoBehaviour
         var targetPosition = Camera.main.ScreenToWorldPoint(new Vector2(Player.Controls.MousePosition.x, Player.Controls.MousePosition.y - Player.Camera.transform.position.z));
         var targetDirection = (targetPosition - transform.position).normalized;
         var targetRotation = Mathf.Atan2(targetDirection.y, targetDirection.x) * Mathf.Rad2Deg;
-        Player.Rigidbody.rotation = targetRotation; //забавное поведение с .MoveRotation
+        Player.Rigidbody.rotation = targetRotation; //забавное поведение с .MoveRotation()
     }
 }

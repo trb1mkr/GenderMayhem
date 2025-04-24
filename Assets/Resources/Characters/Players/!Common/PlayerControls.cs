@@ -14,11 +14,12 @@ public class PlayerControls : MonoBehaviour
     public void OnMove(InputAction.CallbackContext context) =>
         Player.Movement.MovementDirection = context.ReadValue<Vector2>();
 
-    public void OnAttack(InputAction.CallbackContext context)
+    public void OnAttack(InputAction.CallbackContext context) //переименовать в Use
     {
+        Debug.Log("attack");
         if (context.performed)
         {
-            Player.Hands.Use();
+            Player.ItemManager.Use();
             // if (Player.Hands.Weapon is Melee)
             //     if (Player.StateId != CharacterStateId.Attack)
             //         Player.StateId = CharacterStateId.Attack;
@@ -26,13 +27,13 @@ public class PlayerControls : MonoBehaviour
             // if (Player.Hands.Weapon is Gun)
             //     Player.Hands.Weapon.Attack();
         }
-        if (context.canceled) Debug.Log("cancelled");
+        //if (context.canceled) Debug.Log("cancelled");
     }
 
-    public void OnAltAttack(InputAction.CallbackContext context)
+    public void OnAltAttack(InputAction.CallbackContext context) //переименовать в AltUse
     {
         if (context.performed)
-            Player.Hands.AltUse();
+            Player.ItemManager.AltUse();
     }
 
     // public void OnThrow(InputAction.CallbackContext context)
@@ -50,7 +51,7 @@ public class PlayerControls : MonoBehaviour
     public void OnPickUpThrow(InputAction.CallbackContext context)
     {
         if (context.performed)
-            Player.Hands.PickUp();
+            Player.ItemManager.PickUp();
     }
 
     public void OnFinishOff(InputAction.CallbackContext context) { }
@@ -58,10 +59,11 @@ public class PlayerControls : MonoBehaviour
     public void OnAim(InputAction.CallbackContext context) =>
         Player.Camera.Aim(context.performed);
 
-    public void OnAutomaticFire(InputAction.CallbackContext context) 
+    public void OnAutomaticFire(InputAction.CallbackContext context) //переименовать в cotinuous use
     {
-        //if (context.performed)
-            //Debug.Log("auto");
+        // while (context.performed && Player.Hands.Weapon is Rifle)
+        // //if ()
+        //     Player.Hands.Use();
     }
 
     public void OnMousePosition(InputAction.CallbackContext context) => 

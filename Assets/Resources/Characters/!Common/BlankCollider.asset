@@ -28,7 +28,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5ba3d1e722d83f74abade5d03ff5fa04, type: 3}
-  m_Name: Blank
+  m_Name: BlankCollider
   m_EditorClassIdentifier: 
   Paths:
   - {fileID: -4206820476091005821}

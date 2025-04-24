@@ -4,7 +4,7 @@ using UnityEngine;
 abstract public class Weapon : MonoBehaviour
 {
     #region Values
-    [SerializeField] float _sleepVelocity = 1f;
+    float _sleepVelocity = 0.01f;
     public AudioClip AttackSound;
     public AudioClip PickUpSound;
     #endregion

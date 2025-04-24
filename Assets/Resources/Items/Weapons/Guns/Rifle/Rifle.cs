@@ -2,8 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Rifle : Gun
+public class Rifle : Gun, IAutomaticMode
 {
+    public bool AutoFire { get => throw new System.NotImplementedException(); set => throw new System.NotImplementedException(); }
+    public float RateOfFire { get => throw new System.NotImplementedException(); set => throw new System.NotImplementedException(); }
+
     public override void Fire()
     {
         SpawnBullet();

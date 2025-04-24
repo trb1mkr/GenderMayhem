@@ -15,7 +15,7 @@ public class CharacterAnimator : MonoBehaviour
     //[OnInspectorGUI]
     public void Animate()
     {
-        Animator.SetInteger("Weapon", (int)Character.Hands.WeaponId);
+        Animator.SetInteger("Weapon", (int)Character.ItemManager.WeaponId);
         Animator.SetInteger("State", (int)Character.StateId);
         Animator.SetBool("Dead", Character.Dead);
         Animator.SetBool("Unconscious", Character.Unconscious);
