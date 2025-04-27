@@ -421,13 +421,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c57528d826ffee741a683cfea452ce2b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _sleepVelocity: 1
-  AttackSound: {fileID: 8300000, guid: d6a902014f09b72458c0448afff655d0, type: 3}
-  PickUpSound: {fileID: 8300000, guid: f9ef1bd26a4f2ae4c87a770768743932, type: 3}
   Rigidbody: {fileID: 0}
   Collider: {fileID: 0}
   AudioSource: {fileID: 0}
   SpriteRenderer: {fileID: 0}
+  AttackSound: {fileID: 8300000, guid: d6a902014f09b72458c0448afff655d0, type: 3}
+  PickUpSound: {fileID: 8300000, guid: f9ef1bd26a4f2ae4c87a770768743932, type: 3}
   ShotSound: {fileID: 8300000, guid: 3be2b2a897fa64e48a84b7af02ebd6ec, type: 3}
   GunUtilities:
     BulletPoint: {fileID: 0}
@@ -436,6 +435,6 @@ MonoBehaviour:
     Bullet: {fileID: 9041737352635034749, guid: 27105cf3d1647fb4a8f727e7e276f0e6, type: 3}
     Shell: {fileID: 2920767643987161358, guid: 56e41c4af5b14194080fbebd736af473, type: 3}
     Magazine: {fileID: 1295682356239836410, guid: 94335bb893852fc4e98cae88020920cb, type: 3}
-  Ammo: 12
+  Ammo: 15
   Spread: 10
-  AutoFire: 0
+  _rateOfFire: 0.08

@@ -27,10 +27,10 @@ public class AvoidObstacle : MonoBehaviour
 
     private void Update()
     {
+        if (Character.ItemManager.Weapon is Melee) return;
         if (Colliders.Count > 0)
-            Character.StateId = CharacterStateId.Avoid;
+            Character.StateId = CharacterStateId.Avoid; //не ставится на melee потому что надо фиксировать
         else if (Character.StateId == CharacterStateId.Avoid)
             Character.StateId = CharacterStateId.Idle;
-           
     }
 }

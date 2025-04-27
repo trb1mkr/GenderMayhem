@@ -15,7 +15,7 @@
                     "initialStateCheck": true
                 },
                 {
-                    "name": "Attack",
+                    "name": "Use",
                     "type": "Button",
                     "id": "e3c05e86-6e8e-4780-bec6-6545a68cc126",
                     "expectedControlType": "",
@@ -60,15 +60,6 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "AutomaticFire",
-                    "type": "Button",
-                    "id": "aae8e4fe-664f-450e-b759-96535f7d44fe",
-                    "expectedControlType": "",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                },
-                {
                     "name": "MousePosition",
                     "type": "Value",
                     "id": "6f4d39ac-80b7-4bb9-a0f5-238c25f50dc8",
@@ -96,7 +87,7 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "AltAttack",
+                    "name": "AltUse",
                     "type": "Button",
                     "id": "4b94439d-999f-475e-8099-94d5f8e7e36b",
                     "expectedControlType": "",
@@ -168,7 +159,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Attack",
+                    "action": "Use",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -218,17 +209,6 @@
                 },
                 {
                     "name": "",
-                    "id": "7056e361-4e1b-4ec4-b555-33ca4ccf4ca0",
-                    "path": "<Mouse>/leftButton",
-                    "interactions": "Hold(duration=0.1)",
-                    "processors": "",
-                    "groups": "",
-                    "action": "AutomaticFire",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
                     "id": "487b58af-9435-46e2-ad24-66f6ff50c9a8",
                     "path": "<Keyboard>/leftShift",
                     "interactions": "",
@@ -267,7 +247,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "AltAttack",
+                    "action": "AltUse",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

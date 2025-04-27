@@ -14,23 +14,25 @@ public class PlayerControls : MonoBehaviour
     public void OnMove(InputAction.CallbackContext context) =>
         Player.Movement.MovementDirection = context.ReadValue<Vector2>();
 
-    public void OnAttack(InputAction.CallbackContext context) //переименовать в Use
+    public void OnUse(InputAction.CallbackContext context)
     {
-        Debug.Log("attack");
-        if (context.performed)
-        {
-            Player.ItemManager.Use();
-            // if (Player.Hands.Weapon is Melee)
-            //     if (Player.StateId != CharacterStateId.Attack)
-            //         Player.StateId = CharacterStateId.Attack;
+        // if (context.performed)
+        // {
+        //     Player.ItemManager.Use();
+        //     // if (Player.Hands.Weapon is Melee)
+        //     //     if (Player.StateId != CharacterStateId.Attack)
+        //     //         Player.StateId = CharacterStateId.Attack;
 
-            // if (Player.Hands.Weapon is Gun)
-            //     Player.Hands.Weapon.Attack();
-        }
-        //if (context.canceled) Debug.Log("cancelled");
+        //     // if (Player.Hands.Weapon is Gun)
+        //     //     Player.Hands.Weapon.Attack();
+        // }
+        // if (context.canceled) Debug.Log("cancelled");
+        //Coroutine UseRoutine = null;
+        if (context.performed) Player.ItemManager.Use();
+        if (context.canceled && Player.ItemManager.UseRoutine != null) StopCoroutine(Player.ItemManager.UseRoutine);
     }
 
-    public void OnAltAttack(InputAction.CallbackContext context) //переименовать в AltUse
+    public void OnAltUse(InputAction.CallbackContext context) //переименовать в AltUse
     {
         if (context.performed)
             Player.ItemManager.AltUse();
@@ -58,13 +60,6 @@ public class PlayerControls : MonoBehaviour
 
     public void OnAim(InputAction.CallbackContext context) =>
         Player.Camera.Aim(context.performed);
-
-    public void OnAutomaticFire(InputAction.CallbackContext context) //переименовать в cotinuous use
-    {
-        // while (context.performed && Player.Hands.Weapon is Rifle)
-        // //if ()
-        //     Player.Hands.Use();
-    }
 
     public void OnMousePosition(InputAction.CallbackContext context) => 
         MousePosition = context.ReadValue<Vector2>();

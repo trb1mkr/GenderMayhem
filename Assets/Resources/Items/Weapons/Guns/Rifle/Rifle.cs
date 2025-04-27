@@ -1,11 +1,9 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class Rifle : Gun, IAutomaticMode
+public class Rifle : Gun
 {
-    public bool AutoFire { get => throw new System.NotImplementedException(); set => throw new System.NotImplementedException(); }
-    public float RateOfFire { get => throw new System.NotImplementedException(); set => throw new System.NotImplementedException(); }
+    [SerializeField] private float _rateOfFire;
 
     public override void Fire()
     {
@@ -15,11 +13,14 @@ public class Rifle : Gun, IAutomaticMode
         //Instantiate(GunUtilities.Shell, GunUtilities.ShellPoint.transform.position, GunUtilities.ShellPoint.transform.rotation);
     }
 
-    // IEnumerator AutoFire()
-    // {
-    //     yield return new WaitForSeconds(_rateOfFire);
-        
-    // }
+    public override IEnumerator Use()
+    {
+        while (Ammo > 0)
+        {
+            yield return base.Use();
+            yield return new WaitForSeconds(_rateOfFire);
+        }
+    }
 
     // public override void NoAmmo()
     // {

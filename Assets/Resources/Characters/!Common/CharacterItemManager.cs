@@ -1,6 +1,7 @@
 using UnityEngine;
 using Sirenix.OdinInspector;
 using System;
+using System.Collections;
 
 public class CharacterItemManager : MonoBehaviour
 {
@@ -9,6 +10,7 @@ public class CharacterItemManager : MonoBehaviour
     [SerializeField] private float _pickUpDistance;
     [SerializeField] private float _throwForce;
     [SerializeField] private float _throwTorque;
+    public Coroutine UseRoutine;
     #endregion
 
     #region References
@@ -92,18 +94,18 @@ public class CharacterItemManager : MonoBehaviour
         return nearestWeapon;
     }
 
-    public void Use() //сделать предметы, которые используются моментально и которые требует время на использование
-    {
-        if (Weapon is Melee melee)
-        {
-            if (Character.StateId == CharacterStateId.Idle && !melee.IsCooldown)
-            {
-                Character.StateId = CharacterStateId.Attack;
-                Weapon.Attack();
-            }
-        }
-        else Weapon.Attack();
-    }
+    // public void Use() //сделать предметы, которые используются моментально и которые требует время на использование
+    // {
+    //     if (Weapon is Melee melee)
+    //     {
+    //         if (Character.StateId == CharacterStateId.Idle && !melee.IsCooldown)
+    //         {
+    //             Character.StateId = CharacterStateId.Attack;
+    //             Weapon.Attack();
+    //         }
+    //     }
+    //     else Weapon.Attack();
+    // }
 
     public void AltUse()
     {
@@ -115,9 +117,15 @@ public class CharacterItemManager : MonoBehaviour
             }
     }
 
-    public void ContinuousUse() //сделать корутиной
+    public void Use()
     {
-        //стопать из playercontrols когда cancelled
+        if (Weapon is Melee melee)
+            if (Character.StateId == CharacterStateId.Idle && !melee.IsCooldown)
+            {
+                Character.StateId = CharacterStateId.Attack;
+                UseRoutine = StartCoroutine(Weapon.Use());
+            }
+        else UseRoutine = StartCoroutine(Weapon.Use());
     }
 
     public void PickUp()
