@@ -28,6 +28,7 @@ public class PlayerControls : MonoBehaviour
         // }
         // if (context.canceled) Debug.Log("cancelled");
         //Coroutine UseRoutine = null;
+
         if (context.performed) Player.ItemManager.Use();
         if (context.canceled && Player.ItemManager.UseRoutine != null) StopCoroutine(Player.ItemManager.UseRoutine);
     }

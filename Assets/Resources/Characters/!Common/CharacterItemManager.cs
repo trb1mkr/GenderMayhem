@@ -124,8 +124,9 @@ public class CharacterItemManager : MonoBehaviour
             {
                 Character.StateId = CharacterStateId.Attack;
                 UseRoutine = StartCoroutine(Weapon.Use());
+                return;
             }
-        else UseRoutine = StartCoroutine(Weapon.Use());
+        if (Weapon is Gun) UseRoutine = StartCoroutine(Weapon.Use());
     }
 
     public void PickUp()
