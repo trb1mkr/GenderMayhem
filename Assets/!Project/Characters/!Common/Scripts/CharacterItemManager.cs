@@ -120,7 +120,7 @@ public class CharacterItemManager : MonoBehaviour
     public void Use()
     {
         if (Weapon is Melee melee)
-            if (Character.StateId == CharacterStateId.Idle && !melee.IsCooldown)
+            if (!melee.IsCooldown) //Character.StateId == CharacterStateId.Idle && 
             {
                 Character.StateId = CharacterStateId.Attack;
                 UseRoutine = StartCoroutine(Weapon.Use());

@@ -25,7 +25,9 @@ public class PolygonCollider2DAnimator : MonoBehaviour
     [Button][PropertyOrder(0)][FoldoutGroup("View", 1)]
     public void UpdateColliderComponent()
     {
-        if (Colliders.Count - 1 < CurrentCollider) 
+        if (Colliders.Count == 0) return;
+
+        if (Colliders.Count - 1 < CurrentCollider)
         {
             Debug.LogError("No such collider! Wrong index.");
             return;

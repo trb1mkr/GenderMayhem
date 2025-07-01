@@ -56,7 +56,6 @@ public abstract class Gun : Weapon
         GunUtilities.MuzzleFlash.GetComponent<SpriteRenderer>().enabled = true;
         yield return new WaitForSeconds(0.05f);
         GunUtilities.MuzzleFlash.GetComponent<SpriteRenderer>().enabled = false;
-        yield break;
     }
 
     public void SpawnBullet() =>

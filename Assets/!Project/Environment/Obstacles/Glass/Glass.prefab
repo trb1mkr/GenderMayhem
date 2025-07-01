@@ -176,10 +176,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0806a2feaaaac4f47967c99e43edf4af, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  IsBroken: 0
   BrokenGlass: {fileID: 21300000, guid: 9b89c18276e472143be4d4bbf05807f4, type: 3}
   GlassBreak: {fileID: 8300000, guid: 8c0e4c27418f72f419a9af2b50b99721, type: 3}
   GlassWalk: {fileID: 8300000, guid: b8c8e9e0ce6782a489e7e8af01314eed, type: 3}
-  GlassWalkPlayChance: 0.1
+  GlassWalkPlayChance: 0.05
 --- !u!82 &6143523197203270562
 AudioSource:
   m_ObjectHideFlags: 0

@@ -16,24 +16,11 @@ public class PlayerControls : MonoBehaviour
 
     public void OnUse(InputAction.CallbackContext context)
     {
-        // if (context.performed)
-        // {
-        //     Player.ItemManager.Use();
-        //     // if (Player.Hands.Weapon is Melee)
-        //     //     if (Player.StateId != CharacterStateId.Attack)
-        //     //         Player.StateId = CharacterStateId.Attack;
-
-        //     // if (Player.Hands.Weapon is Gun)
-        //     //     Player.Hands.Weapon.Attack();
-        // }
-        // if (context.canceled) Debug.Log("cancelled");
-        //Coroutine UseRoutine = null;
-
         if (context.performed) Player.ItemManager.Use();
-        if (context.canceled && Player.ItemManager.UseRoutine != null) StopCoroutine(Player.ItemManager.UseRoutine);
+        if (context.canceled && Player.ItemManager.UseRoutine != null) Player.ItemManager.StopCoroutine(Player.ItemManager.UseRoutine);
     }
 
-    public void OnAltUse(InputAction.CallbackContext context) //переименовать в AltUse
+    public void OnAltUse(InputAction.CallbackContext context)
     {
         if (context.performed)
             Player.ItemManager.AltUse();

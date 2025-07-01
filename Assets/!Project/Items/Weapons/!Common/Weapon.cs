@@ -12,7 +12,7 @@ abstract public class Weapon : Item, IUsable
     public virtual IEnumerator Use()
     {
         Attack();
-        yield return null;
+        yield break;
         //yield return new WaitForSeconds(UsageTime);
     }
 

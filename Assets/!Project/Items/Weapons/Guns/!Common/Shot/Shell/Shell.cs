@@ -1,8 +1,9 @@
+using Sirenix.Utilities;
+using System.Linq;
 using UnityEngine;
 
 public class Shell : MonoBehaviour
 {
-    // Приватные поля для настройки силы и крутящего момента
     [SerializeField] private float _force;
     [SerializeField] private float _forceDeviation; // Отклонение силы
     [SerializeField] private float _torque;
@@ -10,6 +11,7 @@ public class Shell : MonoBehaviour
     [SerializeField] private float _directionDeviation; // Отклонение направления
 
     private Rigidbody2D _rb;
+    private BoxCollider2D _collider;
     private float _sleepVelocity = 0.1f;
 
     void Update()
@@ -21,13 +23,37 @@ public class Shell : MonoBehaviour
         }
     }
 
-    void Start()
+    void Awake()
     {
-        // Получаем компонент Rigidbody2D
         _rb = GetComponent<Rigidbody2D>();
+        _collider = GetComponent<BoxCollider2D>();
 
-        // Применяем силу и крутящий момент
+        IgnoreCollisions();
         ApplyForceAndTorque();
+    }
+
+    void IgnoreCollisions()
+    {
+        IgnoreCharactersCollisions();
+        IgnoreShellsCollisions();
+    }
+
+    void IgnoreCharactersCollisions()
+    {
+        var characters = FindObjectsByType<Character>(FindObjectsSortMode.None);
+        foreach (var character in characters)
+        {
+            var colliders = character.gameObject.GetComponentsInChildren<Collider2D>();
+            foreach (var collider in colliders)
+                Physics2D.IgnoreCollision(collider, _collider);
+        }
+    }
+
+    void IgnoreShellsCollisions()
+    {
+        var shells = FindObjectsByType<Shell>(FindObjectsSortMode.None);
+        foreach (var shell in shells)
+            Physics2D.IgnoreCollision(shell.GetComponent<BoxCollider2D>(), _collider);
     }
 
     void ApplyForceAndTorque()
