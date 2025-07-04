@@ -1,5 +1,8 @@
 using System.Collections;
 using UnityEngine;
+using GenderMayhem.Actions;
+using System.Collections.Generic;
+using UnityEngine.Events;
 
 public abstract class Gun : Weapon
 {
@@ -7,7 +10,14 @@ public abstract class Gun : Weapon
     public GunUtilities GunUtilities = new GunUtilities();
     public int Ammo, Spread;
 
-    new void Start()
+    public override void Awake()
+    {
+        base.Awake();
+        var altUseActions = new List<UnityAction> { new(AltAttack) };
+        ActionEventsGroup.ActionEvents.Add(new ActionEvent(typeof(PlayerInputAction), PlayerInputAction.AltUse, altUseActions));
+    }
+
+    public override void Start()
     {
         base.Start();
         GunUtilities.ShellPoint = gameObject.transform.GetChild(0).gameObject;
@@ -34,7 +44,7 @@ public abstract class Gun : Weapon
             base.Attack();
     }
 
-    public override void AltAttack()
+    public void AltAttack()
     {
         AudioSource.PlayOneShot(AttackSound);
         //StartCoroutine(Cooldown());
@@ -47,9 +57,9 @@ public abstract class Gun : Weapon
     //     IsCooldown = false;
     // }
 
-    virtual public void Fire() { return; }
+    virtual public void Fire() { }
 
-    //virtual public void NoAmmo() { return; }
+    //virtual public void NoAmmo() { }
 
     IEnumerator MuzzleFlash()
     {

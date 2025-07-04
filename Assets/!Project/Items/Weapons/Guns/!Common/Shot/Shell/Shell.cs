@@ -18,7 +18,7 @@ public class Shell : MonoBehaviour
     {
         if (_rb.linearVelocity.magnitude <= _sleepVelocity) 
         {
-            gameObject.layer = LayerMask.NameToLayer("Ignore");
+            gameObject.layer = LayerMask.NameToLayer("Ignore Collisions");
             _rb.simulated = false;
         }
     }

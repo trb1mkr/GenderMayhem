@@ -45,7 +45,7 @@ public class Glass : MonoBehaviour
 
         Player player = collider.GetComponentInParent<Player>();
         if (player)
-            if (player.AttackCollider == collider && player.StateId == CharacterStateId.Attack)
+            if (player.AttackCollider == collider && player.StateController.StateId == CharacterStateId.Attack)
                 BreakGlass();
     }
 }

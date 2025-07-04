@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class Bullet : MonoBehaviour
 {
-    public int Force;
+    [SerializeField] private int _force;
 
     void Awake()
     {
@@ -10,7 +10,7 @@ public class Bullet : MonoBehaviour
         rigidBody.IgnoreCollisions(GetComponentInParent<Character>().Rigidbody, true);
         transform.parent = null;
 
-        rigidBody.AddForce(new Vector2(gameObject.transform.right.x, gameObject.transform.right.y) * Force, ForceMode2D.Force);
+        rigidBody.AddForce(new Vector2(gameObject.transform.right.x, gameObject.transform.right.y) * _force, ForceMode2D.Force);
         Destroy(gameObject, 2);
     }
 

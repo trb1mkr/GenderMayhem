@@ -6,16 +6,17 @@ TagManager:
   tags:
   - Weapon
   - Obstacle
+  - Item
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Ignore Collisions
   - Water
   - UI
-  - Ignore
-  - Collide
-  - 
+  - Characters
+  - Obstacles
+  - Items
   - 
   - 
   - 

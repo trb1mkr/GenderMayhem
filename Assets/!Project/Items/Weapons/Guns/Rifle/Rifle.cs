@@ -1,23 +1,41 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.Events;
+using System.Collections.Generic;
+using GenderMayhem.Actions;
 
 public class Rifle : Gun
 {
     [SerializeField] private float _rateOfFire;
+    private Coroutine _autoFire;
+
+    public override void Awake()
+    {
+        base.Awake();
+
+        var useCanceledActions = new List<UnityAction> { new(StopAttack) };
+        ActionEventsGroup.ActionEvents.Add(new ActionEvent(typeof(PlayerInputAction), PlayerInputAction.UseCanceled, useCanceledActions));
+    }
 
     public override void Fire()
     {
         SpawnBullet();
         SpawnShell();
-        //Instantiate(GunUtilities.Bullet, GunUtilities.BulletPoint.transform.position, GunUtilities.BulletPoint.transform.rotation);
-        //Instantiate(GunUtilities.Shell, GunUtilities.ShellPoint.transform.position, GunUtilities.ShellPoint.transform.rotation);
     }
 
-    public override IEnumerator Use()
+    public override void Attack() =>
+        _autoFire = StartCoroutine(AutoAttack());
+
+    public void StopAttack()
+    {
+        if (_autoFire != null) StopCoroutine(_autoFire);
+    }
+
+    public IEnumerator AutoAttack()
     {
         while (Ammo > 0)
         {
-            yield return base.Use();
+            base.Attack();
             yield return new WaitForSeconds(_rateOfFire);
         }
     }

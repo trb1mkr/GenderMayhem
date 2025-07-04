@@ -1536,7 +1536,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8653230858556177108, guid: 70511a1e3c3bf3743857c6f7b8c16cf9, type: 3}
       propertyPath: m_Layer
-      value: 9
+      value: 7
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1648,6 +1648,10 @@ PrefabInstance:
     - target: {fileID: 6708188030404141778, guid: 8270150d9b1256247966e61293d412bb, type: 3}
       propertyPath: m_Name
       value: Shotgun
+      objectReference: {fileID: 0}
+    - target: {fileID: 6708188030404141778, guid: 8270150d9b1256247966e61293d412bb, type: 3}
+      propertyPath: m_Layer
+      value: 8
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -2041,6 +2045,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Rifle
       objectReference: {fileID: 0}
+    - target: {fileID: 8389825955537682450, guid: 3dfc21bbe43ef2945820692ece5996d1, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -2399,7 +2407,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 255504694}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Doors
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2902,6 +2910,10 @@ PrefabInstance:
     - target: {fileID: 4930986571820476096, guid: 23f5674b83389bb49895d7b2bf63b9df, type: 3}
       propertyPath: m_Name
       value: Bat
+      objectReference: {fileID: 0}
+    - target: {fileID: 4930986571820476096, guid: 23f5674b83389bb49895d7b2bf63b9df, type: 3}
+      propertyPath: m_Layer
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 6850604433235634959, guid: 23f5674b83389bb49895d7b2bf63b9df, type: 3}
       propertyPath: m_LocalPosition.x
@@ -3694,7 +3706,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8653230858556177108, guid: 70511a1e3c3bf3743857c6f7b8c16cf9, type: 3}
       propertyPath: m_Layer
-      value: 9
+      value: 7
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -4365,9 +4377,17 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 377482194630554891, guid: 1a45b59c87fc8734caec0db3d11e7be8, type: 3}
+      propertyPath: CooldownTime
+      value: 0.5
+      objectReference: {fileID: 0}
     - target: {fileID: 4696802203991581726, guid: 1a45b59c87fc8734caec0db3d11e7be8, type: 3}
       propertyPath: m_Name
       value: Katana
+      objectReference: {fileID: 0}
+    - target: {fileID: 4696802203991581726, guid: 1a45b59c87fc8734caec0db3d11e7be8, type: 3}
+      propertyPath: m_Layer
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 6508329276299667921, guid: 1a45b59c87fc8734caec0db3d11e7be8, type: 3}
       propertyPath: m_LocalPosition.x
@@ -4508,10 +4528,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1188481125}
     m_Modifications:
-    - target: {fileID: 542370908846915348, guid: d49549335073e5d4485b845bb0997f89, type: 3}
-      propertyPath: m_Layer
-      value: 7
-      objectReference: {fileID: 0}
     - target: {fileID: 1829391030577637659, guid: d49549335073e5d4485b845bb0997f89, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -4540,17 +4556,9 @@ PrefabInstance:
       propertyPath: m_LocalPosition.z
       value: -10
       objectReference: {fileID: 0}
-    - target: {fileID: 3038583743556406931, guid: d49549335073e5d4485b845bb0997f89, type: 3}
-      propertyPath: m_Layer
-      value: 6
-      objectReference: {fileID: 0}
     - target: {fileID: 3235359361686167238, guid: d49549335073e5d4485b845bb0997f89, type: 3}
       propertyPath: orthographic size
       value: 100
-      objectReference: {fileID: 0}
-    - target: {fileID: 4301831753962545961, guid: d49549335073e5d4485b845bb0997f89, type: 3}
-      propertyPath: m_Layer
-      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 4501504809509568775, guid: d49549335073e5d4485b845bb0997f89, type: 3}
       propertyPath: _mousePositionWeight
@@ -4559,14 +4567,6 @@ PrefabInstance:
     - target: {fileID: 4501504809509568775, guid: d49549335073e5d4485b845bb0997f89, type: 3}
       propertyPath: _mousePositionFocusedWeight
       value: 1.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 4785982506051445442, guid: d49549335073e5d4485b845bb0997f89, type: 3}
-      propertyPath: m_Layer
-      value: 7
-      objectReference: {fileID: 0}
-    - target: {fileID: 5332538409482697820, guid: d49549335073e5d4485b845bb0997f89, type: 3}
-      propertyPath: m_Layer
-      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 5893614410864910287, guid: d49549335073e5d4485b845bb0997f89, type: 3}
       propertyPath: m_LocalPosition.x
@@ -4608,21 +4608,9 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 7850620020950226021, guid: d49549335073e5d4485b845bb0997f89, type: 3}
-      propertyPath: m_Layer
-      value: 7
-      objectReference: {fileID: 0}
     - target: {fileID: 8219183064835273934, guid: d49549335073e5d4485b845bb0997f89, type: 3}
       propertyPath: m_Name
       value: TestPlayer
-      objectReference: {fileID: 0}
-    - target: {fileID: 8219183064835273934, guid: d49549335073e5d4485b845bb0997f89, type: 3}
-      propertyPath: m_Layer
-      value: 7
-      objectReference: {fileID: 0}
-    - target: {fileID: 8423610400654574401, guid: d49549335073e5d4485b845bb0997f89, type: 3}
-      propertyPath: m_Layer
-      value: 7
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -5911,6 +5899,10 @@ PrefabInstance:
     - target: {fileID: 1190318660823282134, guid: b92a4cff57b201249bf52c3487c0ef15, type: 3}
       propertyPath: m_Name
       value: Knife
+      objectReference: {fileID: 0}
+    - target: {fileID: 1190318660823282134, guid: b92a4cff57b201249bf52c3487c0ef15, type: 3}
+      propertyPath: m_Layer
+      value: 8
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -10291,7 +10283,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1383620344}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Walls
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -11710,7 +11702,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1616251930}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Obstacles
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -14818,6 +14810,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Pistol
       objectReference: {fileID: 0}
+    - target: {fileID: 8522072857297819949, guid: 3e6df3dac8e15164284f27dc5e34c193, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -14930,7 +14926,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2069083527}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Glass
   m_TagString: Untagged
   m_Icon: {fileID: 0}

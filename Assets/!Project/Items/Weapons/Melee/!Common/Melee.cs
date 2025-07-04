@@ -10,7 +10,7 @@ public abstract class Melee : Weapon
     public float CooldownTime; //с учётом длительности анимации
     [ReadOnly] public bool IsCooldown;
 
-    private new void Start()
+    public override void Start()
     {
         base.Start();
     }

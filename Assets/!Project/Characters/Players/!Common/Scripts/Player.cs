@@ -10,7 +10,7 @@ public class Player : Character
     //public FinishOff FinishOff { get; private set; }
 
     new void Awake()
-	{
+    {
         base.Awake();
         Controls = GetComponent<PlayerControls>();
         Movement = GetComponent<PlayerMovement>();
@@ -18,9 +18,11 @@ public class Player : Character
 
         Movement.Player = Controls.Player = Camera.Player = this;
 
-        StateId = CharacterStateId.Idle;
         //Hands.Weapon = Fists;
 
         PlayerSpawned.Invoke();
-	}
+
+        Controls.AltUsed.AddListener(StateController.HandleAltUsed);
+        Controls.Used.AddListener(StateController.HandleUsed);
+    }
 }

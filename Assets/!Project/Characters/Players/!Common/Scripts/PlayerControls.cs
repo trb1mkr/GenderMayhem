@@ -1,9 +1,12 @@
+using GenderMayhem.Actions;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.InputSystem;
 
 public class PlayerControls : MonoBehaviour
 {
     #region Values
+    [HideInInspector] public UnityEvent Used, UseCanceled, AltUsed;
     public Vector2 MousePosition { get; private set; }
     #endregion
 
@@ -16,27 +19,22 @@ public class PlayerControls : MonoBehaviour
 
     public void OnUse(InputAction.CallbackContext context)
     {
-        if (context.performed) Player.ItemManager.Use();
-        if (context.canceled && Player.ItemManager.UseRoutine != null) Player.ItemManager.StopCoroutine(Player.ItemManager.UseRoutine);
+        if (context.performed)
+            if (Player.ItemManager.Item.ActionEventsGroup.InvokeSuitableActions(PlayerInputAction.Use))
+                Used.Invoke();
+        if (context.canceled)
+            if (Player.ItemManager.Item.ActionEventsGroup.InvokeSuitableActions(PlayerInputAction.UseCanceled))
+                UseCanceled.Invoke();
     }
 
     public void OnAltUse(InputAction.CallbackContext context)
     {
-        if (context.performed)
-            Player.ItemManager.AltUse();
+        if (context.performed && Player.StateController.StateId == CharacterStateId.Idle)
+        {
+            if (Player.ItemManager.Item.ActionEventsGroup.InvokeSuitableActions(PlayerInputAction.AltUse))
+                AltUsed.Invoke();
+        }
     }
-
-    // public void OnThrow(InputAction.CallbackContext context)
-    // {
-    //     if (context.performed)
-    //         Player.Hands.Throw();
-    // }
-
-    // public void OnPickUp(InputAction.CallbackContext context)
-    // {
-    //     if (context.started)
-    //         Player.Hands.PickUp();
-    // }
 
     public void OnPickUpThrow(InputAction.CallbackContext context)
     {

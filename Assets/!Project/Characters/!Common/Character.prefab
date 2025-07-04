@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 1519525405002275733}
   - component: {fileID: 3593156924925266668}
   - component: {fileID: 234732289514107157}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: AvoidCollider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -100,7 +100,8 @@ MonoBehaviour:
   _colliderComponent: {fileID: 3593156924925266668}
   CurrentCollider: 0
   Colliders: []
-  SerializedColliderName: 
+  _autoUpdateColliderComponent: 1
+  _colliderName: 
   _autoSave: 1
   _saveFolder: 
 --- !u!1 &1171868502133147323
@@ -114,10 +115,11 @@ GameObject:
   - component: {fileID: 3718113289256693178}
   - component: {fileID: 1230133410135110988}
   - component: {fileID: 2335699261410331719}
+  - component: {fileID: -6784073650192189678}
   - component: {fileID: 7917002332989594765}
   - component: {fileID: 7660532431483300520}
   - component: {fileID: 2280342119234328695}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Character
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -171,8 +173,25 @@ MonoBehaviour:
   _throwForce: 500
   _throwTorque: 500
   Character: {fileID: 0}
-  <Weapon>k__BackingField: {fileID: 6740073045893077235}
+  Item: {fileID: 6740073045893077235}
   _fists: {fileID: 6740073045893077235}
+  OnItemChange:
+    m_PersistentCalls:
+      m_Calls: []
+--- !u!114 &-6784073650192189678
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1171868502133147323}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 22d9da560256819439f3f86968b092d5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  StateId: 0
+  Character: {fileID: 0}
 --- !u!82 &7917002332989594765
 AudioSource:
   m_ObjectHideFlags: 0
@@ -329,7 +348,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2071234082576100392}
   - component: {fileID: 6516563990743408527}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Body
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -421,7 +440,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8560590453206253152}
   - component: {fileID: 1306549697380421091}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Legs
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -509,7 +528,7 @@ GameObject:
   - component: {fileID: 553358314052899562}
   - component: {fileID: 695899834292155802}
   - component: {fileID: 948802243435001747}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: AttackCollider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -598,7 +617,8 @@ MonoBehaviour:
   _colliderComponent: {fileID: 695899834292155802}
   CurrentCollider: 0
   Colliders: []
-  SerializedColliderName: 
+  _autoUpdateColliderComponent: 1
+  _colliderName: 
   _autoSave: 1
   _saveFolder: 
 --- !u!1 &6476205344310350172
@@ -612,7 +632,7 @@ GameObject:
   - component: {fileID: 6188905297952560006}
   - component: {fileID: 5617571445286105248}
   - component: {fileID: 6764144599097823401}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: BodyCollider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -701,7 +721,8 @@ MonoBehaviour:
   _colliderComponent: {fileID: 5617571445286105248}
   CurrentCollider: 0
   Colliders: []
-  SerializedColliderName: 
+  _autoUpdateColliderComponent: 1
+  _colliderName: 
   _autoSave: 1
   _saveFolder: 
 --- !u!1 &7338004492575001953
@@ -713,7 +734,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3151917603023310356}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: WeaponPoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}

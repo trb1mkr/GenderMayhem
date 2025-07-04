@@ -28,8 +28,8 @@ public class AvoidObstacle : MonoBehaviour
     private void Update()
     {
         if (Colliders.Count > 0)
-            Character.StateId = CharacterStateId.Avoid;
-        else if (Character.StateId == CharacterStateId.Avoid)
-            Character.StateId = CharacterStateId.Idle;
+            Character.StateController.StateId = CharacterStateId.Avoid;
+        else if (Character.StateController.StateId == CharacterStateId.Avoid)
+            Character.StateController.StateId = CharacterStateId.Idle;
     }
 }

@@ -1,25 +1,21 @@
-using System.Collections;
 using UnityEngine;
+using GenderMayhem.Actions;
+using System.Collections.Generic;
+using UnityEngine.Events;
 
 [System.Serializable]
-abstract public class Weapon : Item, IUsable
+abstract public class Weapon : Item
 {
     #region Values
     public AudioClip AttackSound;
-    public AudioClip PickUpSound;
     #endregion
 
-    public virtual IEnumerator Use()
+    public virtual void Awake()
     {
-        Attack();
-        yield break;
-        //yield return new WaitForSeconds(UsageTime);
+        var useActions = new List<UnityAction> { new(Attack) };
+        ActionEventsGroup.ActionEvents.Add(new ActionEvent(typeof(PlayerInputAction), PlayerInputAction.Use, useActions));
     }
 
-    virtual public void Attack() 
+    public virtual void Attack()
         { GetComponent<CameraShakeSource>().Shake(); }
-
-    virtual public void AltAttack() { return; }
-
-
 }
