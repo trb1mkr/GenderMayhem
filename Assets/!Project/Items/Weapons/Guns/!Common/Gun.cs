@@ -47,15 +47,7 @@ public abstract class Gun : Weapon
     public void AltAttack()
     {
         AudioSource.PlayOneShot(AttackSound);
-        //StartCoroutine(Cooldown());
     }
-
-    // IEnumerator Cooldown()
-    // {
-    //     IsCooldown = true;
-    //     yield return new WaitForSeconds(CooldownTime);
-    //     IsCooldown = false;
-    // }
 
     virtual public void Fire() { }
 

@@ -12,6 +12,7 @@ public abstract class Character : MonoBehaviour
     public CharacterItemManager ItemManager { get; protected set; }
     public CharacterStateController StateController { get; protected set; }
     public CharacterHealth Health { get; protected set; }
+    public CharacterWeaponController WeaponController { get; protected set; }
     public ColliderTriggerTagFilter AvoidList { get; protected set; }
     #endregion
 
@@ -26,8 +27,9 @@ public abstract class Character : MonoBehaviour
         ItemManager = GetComponent<CharacterItemManager>();
         StateController = GetComponent<CharacterStateController>();
         Health = GetComponent<CharacterHealth>();
+        WeaponController = GetComponent<CharacterWeaponController>();
         AvoidList = GetComponentInChildren<ColliderTriggerTagFilter>();
 
-        AnimatorController.Character = ItemManager.Character = StateController.Character = this;
+        AnimatorController.Character = ItemManager.Character = StateController.Character = WeaponController.Character = this;
     }
 }

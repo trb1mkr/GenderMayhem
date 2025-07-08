@@ -1,5 +1,3 @@
-using Sirenix.OdinInspector;
-using System.Collections;
 using UnityEngine;
 
 public abstract class Melee : Weapon
@@ -8,7 +6,6 @@ public abstract class Melee : Weapon
     public bool Lethal;
     public float AttackTime;
     public float CooldownTime; //с учётом длительности анимации
-    [ReadOnly] public bool IsCooldown;
 
     public override void Start()
     {
@@ -17,16 +14,9 @@ public abstract class Melee : Weapon
 
     public override void Attack()
     {
-        if (IsCooldown) return;
+        //if (IsCooldown) return;
         AudioSource.PlayOneShot(AttackSound);
-        StartCoroutine(Cooldown());
+        //StartCoroutine(Cooldown());
         base.Attack();
-    }
-
-    IEnumerator Cooldown()
-    {
-        IsCooldown = true;
-        yield return new WaitForSeconds(CooldownTime);
-        IsCooldown = false;
     }
 }

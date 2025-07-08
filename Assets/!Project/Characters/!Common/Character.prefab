@@ -115,6 +115,7 @@ GameObject:
   - component: {fileID: 3718113289256693178}
   - component: {fileID: 1230133410135110988}
   - component: {fileID: 2335699261410331719}
+  - component: {fileID: 2059025463604269241}
   - component: {fileID: -6784073650192189678}
   - component: {fileID: 4868138410655425148}
   - component: {fileID: 7917002332989594765}
@@ -172,12 +173,27 @@ MonoBehaviour:
   _pickUpDistance: 35
   _throwForce: 500
   _throwTorque: 500
-  OnItemChange:
+  ItemChanged:
     m_PersistentCalls:
       m_Calls: []
   Character: {fileID: 0}
   Item: {fileID: 6740073045893077235}
   _fists: {fileID: 6740073045893077235}
+--- !u!114 &2059025463604269241
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1171868502133147323}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0c52aa39fed18134989461dc20a233b3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  IsCooldown: 0
+  CooldownTime: 0
+  Character: {fileID: 0}
 --- !u!114 &-6784073650192189678
 MonoBehaviour:
   m_ObjectHideFlags: 0

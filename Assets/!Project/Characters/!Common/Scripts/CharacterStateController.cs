@@ -21,7 +21,7 @@ public class CharacterStateController : MonoBehaviour
     {
         SetWeaponId();
         StateId = CharacterStateId.Idle;
-        Character.ItemManager.OnItemChange.AddListener(SetWeaponId);
+        Character.ItemManager.ItemChanged.AddListener(SetWeaponId);
     }
 
     private void Update()

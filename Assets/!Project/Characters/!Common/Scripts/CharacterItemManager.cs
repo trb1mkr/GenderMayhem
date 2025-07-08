@@ -8,7 +8,7 @@ public class CharacterItemManager : MonoBehaviour
     [SerializeField] private float _throwForce;
     [SerializeField] private float _throwTorque;
     public Coroutine UseRoutine;
-    [HideInInspector] public UnityEvent OnItemChange;
+    [HideInInspector] public UnityEvent ItemChanged;
     #endregion
 
     #region References
@@ -16,6 +16,11 @@ public class CharacterItemManager : MonoBehaviour
     public Item Item;
     [SerializeField] private Weapon _fists;
     #endregion
+
+    void Awake()
+    {
+        Item = _fists;
+    }
 
     public GameObject GetTargetItem()
     {
@@ -63,7 +68,7 @@ public class CharacterItemManager : MonoBehaviour
         Item.transform.SetLocalPositionAndRotation(Vector3.zero, Quaternion.identity);
         Item.AudioSource.PlayOneShot(Item.PickUpSound);
 
-        OnItemChange.Invoke();
+        ItemChanged.Invoke();
     }
 
     public void Throw()
@@ -82,6 +87,6 @@ public class CharacterItemManager : MonoBehaviour
         Item.AudioSource.PlayOneShot(Item.ThrowSound);
         Item = _fists;
 
-        OnItemChange.Invoke();
+        ItemChanged.Invoke();
     }
 }

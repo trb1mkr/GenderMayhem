@@ -14,7 +14,7 @@ public class PlayerControls : MonoBehaviour
     [HideInInspector] public Player Player;
     #endregion
 
-    private void Start()
+    private void Start() //потом переснести отсюда
     {
         AltUsed.AddListener(Player.StateController.HandleAltUsed);
         Used.AddListener(Player.StateController.HandleUsed);
@@ -26,8 +26,11 @@ public class PlayerControls : MonoBehaviour
     public void OnUse(InputAction.CallbackContext context)
     {
         if (context.performed)
+        {
+            if (Player.WeaponController.IsCooldown) return;
             if (Player.ItemManager.Item.ActionEventsGroup.InvokeSuitableActions(PlayerInputAction.Use))
                 Used.Invoke();
+        }
         if (context.canceled)
             if (Player.ItemManager.Item.ActionEventsGroup.InvokeSuitableActions(PlayerInputAction.UseCanceled))
                 UseCanceled.Invoke();

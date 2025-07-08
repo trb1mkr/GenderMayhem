@@ -8,6 +8,7 @@ abstract public class Weapon : Item
 {
     #region Values
     public AudioClip AttackSound;
+    [HideInInspector] public UnityEvent Attacked;
     #endregion
 
     public virtual void Awake()
@@ -17,5 +18,8 @@ abstract public class Weapon : Item
     }
 
     public virtual void Attack()
-        { GetComponent<CameraShakeSource>().Shake(); }
+    {
+        Attacked.Invoke();
+        GetComponent<CameraShakeSource>().Shake();
+    }
 }
