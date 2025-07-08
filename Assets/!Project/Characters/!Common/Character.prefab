@@ -116,6 +116,7 @@ GameObject:
   - component: {fileID: 1230133410135110988}
   - component: {fileID: 2335699261410331719}
   - component: {fileID: -6784073650192189678}
+  - component: {fileID: 4868138410655425148}
   - component: {fileID: 7917002332989594765}
   - component: {fileID: 7660532431483300520}
   - component: {fileID: 2280342119234328695}
@@ -156,7 +157,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Character: {fileID: 0}
-  Animator: {fileID: 2280342119234328695}
 --- !u!114 &2335699261410331719
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -172,12 +172,12 @@ MonoBehaviour:
   _pickUpDistance: 35
   _throwForce: 500
   _throwTorque: 500
-  Character: {fileID: 0}
-  Item: {fileID: 6740073045893077235}
-  _fists: {fileID: 6740073045893077235}
   OnItemChange:
     m_PersistentCalls:
       m_Calls: []
+  Character: {fileID: 0}
+  Item: {fileID: 6740073045893077235}
+  _fists: {fileID: 6740073045893077235}
 --- !u!114 &-6784073650192189678
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -191,7 +191,25 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   StateId: 0
+  BodyCollider: {fileID: 5617571445286105248}
+  AttackCollider: {fileID: 695899834292155802}
+  AvoidCollider: {fileID: 3593156924925266668}
+  WeaponPoint: {fileID: 3151917603023310356}
   Character: {fileID: 0}
+--- !u!114 &4868138410655425148
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1171868502133147323}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 36810065c4d281d43a13b182099390ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Dead: 0
+  Unconscious: 0
 --- !u!82 &7917002332989594765
 AudioSource:
   m_ObjectHideFlags: 0

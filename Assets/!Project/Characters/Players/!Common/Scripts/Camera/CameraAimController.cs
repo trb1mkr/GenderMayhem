@@ -14,7 +14,6 @@ public class CameraAimController : MonoBehaviour
     #endregion
 
     #region References
-    [HideInInspector] public Player Player;
     private CinemachineTargetGroup _targetGroup;
     #endregion
 

@@ -8,13 +8,13 @@ public class CharacterItemManager : MonoBehaviour
     [SerializeField] private float _throwForce;
     [SerializeField] private float _throwTorque;
     public Coroutine UseRoutine;
+    [HideInInspector] public UnityEvent OnItemChange;
     #endregion
 
     #region References
     [HideInInspector] public Character Character;
     public Item Item;
     [SerializeField] private Weapon _fists;
-    [HideInInspector] public UnityEvent OnItemChange;
     #endregion
 
     public GameObject GetTargetItem()
@@ -59,7 +59,7 @@ public class CharacterItemManager : MonoBehaviour
         Item.SpriteRenderer.enabled = false;
         Item.Rigidbody.IgnoreCollisions(Character.Rigidbody, true);
         Item.Rigidbody.simulated = false;
-        Item.transform.parent = Character.WeaponPoint;
+        Item.transform.parent = Character.StateController.WeaponPoint;
         Item.transform.SetLocalPositionAndRotation(Vector3.zero, Quaternion.identity);
         Item.AudioSource.PlayOneShot(Item.PickUpSound);
 

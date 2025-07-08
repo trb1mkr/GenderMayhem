@@ -2,16 +2,11 @@ using Sirenix.OdinInspector;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AvoidObstacle : MonoBehaviour
+public class ColliderTriggerTagFilter : MonoBehaviour
 {
-    [HideInInspector] public Character Character;
-
+    #region Values
     [ReadOnly] public List<Collider2D> Colliders = new List<Collider2D>();
-
-    void Start()
-    {
-        Character = GetComponentInParent<Character>();
-    }
+    #endregion
 
     private void OnTriggerEnter2D(Collider2D collider)
     {
@@ -23,13 +18,5 @@ public class AvoidObstacle : MonoBehaviour
     {
         if (Colliders.Contains(collider))
             Colliders.Remove(collider);
-    }
-
-    private void Update()
-    {
-        if (Colliders.Count > 0)
-            Character.StateController.StateId = CharacterStateId.Avoid;
-        else if (Character.StateController.StateId == CharacterStateId.Avoid)
-            Character.StateController.StateId = CharacterStateId.Idle;
     }
 }

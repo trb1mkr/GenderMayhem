@@ -6,11 +6,11 @@ public class Bullet : MonoBehaviour
 
     void Awake()
     {
-        var rigidBody = gameObject.GetComponent<Rigidbody2D>();
-        rigidBody.IgnoreCollisions(GetComponentInParent<Character>().Rigidbody, true);
+        var rb = gameObject.GetComponent<Rigidbody2D>();
+        rb.IgnoreCollisions(GetComponentInParent<Character>().Rigidbody, true);
         transform.parent = null;
 
-        rigidBody.AddForce(new Vector2(gameObject.transform.right.x, gameObject.transform.right.y) * _force, ForceMode2D.Force);
+        rb.AddForce(new Vector2(gameObject.transform.right.x, gameObject.transform.right.y) * _force, ForceMode2D.Force);
         Destroy(gameObject, 2);
     }
 

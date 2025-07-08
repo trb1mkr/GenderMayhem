@@ -14,6 +14,12 @@ public class PlayerControls : MonoBehaviour
     [HideInInspector] public Player Player;
     #endregion
 
+    private void Start()
+    {
+        AltUsed.AddListener(Player.StateController.HandleAltUsed);
+        Used.AddListener(Player.StateController.HandleUsed);
+    }
+
     public void OnMove(InputAction.CallbackContext context) =>
         Player.Movement.MovementDirection = context.ReadValue<Vector2>();
 
@@ -45,7 +51,7 @@ public class PlayerControls : MonoBehaviour
     public void OnFinishOff(InputAction.CallbackContext context) { }
 
     public void OnAim(InputAction.CallbackContext context) =>
-        Player.Camera.Aim(context.performed);
+        Player.CamAimController.Aim(context.performed);
 
     public void OnMousePosition(InputAction.CallbackContext context) => 
         MousePosition = context.ReadValue<Vector2>();

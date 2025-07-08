@@ -338,13 +338,6 @@
       },
       "url": "https://packages.unity.com"
     },
-    "jp.hadashikick.vcontainer": {
-      "version": "https://github.com/hadashiA/VContainer.git?path=VContainer/Assets/VContainer#1.16.9",
-      "depth": 0,
-      "source": "git",
-      "dependencies": {},
-      "hash": "0522be3ef0bb03a3dd8866d43090b6e7ea22884a"
-    },
     "nuget-packages": {
       "version": "file:nuget-packages",
       "depth": 0,

@@ -252,6 +252,30 @@ PrefabInstance:
       propertyPath: _autoUpdateColliderComponent
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6277522271693609014, guid: 667dfd4a2277230469f42b728ed0c9f6, type: 3}
+      propertyPath: _weaponPoint
+      value: 
+      objectReference: {fileID: 5327453926192413793}
+    - target: {fileID: 6277522271693609014, guid: 667dfd4a2277230469f42b728ed0c9f6, type: 3}
+      propertyPath: _bodyCollider
+      value: 
+      objectReference: {fileID: 3433616713832448725}
+    - target: {fileID: 6277522271693609014, guid: 667dfd4a2277230469f42b728ed0c9f6, type: 3}
+      propertyPath: _avoidCollider
+      value: 
+      objectReference: {fileID: 6020822789875038361}
+    - target: {fileID: 6277522271693609014, guid: 667dfd4a2277230469f42b728ed0c9f6, type: 3}
+      propertyPath: _attackCollider
+      value: 
+      objectReference: {fileID: 7780921034727262191}
+    - target: {fileID: 6277522271693609014, guid: 667dfd4a2277230469f42b728ed0c9f6, type: 3}
+      propertyPath: autoInjectGameObjects.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6277522271693609014, guid: 667dfd4a2277230469f42b728ed0c9f6, type: 3}
+      propertyPath: 'autoInjectGameObjects.Array.data[0]'
+      value: 
+      objectReference: {fileID: 8219183064835273934}
     - target: {fileID: 6399314949811581821, guid: 667dfd4a2277230469f42b728ed0c9f6, type: 3}
       propertyPath: _saveFolder
       value: Assets/Resources/Characters/Players/Test/States
@@ -501,6 +525,31 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 667dfd4a2277230469f42b728ed0c9f6, type: 3}
+--- !u!60 &3433616713832448725 stripped
+PolygonCollider2D:
+  m_CorrespondingSourceObject: {fileID: 1734346418227983438, guid: 667dfd4a2277230469f42b728ed0c9f6, type: 3}
+  m_PrefabInstance: {fileID: 4014689504196621979}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &5327453926192413793 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 9104556387976186618, guid: 667dfd4a2277230469f42b728ed0c9f6, type: 3}
+  m_PrefabInstance: {fileID: 4014689504196621979}
+  m_PrefabAsset: {fileID: 0}
+--- !u!60 &6020822789875038361 stripped
+PolygonCollider2D:
+  m_CorrespondingSourceObject: {fileID: 7221883433301249538, guid: 667dfd4a2277230469f42b728ed0c9f6, type: 3}
+  m_PrefabInstance: {fileID: 4014689504196621979}
+  m_PrefabAsset: {fileID: 0}
+--- !u!60 &7780921034727262191 stripped
+PolygonCollider2D:
+  m_CorrespondingSourceObject: {fileID: 6650805794334339444, guid: 667dfd4a2277230469f42b728ed0c9f6, type: 3}
+  m_PrefabInstance: {fileID: 4014689504196621979}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &8219183064835273934 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5019100869967823445, guid: 667dfd4a2277230469f42b728ed0c9f6, type: 3}
+  m_PrefabInstance: {fileID: 4014689504196621979}
+  m_PrefabAsset: {fileID: 0}
 --- !u!95 &9076530410873612802 stripped
 Animator:
   m_CorrespondingSourceObject: {fileID: 5350657359033539737, guid: 667dfd4a2277230469f42b728ed0c9f6, type: 3}

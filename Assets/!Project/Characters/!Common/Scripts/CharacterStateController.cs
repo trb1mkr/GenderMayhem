@@ -4,15 +4,32 @@ using Sirenix.OdinInspector;
 
 public class CharacterStateController : MonoBehaviour
 {
+    #region Values
     public CharacterStateId StateId;
     [field: ReadOnly] public WeaponId WeaponId { get; private set; }
+    public PolygonCollider2D BodyCollider;
+    public PolygonCollider2D AttackCollider;
+    public PolygonCollider2D AvoidCollider;
+    public Transform WeaponPoint;
+    #endregion
 
+    #region References
     [HideInInspector] public Character Character;
+    #endregion
 
     public void Start()
     {
         SetWeaponId();
+        StateId = CharacterStateId.Idle;
         Character.ItemManager.OnItemChange.AddListener(SetWeaponId);
+    }
+
+    private void Update()
+    {
+        if (Character.AvoidList.Colliders.Count > 0)
+            StateId = CharacterStateId.Avoid;
+        else if (StateId == CharacterStateId.Avoid)
+            StateId = CharacterStateId.Idle;
     }
 
     void SetWeaponId()
