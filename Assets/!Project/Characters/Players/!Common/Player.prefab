@@ -100,9 +100,6 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 1171868502133147323, guid: e6f260d920b23054d989265f71dc2d4d, type: 3}
       insertIndex: 4
       addedObject: {fileID: 5097662434106307800}
-    - targetCorrespondingSourceObject: {fileID: 1171868502133147323, guid: e6f260d920b23054d989265f71dc2d4d, type: 3}
-      insertIndex: 5
-      addedObject: {fileID: 2243372953618323742}
     - targetCorrespondingSourceObject: {fileID: 1053901765440366096, guid: e6f260d920b23054d989265f71dc2d4d, type: 3}
       insertIndex: -1
       addedObject: {fileID: 3289379436359076685}
@@ -314,18 +311,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b2babd4c09e380a4a95a9215611d1aa1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  SpriteRenderer: {fileID: 0}
-  Rigidbody: {fileID: 0}
-  AudioSource: {fileID: 0}
-  Animator: {fileID: 0}
-  AnimatorContoller: {fileID: 0}
-  ItemManager: {fileID: 0}
-  StateController: {fileID: 0}
-  Health: {fileID: 0}
-  AvoidList: {fileID: 0}
-  Controls: {fileID: 0}
-  Movement: {fileID: 0}
-  CamAimController: {fileID: 0}
 --- !u!114 &4187561494834836682
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -347,6 +332,7 @@ MonoBehaviour:
   AltUsed:
     m_PersistentCalls:
       m_Calls: []
+  Player: {fileID: 0}
 --- !u!114 &5097662434106307800
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -361,20 +347,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   MovementSpeed: 220
   MovementDirection: {x: 0, y: 0}
---- !u!114 &2243372953618323742
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5019100869967823445}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 36810065c4d281d43a13b182099390ff, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Dead: 0
-  Unconscious: 0
+  Player: {fileID: 0}
 --- !u!1 &6576394025390973694 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1053901765440366096, guid: e6f260d920b23054d989265f71dc2d4d, type: 3}

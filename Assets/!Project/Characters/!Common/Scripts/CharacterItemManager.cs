@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.Events;
+using System.Collections;
 
 public class CharacterItemManager : MonoBehaviour
 {
@@ -9,6 +10,7 @@ public class CharacterItemManager : MonoBehaviour
     [SerializeField] private float _throwTorque;
     public Coroutine UseRoutine;
     [HideInInspector] public UnityEvent ItemChanged;
+    private Coroutine _characterIgnoreCoroutine;
     #endregion
 
     #region References
@@ -32,16 +34,13 @@ public class CharacterItemManager : MonoBehaviour
         GameObject nearestWeapon = null;
         float nearestDistance = float.MaxValue;
 
-        // Получаем все объекты с компонентом Weapon
         Weapon[] weapons = FindObjectsByType<Weapon>(FindObjectsSortMode.None);
-
         foreach (Weapon weapon in weapons)
         {
-            if (weapon.transform.GetComponentInParent<Player>() != null) continue;
-            // Вычисляем дистанцию между игроком и оружием
-            float distance = Vector3.Distance(transform.position, weapon.transform.position);
+            if (weapon.transform.GetComponentInParent<Character>() != null) continue;
+            if (Physics2D.Linecast(weapon.transform.GetComponent<Item>().Collider.ClosestPoint(Character.transform.position), Character.transform.position, LayerMask.GetMask("Obstacles")).collider != null) continue;
 
-            // Проверяем, что дистанция меньше максимальной и меньше текущей ближайшей дистанции
+            float distance = Vector3.Distance(transform.position, weapon.transform.position);
             if (distance <= _pickUpDistance && distance < nearestDistance)
             {
                 nearestWeapon = weapon.gameObject;
@@ -60,8 +59,10 @@ public class CharacterItemManager : MonoBehaviour
         if (Item != _fists) Throw();
         if (targetItem == null) return;
 
+        if (_characterIgnoreCoroutine != null) StopCoroutine(_characterIgnoreCoroutine);
         Item = targetItem.GetComponent<Item>();
         Item.SpriteRenderer.enabled = false;
+        //Item.StopAllCoroutines(); //сделать с этим что-то
         Item.Rigidbody.IgnoreCollisions(Character.Rigidbody, true);
         Item.Rigidbody.simulated = false;
         Item.transform.parent = Character.StateController.WeaponPoint;
@@ -79,7 +80,8 @@ public class CharacterItemManager : MonoBehaviour
         Character.StateController.StateId = CharacterStateId.Idle;
 
         Item.SpriteRenderer.enabled = true;
-        this.Invoke(() => Item.Rigidbody.IgnoreCollisions(Character.Rigidbody, false), 0.1f);
+        //Item.Invoke(() => Item.Rigidbody.IgnoreCollisions(Character.Rigidbody, false), 0.5f);
+        _characterIgnoreCoroutine = StartCoroutine(UnIgnoreCharacter(Item));
         Item.Rigidbody.simulated = true;
         Item.transform.SetParent(null, true);
         Item.Rigidbody.AddForce(_throwForce * new Vector2(transform.right.x, transform.right.y).normalized, ForceMode2D.Impulse);
@@ -88,5 +90,11 @@ public class CharacterItemManager : MonoBehaviour
         Item = _fists;
 
         ItemChanged.Invoke();
+    }
+
+    private IEnumerator UnIgnoreCharacter(Item item)
+    {
+        yield return new WaitForSeconds(0.5f);
+        item.Rigidbody.IgnoreCollisions(Character.Rigidbody, false);
     }
 }

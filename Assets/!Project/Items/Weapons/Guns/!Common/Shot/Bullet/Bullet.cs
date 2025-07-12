@@ -1,3 +1,4 @@
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class Bullet : MonoBehaviour
@@ -16,8 +17,25 @@ public class Bullet : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collider)
     {
-        if (collider.GetComponent<Shell>() || collider.GetComponent<Bullet>() || collider.GetComponent<Weapon>()) return;
+        if (collider.GetComponent<Shell>() || collider.GetComponent<Bullet>() || collider.GetComponent<Weapon>()) return; //летит дальше
+
+        var character = collider.GetComponentInParent<Character>();
+        if (character != null && collider == character.StateController.BodyCollider)
+            character.Health.Die();
 
         Destroy(gameObject);
     }
+
+    // private void OnCollisionEnter2D(Collision2D collision)
+    // {
+    //     Debug.Log(collision.collider.name);
+    //     Debug.Log(collision.otherCollider.name);
+    //     var character = collision.collider.GetComponentInParent<Character>();
+    //     if (character != null && collision.collider == character.StateController.BodyCollider)
+    //     {
+    //         Debug.Log("BodyCollider");
+    //         //if (collision.collider.GetComponent<Weapon>()) character.Health.FallUnconscious();
+    //         if (collision.collider.GetComponent<Bullet>()) character.Health.Die();
+    //     }
+    // }
 }

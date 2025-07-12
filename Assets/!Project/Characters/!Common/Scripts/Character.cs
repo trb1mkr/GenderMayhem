@@ -30,6 +30,6 @@ public abstract class Character : MonoBehaviour
         WeaponController = GetComponent<CharacterWeaponController>();
         AvoidList = GetComponentInChildren<ColliderTriggerTagFilter>();
 
-        AnimatorController.Character = ItemManager.Character = StateController.Character = WeaponController.Character = this;
+        AnimatorController.Character = ItemManager.Character = StateController.Character = WeaponController.Character = Health.Character = this;
     }
 }

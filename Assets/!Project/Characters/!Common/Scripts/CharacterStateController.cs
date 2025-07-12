@@ -42,8 +42,8 @@ public class CharacterStateController : MonoBehaviour
 
     public void HandleAltUsed()
     {
-        if (Character.ItemManager.Item is Weapon)
-            StateId = CharacterStateId.Attack;
+        //if (Character.ItemManager.Item is Gun)
+            //StateId = CharacterStateId.Attack;
     }
 
     public void HandleUsed()

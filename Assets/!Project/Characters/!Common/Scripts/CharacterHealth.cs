@@ -1,40 +1,58 @@
 using UnityEngine;
 using Sirenix.OdinInspector;
+using System.Collections;
+using System;
 
 public class CharacterHealth : MonoBehaviour
 {
     #region Values
+    public float KnockdownForce;
+    public float KnockdownTime;
     [ReadOnly] public bool Dead;
     [ReadOnly] public bool Unconscious;
+    public event Action Died;
+    public event Action Knocked;
+    public event Action StoodUp;
     #endregion
 
     #region References
-
+    [HideInInspector] public Character Character;
     #endregion
 
-    // private void OnCollisionEnter2D(Collision2D collision)
-    // {
-    //     if (collision.otherCollider == BodyCollider)
-    //     {
-    //         //Debug.Log("BodyCollider");
-    //         //if (collision.collider.GetComponent<Weapon>()) FallUnconscious();
-    //         if (collision.collider.GetComponent<Bullet>()) Die();
-    //     }
-    // }
+    [Button]
+    public void Die()
+    {
+        Unconscious = false;
+        Dead = true;
+        Character.ItemManager.Throw();
+        Character.Rigidbody.simulated = false;
+        StopCoroutine(StandUp());
+        ChangeComponentState(false);
+        Died?.Invoke();
+    }
 
-    // public void Die()
-    // {
-    //     Dead = true;
-    //     ItemManager.Throw();
-    //     //Throw(new Vector2(Random.Range(-10, 10), Random.Range(-10, 10)));
-    // }
+    [Button]
+    public void Knockdown()
+    {
+        Unconscious = true;
+        Character.ItemManager.Throw();
+        Character.Rigidbody.simulated = false;
+        StartCoroutine(StandUp());
+        ChangeComponentState(false);
+        Knocked?.Invoke();
+    }
 
-    // public void FallUnconscious()
-    // {
-    //     Unconscious = true;
-    //     ItemManager.Throw();
-    //     Rigidbody.simulated = false;
-    //     gameObject.layer = LayerMask.NameToLayer("Ignore Collisions");
-    //     //Throw(new Vector2(Random.Range(-10, 10), Random.Range(-10, 10)));
-    // }
+    private void ChangeComponentState(bool state)
+    {
+
+    }
+
+    public IEnumerator StandUp()
+    {
+        yield return new WaitForSeconds(KnockdownTime);
+        Unconscious = false;
+        Character.Rigidbody.simulated = true;
+        ChangeComponentState(true);
+        StoodUp?.Invoke();
+    }
 }

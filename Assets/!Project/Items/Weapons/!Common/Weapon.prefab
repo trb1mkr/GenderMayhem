@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 3852843662223302034}
   - component: {fileID: 330173140155346813}
   - component: {fileID: 483041895577137574}
+  - component: {fileID: 3446051962203625489}
   m_Layer: 8
   m_Name: Weapon
   m_TagString: Weapon
@@ -115,7 +116,7 @@ Rigidbody2D:
     serializedVersion: 2
     m_Bits: 0
   m_Interpolate: 0
-  m_SleepingMode: 0
+  m_SleepingMode: 1
   m_CollisionDetection: 1
   m_Constraints: 0
 --- !u!60 &3852843662223302034
@@ -282,3 +283,17 @@ MonoBehaviour:
   Duration: 0
   Amplitude: 0
   Frequency: 0
+--- !u!114 &3446051962203625489
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7944614581221739865}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6334fa3e719bceb4baeb9497a8e802a8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _lastCollidedRigidbody: {fileID: 0}
+  _lastTriggeredRigidbody: {fileID: 0}

@@ -1,12 +1,14 @@
 using GenderMayhem.Actions;
 using Sirenix.OdinInspector;
+using System.Collections;
 using UnityEngine;
 
 public abstract class Item : MonoBehaviour
 {
     #region Values
     [ReadOnly] public ActionEventsGroup ActionEventsGroup;
-    float _sleepVelocity = 0.01f;
+    [SerializeField] private float _sleepVelocity = 0.1f;
+    [SerializeField] private float _ignoreVelocity = 30f;
     #endregion
 
     #region References
@@ -28,11 +30,25 @@ public abstract class Item : MonoBehaviour
 
     void Update()
     {
-        if (Rigidbody.linearVelocity.magnitude <= _sleepVelocity) 
+        if (Rigidbody.linearVelocity.magnitude <= _ignoreVelocity)
         {
+            if (Rigidbody.linearVelocity.magnitude <= _sleepVelocity)
+                Rigidbody.simulated = false;
             gameObject.layer = LayerMask.NameToLayer("Ignore Collisions");
-            Rigidbody.simulated = false;
         }
         else gameObject.layer = LayerMask.NameToLayer("Items");
+    }
+
+    private void OnCollisionStay2D(Collision2D collision)
+    {
+        Debug.Log(collision.collider.name);
+        var character = collision.collider.GetComponentInParent<Character>();
+        if (character != null && collision.collider == character.StateController.BodyCollider)
+        {
+            Vector2 collisionVelocity = Rigidbody.linearVelocity; //- character.Rigidbody.linearVelocity;
+            var lastTouched = GetComponent<LastTouchedRigidbody>();
+            if (lastTouched.LastCollidedRigidbody != character.Rigidbody && collisionVelocity.magnitude * Rigidbody.mass > character.Health.KnockdownForce)
+                character.Health.Knockdown();
+        }
     }
 }
