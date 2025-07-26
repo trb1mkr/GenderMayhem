@@ -12,5 +12,6 @@ public class Player : Character
         CamAimController = transform.root.GetComponentInChildren<CameraAimController>();
 
         Movement.Player = Controls.Player = this;
+        Health.Character = this;
     }
 }

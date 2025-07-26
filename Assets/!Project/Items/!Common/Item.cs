@@ -47,8 +47,8 @@ public abstract class Item : MonoBehaviour
         {
             Vector2 collisionVelocity = Rigidbody.linearVelocity; //- character.Rigidbody.linearVelocity;
             var lastTouched = GetComponent<LastTouchedRigidbody>();
-            if (lastTouched.LastCollidedRigidbody != character.Rigidbody && collisionVelocity.magnitude * Rigidbody.mass > character.Health.KnockdownForce)
-                character.Health.Knockdown();
+            if (collisionVelocity.magnitude * Rigidbody.mass > character.Health.KnockdownForce) //lastTouched.LastCollidedRigidbody != character.Rigidbody && 
+                character.Health.FallUnconscious(collision.contacts[0].point);
         }
     }
 }

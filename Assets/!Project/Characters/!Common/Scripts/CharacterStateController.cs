@@ -22,6 +22,8 @@ public class CharacterStateController : MonoBehaviour
         SetWeaponId();
         StateId = CharacterStateId.Idle;
         Character.ItemManager.ItemChanged.AddListener(SetWeaponId);
+        Character.WeaponController.CooldownEnded += HandleCooldownEnded;
+        Character.ItemManager.ItemThrowed += HandleItemThrowed;
     }
 
     private void Update()
@@ -43,7 +45,7 @@ public class CharacterStateController : MonoBehaviour
     public void HandleAltUsed()
     {
         //if (Character.ItemManager.Item is Gun)
-            //StateId = CharacterStateId.Attack;
+        //StateId = CharacterStateId.Attack;
     }
 
     public void HandleUsed()
@@ -51,6 +53,10 @@ public class CharacterStateController : MonoBehaviour
         if (Character.ItemManager.Item is Melee)
             StateId = CharacterStateId.Attack;
     }
+
+    public void HandleItemThrowed() => StateId = CharacterStateId.Idle;
+
+    private void HandleCooldownEnded() => StateId = CharacterStateId.Idle;
 }
 
 public enum WeaponId

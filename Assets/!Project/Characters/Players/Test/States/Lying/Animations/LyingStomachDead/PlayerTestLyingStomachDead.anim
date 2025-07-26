@@ -6,7 +6,7 @@ AnimationClip:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: PlayerTestDead
+  m_Name: PlayerTestLyingStomachDead
   serializedVersion: 7
   m_Legacy: 0
   m_Compressed: 0
@@ -21,7 +21,7 @@ AnimationClip:
   - serializedVersion: 2
     curve:
     - time: 0
-      value: {fileID: -1262872702, guid: 4c3c07637ade74b4bbad226fe30d3e12, type: 3}
+      value: {fileID: 7039146399462157922, guid: 1133bd3b01c480941b4eb23a6060a55a, type: 3}
     attribute: m_Sprite
     path: Body
     classID: 212
@@ -44,7 +44,7 @@ AnimationClip:
       isIntCurve: 0
       isSerializeReferenceCurve: 0
     pptrCurveMapping:
-    - {fileID: -1262872702, guid: 4c3c07637ade74b4bbad226fe30d3e12, type: 3}
+    - {fileID: 7039146399462157922, guid: 1133bd3b01c480941b4eb23a6060a55a, type: 3}
   m_AnimationClipSettings:
     serializedVersion: 2
     m_AdditiveReferencePoseClip: {fileID: 0}

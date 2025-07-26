@@ -204,7 +204,6 @@ GameObject:
   - component: {fileID: 2335699261410331719}
   - component: {fileID: 2059025463604269241}
   - component: {fileID: -6784073650192189678}
-  - component: {fileID: 4868138410655425148}
   - component: {fileID: 7917002332989594765}
   - component: {fileID: 7660532431483300520}
   - component: {fileID: 2280342119234328695}
@@ -299,23 +298,6 @@ MonoBehaviour:
   AttackCollider: {fileID: 695899834292155802}
   AvoidCollider: {fileID: 3593156924925266668}
   WeaponPoint: {fileID: 3151917603023310356}
-  Character: {fileID: 0}
---- !u!114 &4868138410655425148
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1171868502133147323}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 36810065c4d281d43a13b182099390ff, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  KnockdownForce: 100
-  KnockdownTime: 3
-  Dead: 0
-  Unconscious: 0
   Character: {fileID: 0}
 --- !u!82 &7917002332989594765
 AudioSource:

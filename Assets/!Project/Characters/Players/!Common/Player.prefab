@@ -100,6 +100,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 1171868502133147323, guid: e6f260d920b23054d989265f71dc2d4d, type: 3}
       insertIndex: 4
       addedObject: {fileID: 5097662434106307800}
+    - targetCorrespondingSourceObject: {fileID: 1171868502133147323, guid: e6f260d920b23054d989265f71dc2d4d, type: 3}
+      insertIndex: 5
+      addedObject: {fileID: 6218075856115719992}
     - targetCorrespondingSourceObject: {fileID: 1053901765440366096, guid: e6f260d920b23054d989265f71dc2d4d, type: 3}
       insertIndex: -1
       addedObject: {fileID: 3289379436359076685}
@@ -348,6 +351,25 @@ MonoBehaviour:
   MovementSpeed: 220
   MovementDirection: {x: 0, y: 0}
   Player: {fileID: 0}
+--- !u!114 &6218075856115719992
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5019100869967823445}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6659a80e10e463944a6731e20f1df17b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  KnockdownForce: 100
+  KnockbackForce: 10000
+  KnockdownTime: 2
+  Dead: 0
+  Unconscious: 0
+  IsAttackedFromFront: 0
+  Character: {fileID: 0}
 --- !u!1 &6576394025390973694 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1053901765440366096, guid: e6f260d920b23054d989265f71dc2d4d, type: 3}

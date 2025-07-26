@@ -1,22 +1,25 @@
 using UnityEngine;
 using System.Collections;
 using Sirenix.OdinInspector;
+using System;
 
 public class CharacterWeaponController : MonoBehaviour
 {
     #region Values
     [ReadOnly] public bool IsCooldown;
     public float CooldownTime;
+    public event Action CooldownEnded;
     #endregion
 
     #region References
     [HideInInspector] public Character Character;
     #endregion
-
+    
     private void Start()
     {
         Character.ItemManager.ItemChanged.AddListener(() => IsCooldown = false);
         Character.ItemManager.ItemChanged.AddListener(SubscribeOnAttack);
+        SubscribeOnAttack();
     }
 
     void SubscribeOnAttack()
@@ -40,5 +43,6 @@ public class CharacterWeaponController : MonoBehaviour
         IsCooldown = true;
         yield return new WaitForSeconds(CooldownTime);
         IsCooldown = false;
+        CooldownEnded.Invoke();
     }
 }

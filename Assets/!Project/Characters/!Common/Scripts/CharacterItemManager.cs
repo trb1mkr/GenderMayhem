@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.Events;
 using System.Collections;
+using System;
 
 public class CharacterItemManager : MonoBehaviour
 {
@@ -10,6 +11,8 @@ public class CharacterItemManager : MonoBehaviour
     [SerializeField] private float _throwTorque;
     public Coroutine UseRoutine;
     [HideInInspector] public UnityEvent ItemChanged;
+    public event Action ItemPickedUp;
+    public event Action ItemThrowed;
     private Coroutine _characterIgnoreCoroutine;
     #endregion
 
@@ -62,7 +65,6 @@ public class CharacterItemManager : MonoBehaviour
         if (_characterIgnoreCoroutine != null) StopCoroutine(_characterIgnoreCoroutine);
         Item = targetItem.GetComponent<Item>();
         Item.SpriteRenderer.enabled = false;
-        //Item.StopAllCoroutines(); //сделать с этим что-то
         Item.Rigidbody.IgnoreCollisions(Character.Rigidbody, true);
         Item.Rigidbody.simulated = false;
         Item.transform.parent = Character.StateController.WeaponPoint;
@@ -70,6 +72,7 @@ public class CharacterItemManager : MonoBehaviour
         Item.AudioSource.PlayOneShot(Item.PickUpSound);
 
         ItemChanged.Invoke();
+        //ItemPickedUp.Invoke();
     }
 
     public void Throw()
@@ -77,10 +80,9 @@ public class CharacterItemManager : MonoBehaviour
         if (Character.StateController.StateId == CharacterStateId.Attack) return;
         if (Item == _fists) return;
 
-        Character.StateController.StateId = CharacterStateId.Idle;
+        ItemThrowed.Invoke();
 
         Item.SpriteRenderer.enabled = true;
-        //Item.Invoke(() => Item.Rigidbody.IgnoreCollisions(Character.Rigidbody, false), 0.5f);
         _characterIgnoreCoroutine = StartCoroutine(UnIgnoreCharacter(Item));
         Item.Rigidbody.simulated = true;
         Item.transform.SetParent(null, true);
