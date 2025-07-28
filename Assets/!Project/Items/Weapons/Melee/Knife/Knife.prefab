@@ -317,6 +317,6 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   HitSound: {fileID: 0}
-  Lethal: 0
+  IsLethal: 1
   AttackTime: 0
   CooldownTime: 0.125

@@ -17,8 +17,8 @@ public class CharacterWeaponController : MonoBehaviour
     
     private void Start()
     {
-        Character.ItemManager.ItemChanged.AddListener(() => IsCooldown = false);
-        Character.ItemManager.ItemChanged.AddListener(SubscribeOnAttack);
+        Character.ItemManager.ItemChanged += () => IsCooldown = false;
+        Character.ItemManager.ItemChanged += SubscribeOnAttack;
         SubscribeOnAttack();
     }
 
@@ -43,6 +43,6 @@ public class CharacterWeaponController : MonoBehaviour
         IsCooldown = true;
         yield return new WaitForSeconds(CooldownTime);
         IsCooldown = false;
-        CooldownEnded.Invoke();
+        CooldownEnded?.Invoke();
     }
 }

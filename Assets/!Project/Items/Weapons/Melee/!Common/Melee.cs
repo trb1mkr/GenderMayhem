@@ -3,7 +3,7 @@ using UnityEngine;
 public abstract class Melee : Weapon
 {
     public AudioClip HitSound;
-    public bool Lethal;
+    public bool IsLethal;
     public float AttackTime;
     public float CooldownTime; //с учётом длительности анимации
 
@@ -14,9 +14,7 @@ public abstract class Melee : Weapon
 
     public override void Attack()
     {
-        //if (IsCooldown) return;
         AudioSource.PlayOneShot(AttackSound);
-        //StartCoroutine(Cooldown());
         base.Attack();
     }
 }

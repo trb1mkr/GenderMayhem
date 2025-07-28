@@ -635,6 +635,7 @@ GameObject:
   - component: {fileID: 553358314052899562}
   - component: {fileID: 695899834292155802}
   - component: {fileID: 948802243435001747}
+  - component: {fileID: 1328061569570511825}
   m_Layer: 6
   m_Name: AttackCollider
   m_TagString: Untagged
@@ -728,6 +729,18 @@ MonoBehaviour:
   _colliderName: 
   _autoSave: 1
   _saveFolder: 
+--- !u!114 &1328061569570511825
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2905890677594492457}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 290b4641f80e77b44b5b165ce4e2a661, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &6476205344310350172
 GameObject:
   m_ObjectHideFlags: 0

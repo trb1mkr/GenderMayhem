@@ -10,7 +10,7 @@ public class CharacterItemManager : MonoBehaviour
     [SerializeField] private float _throwForce;
     [SerializeField] private float _throwTorque;
     public Coroutine UseRoutine;
-    [HideInInspector] public UnityEvent ItemChanged;
+    public Action ItemChanged;
     public event Action ItemPickedUp;
     public event Action ItemThrowed;
     private Coroutine _characterIgnoreCoroutine;
@@ -71,8 +71,8 @@ public class CharacterItemManager : MonoBehaviour
         Item.transform.SetLocalPositionAndRotation(Vector3.zero, Quaternion.identity);
         Item.AudioSource.PlayOneShot(Item.PickUpSound);
 
-        ItemChanged.Invoke();
-        //ItemPickedUp.Invoke();
+        ItemChanged?.Invoke();
+        ItemPickedUp?.Invoke();
     }
 
     public void Throw()
@@ -91,7 +91,7 @@ public class CharacterItemManager : MonoBehaviour
         Item.AudioSource.PlayOneShot(Item.ThrowSound);
         Item = _fists;
 
-        ItemChanged.Invoke();
+        ItemChanged?.Invoke();
     }
 
     private IEnumerator UnIgnoreCharacter(Item item)

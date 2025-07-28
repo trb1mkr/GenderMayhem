@@ -1,7 +1,19 @@
 fileFormatVersion: 2
-guid: 4c3c07637ade74b4bbad226fe30d3e12
+guid: 1133bd3b01c480941b4eb23a6060a55a
 TextureImporter:
-  internalIDToNameTable: []
+  internalIDToNameTable:
+  - first:
+      213: -9009966998744547650
+    second: Lying 1_0
+  - first:
+      213: 3362430858882814220
+    second: Lying 1_1
+  - first:
+      213: 3622460158410680644
+    second: Lying 1_2
+  - first:
+      213: 7039146399462157922
+    second: Lying 1_3
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -65,7 +77,7 @@ TextureImporter:
   ignorePngGamma: 0
   applyGammaDecoding: 0
   swizzle: 50462976
-  cookieLightType: 1
+  cookieLightType: 0
   platformSettings:
   - serializedVersion: 4
     buildTarget: DefaultTexturePlatform
@@ -123,45 +135,89 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Unconscious
+      name: LyingBackUnconscious
       rect:
         serializedVersion: 2
         x: 0
-        y: 0
-        width: 22
-        height: 51
+        y: 87
+        width: 52
+        height: 22
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: 0
+      tessellationDetail: -1
       bones: []
-      spriteID: 49600afbee2e01547a422e4864e717ac
-      internalID: 1901669575
+      spriteID: ebeb6d160ca26f280800000000000000
+      internalID: -9009966998744547650
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Dead
+      name: LyingBackDead
       rect:
         serializedVersion: 2
-        x: 23
-        y: 0
-        width: 22
-        height: 51
+        x: 0
+        y: 64
+        width: 52
+        height: 22
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: 0
+      tessellationDetail: -1
       bones: []
-      spriteID: 2a5d48e91c7f9a04fa0647ef2d469e01
-      internalID: -1262872702
+      spriteID: c01958d1d01c9ae20800000000000000
+      internalID: 3362430858882814220
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: LyingStomachUnconscious
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 32
+        width: 58
+        height: 31
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 449e21b4250954230800000000000000
+      internalID: 3622460158410680644
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: LyingStomachDead
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 58
+        height: 31
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 26e69e5fa5210b160800000000000000
+      internalID: 7039146399462157922
       vertices: []
       indices: 
       edges: []
@@ -180,8 +236,10 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      Dead: -1262872702
-      Unconscious: 1901669575
+      LyingBackDead: 3362430858882814220
+      LyingBackUnconscious: -9009966998744547650
+      LyingStomachDead: 7039146399462157922
+      LyingStomachUnconscious: 3622460158410680644
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

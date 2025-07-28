@@ -1,6 +1,5 @@
 using GenderMayhem.Actions;
 using Sirenix.OdinInspector;
-using System.Collections;
 using UnityEngine;
 
 public abstract class Item : MonoBehaviour
@@ -50,5 +49,15 @@ public abstract class Item : MonoBehaviour
             if (collisionVelocity.magnitude * Rigidbody.mass > character.Health.KnockdownForce) //lastTouched.LastCollidedRigidbody != character.Rigidbody && 
                 character.Health.FallUnconscious(collision.contacts[0].point);
         }
+    }
+
+    public virtual void OnPickUp()
+    {
+
+    }
+
+    public virtual void OnThrow()
+    {
+
     }
 }

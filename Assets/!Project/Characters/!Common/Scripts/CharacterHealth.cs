@@ -9,8 +9,9 @@ public abstract class CharacterHealth : MonoBehaviour
     public float KnockdownForce;
     public float KnockbackForce;
     public float KnockdownTime;
-    [ReadOnly] public bool Dead;
-    [ReadOnly] public bool Unconscious;
+    [ReadOnly] public bool IsDead;
+    [ReadOnly] public bool IsUnconscious;
+    [ReadOnly] public bool IsAlive { get { return !(IsDead || IsUnconscious); } }
     [ReadOnly] public bool IsAttackedFromFront;
     public event Action Died;
     public event Action BecameUnconscious;
@@ -22,11 +23,16 @@ public abstract class CharacterHealth : MonoBehaviour
     [HideInInspector] public Character Character;
     #endregion
 
+    void Update()
+    {
+        Character.Body.GetComponent<SpriteRenderer>().sortingOrder = IsAlive ? 1 : 0;
+    }
+
     public virtual void Die(Vector2 point)
     {
         Knockdown(point);
-        Unconscious = false;
-        Dead = true;
+        IsUnconscious = false;
+        IsDead = true;
         StopCoroutine(StandUp());
         Died?.Invoke();
     }
@@ -34,7 +40,7 @@ public abstract class CharacterHealth : MonoBehaviour
     public virtual void FallUnconscious(Vector2 point)
     {
         Knockdown(point);
-        Unconscious = true;
+        IsUnconscious = true;
         StartCoroutine(StandUp());
         BecameUnconscious?.Invoke();
     }
@@ -51,7 +57,7 @@ public abstract class CharacterHealth : MonoBehaviour
     protected IEnumerator StandUp()
     {
         yield return new WaitForSeconds(KnockdownTime);
-        Unconscious = false;
+        IsUnconscious = false;
         Character.Rigidbody.simulated = true;
         ChangeComponentsState(true);
         StoodUp?.Invoke();

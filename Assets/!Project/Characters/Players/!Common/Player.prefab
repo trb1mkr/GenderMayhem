@@ -107,6 +107,11 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 3289379436359076685}
   m_SourcePrefab: {fileID: 100100000, guid: e6f260d920b23054d989265f71dc2d4d, type: 3}
+--- !u!4 &2533677482127768206 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 8560590453206253152, guid: e6f260d920b23054d989265f71dc2d4d, type: 3}
+  m_PrefabInstance: {fileID: 6189139509873263854}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &5019100869967823445 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1171868502133147323, guid: e6f260d920b23054d989265f71dc2d4d, type: 3}
@@ -314,6 +319,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b2babd4c09e380a4a95a9215611d1aa1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Head: {fileID: 6004811781765999453}
+  Body: {fileID: 5285745999043995846}
+  Legs: {fileID: 2533677482127768206}
 --- !u!114 &4187561494834836682
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -366,10 +374,20 @@ MonoBehaviour:
   KnockdownForce: 100
   KnockbackForce: 10000
   KnockdownTime: 2
-  Dead: 0
-  Unconscious: 0
+  IsDead: 0
+  IsUnconscious: 0
   IsAttackedFromFront: 0
   Character: {fileID: 0}
+--- !u!4 &5285745999043995846 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 2071234082576100392, guid: e6f260d920b23054d989265f71dc2d4d, type: 3}
+  m_PrefabInstance: {fileID: 6189139509873263854}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &6004811781765999453 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 482268990961020851, guid: e6f260d920b23054d989265f71dc2d4d, type: 3}
+  m_PrefabInstance: {fileID: 6189139509873263854}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &6576394025390973694 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1053901765440366096, guid: e6f260d920b23054d989265f71dc2d4d, type: 3}
