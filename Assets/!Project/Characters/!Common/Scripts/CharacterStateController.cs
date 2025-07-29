@@ -7,7 +7,7 @@ public class CharacterStateController : MonoBehaviour
     #region Values
     public CharacterStateId StateId;
     [field: ReadOnly] public WeaponId WeaponId { get; private set; }
-    public PolygonCollider2D BodyCollider;
+    public PolygonCollider2D TorsoCollider;
     public PolygonCollider2D AttackCollider;
     public PolygonCollider2D AvoidCollider;
     public Transform WeaponPoint;

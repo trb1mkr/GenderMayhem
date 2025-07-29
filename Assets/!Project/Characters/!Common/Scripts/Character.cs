@@ -3,10 +3,6 @@ using UnityEngine;
 public abstract class Character : MonoBehaviour
 {
     #region References
-    public Transform Head;
-    public Transform Body;
-    public Transform Legs;
-
     public Rigidbody2D Rigidbody { get; protected set; }
     public AudioSource AudioSource { get; protected set; }
     public Animator Animator { get; protected set; }
@@ -18,6 +14,7 @@ public abstract class Character : MonoBehaviour
     public CharacterWeaponController WeaponController { get; protected set; }
     public ColliderTriggerTagFilter AvoidList { get; protected set; }
     public CharacterMeleeAttack MeleeAttack { get; protected set; }
+    public CharacterBody Body { get; protected set; }
     #endregion
 
     public void Awake()
@@ -33,7 +30,8 @@ public abstract class Character : MonoBehaviour
         WeaponController = GetComponent<CharacterWeaponController>();
         AvoidList = GetComponentInChildren<ColliderTriggerTagFilter>();
         MeleeAttack = GetComponentInChildren<CharacterMeleeAttack>();
+        Body = GetComponent<CharacterBody>();
 
-        AnimatorController.Character = ItemManager.Character = StateController.Character = WeaponController.Character = MeleeAttack.Character = this;
+        AnimatorController.Character = ItemManager.Character = StateController.Character = WeaponController.Character = MeleeAttack.Character = Body.Character = this;
     }
 }

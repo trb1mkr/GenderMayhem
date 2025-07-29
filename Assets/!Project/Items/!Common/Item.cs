@@ -42,7 +42,7 @@ public abstract class Item : MonoBehaviour
     {
         Debug.Log(collision.collider.name);
         var character = collision.collider.GetComponentInParent<Character>();
-        if (character != null && collision.collider == character.StateController.BodyCollider)
+        if (character != null && collision.collider == character.StateController.TorsoCollider)
         {
             Vector2 collisionVelocity = Rigidbody.linearVelocity; //- character.Rigidbody.linearVelocity;
             var lastTouched = GetComponent<LastTouchedRigidbody>();

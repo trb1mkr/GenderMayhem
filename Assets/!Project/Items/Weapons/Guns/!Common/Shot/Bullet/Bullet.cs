@@ -19,7 +19,7 @@ public class Bullet : MonoBehaviour
         if (collider.GetComponent<Shell>() || collider.GetComponent<Bullet>() || collider.GetComponent<Weapon>()) return; //летит дальше
 
         var character = collider.GetComponentInParent<Character>();
-        if (character != null && collider == character.StateController.BodyCollider)
+        if (character != null && collider == character.StateController.TorsoCollider)
             character.Health.Die(transform.position);
         else return;
 

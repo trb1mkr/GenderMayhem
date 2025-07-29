@@ -73,9 +73,9 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingLayerID: -1860913373
+  m_SortingLayer: 4
+  m_SortingOrder: 2
   m_Sprite: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -200,6 +200,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3718113289256693178}
+  - component: {fileID: 1465306415100327162}
   - component: {fileID: 1230133410135110988}
   - component: {fileID: 2335699261410331719}
   - component: {fileID: 2059025463604269241}
@@ -232,6 +233,22 @@ Transform:
   - {fileID: 8560590453206253152}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1465306415100327162
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1171868502133147323}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 70b19d70cec054546ad605d797b5db41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Head: {fileID: 482268990961020851}
+  Torso: {fileID: 2071234082576100392}
+  Legs: {fileID: 8560590453206253152}
+  Character: {fileID: 0}
 --- !u!114 &1230133410135110988
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -260,9 +277,6 @@ MonoBehaviour:
   _pickUpDistance: 35
   _throwForce: 500
   _throwTorque: 500
-  ItemChanged:
-    m_PersistentCalls:
-      m_Calls: []
   Character: {fileID: 0}
   Item: {fileID: 6740073045893077235}
   _fists: {fileID: 6740073045893077235}
@@ -294,7 +308,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   StateId: 0
-  BodyCollider: {fileID: 5617571445286105248}
+  TorsoCollider: {fileID: 0}
   AttackCollider: {fileID: 695899834292155802}
   AvoidCollider: {fileID: 3593156924925266668}
   WeaponPoint: {fileID: 3151917603023310356}
@@ -456,7 +470,7 @@ GameObject:
   - component: {fileID: 2071234082576100392}
   - component: {fileID: 6516563990743408527}
   m_Layer: 6
-  m_Name: Body
+  m_Name: Torso
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -524,7 +538,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -1860913373
-  m_SortingLayer: 5
+  m_SortingLayer: 4
   m_SortingOrder: 1
   m_Sprite: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -611,7 +625,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -1860913373
-  m_SortingLayer: 5
+  m_SortingLayer: 4
   m_SortingOrder: 0
   m_Sprite: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -741,6 +755,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 290b4641f80e77b44b5b165ce4e2a661, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Character: {fileID: 0}
 --- !u!1 &6476205344310350172
 GameObject:
   m_ObjectHideFlags: 0
@@ -753,7 +768,7 @@ GameObject:
   - component: {fileID: 5617571445286105248}
   - component: {fileID: 6764144599097823401}
   m_Layer: 6
-  m_Name: BodyCollider
+  m_Name: TorsoCollider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
