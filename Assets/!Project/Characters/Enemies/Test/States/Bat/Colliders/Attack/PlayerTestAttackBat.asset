@@ -1,0 +1,37 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5ba3d1e722d83f74abade5d03ff5fa04, type: 3}
+  m_Name: PlayerTestAttackBat
+  m_EditorClassIdentifier: 
+  Paths:
+  - {fileID: 7250600267202926396}
+--- !u!114 &7250600267202926396
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 324b1a52654fbcd4a8a833d9e23595c1, type: 3}
+  m_Name: 0
+  m_EditorClassIdentifier: 
+  Points:
+  - {x: 25.5, y: -4}
+  - {x: 25.548943, y: 1.809017}
+  - {x: 23.412214, y: 10.690983}
+  - {x: 14.248989, y: 7.769021}
+  - {x: 8.912215, y: 4.6909823}
+  - {x: 8.412215, y: -3.8090172}
+  - {x: 13.587786, y: -8.309017}
+  - {x: 21.951057, y: -10.190983}

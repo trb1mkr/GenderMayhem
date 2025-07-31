@@ -25,7 +25,7 @@ public abstract class CharacterHealth : MonoBehaviour
 
     void Update()
     {
-        Character.Body.Torso.GetComponent<SpriteRenderer>().sortingOrder = IsAlive ? 1 : 0;
+        //Character.Body.Torso.GetComponent<SpriteRenderer>().sortingOrder = IsAlive ? 1 : 0;
     }
 
     public virtual void Die(Vector2 point)

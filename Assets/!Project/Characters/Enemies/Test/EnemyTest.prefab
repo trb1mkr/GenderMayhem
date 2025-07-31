@@ -8,6 +8,26 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 11630945261141854, guid: bc38bb2b44a62cd4d84a879d45a5f467, type: 3}
+      propertyPath: m_Size.x
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 11630945261141854, guid: bc38bb2b44a62cd4d84a879d45a5f467, type: 3}
+      propertyPath: m_Size.y
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 11630945261141854, guid: bc38bb2b44a62cd4d84a879d45a5f467, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 415182240, guid: c43a1dd9ab2ca984a9e3c68f27f486d5, type: 3}
+    - target: {fileID: 11630945261141854, guid: bc38bb2b44a62cd4d84a879d45a5f467, type: 3}
+      propertyPath: m_WasSpriteAssigned
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5035949310106089638, guid: bc38bb2b44a62cd4d84a879d45a5f467, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 22100000, guid: c048bc7847ab2834bb2a062dc569e098, type: 2}
     - target: {fileID: 5333807965469173354, guid: bc38bb2b44a62cd4d84a879d45a5f467, type: 3}
       propertyPath: m_Name
       value: EnemyTest
@@ -62,6 +82,15 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 5333807965469173354, guid: bc38bb2b44a62cd4d84a879d45a5f467, type: 3}
       insertIndex: 7
       addedObject: {fileID: 7369796438405350114}
+    - targetCorrespondingSourceObject: {fileID: 5333807965469173354, guid: bc38bb2b44a62cd4d84a879d45a5f467, type: 3}
+      insertIndex: 8
+      addedObject: {fileID: 126164132447161351}
+    - targetCorrespondingSourceObject: {fileID: 5333807965469173354, guid: bc38bb2b44a62cd4d84a879d45a5f467, type: 3}
+      insertIndex: 9
+      addedObject: {fileID: 8675969523428802670}
+    - targetCorrespondingSourceObject: {fileID: 6628326433710970134, guid: bc38bb2b44a62cd4d84a879d45a5f467, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 4433043058120705835}
   m_SourcePrefab: {fileID: 100100000, guid: bc38bb2b44a62cd4d84a879d45a5f467, type: 3}
 --- !u!1 &5016220044367589304 stripped
 GameObject:
@@ -80,6 +109,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b92aad440fae57e4eaa458318be0fb5e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  PatrolPaths: []
+  IsRandomPath: 0
 --- !u!195 &7369796438405350114
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -89,7 +120,7 @@ NavMeshAgent:
   m_GameObject: {fileID: 5016220044367589304}
   m_Enabled: 1
   m_AgentTypeID: 0
-  m_Radius: 0.5
+  m_Radius: 4.5
   m_Speed: 3.5
   m_Acceleration: 8
   avoidancePriority: 50
@@ -98,7 +129,113 @@ NavMeshAgent:
   m_AutoTraverseOffMeshLink: 1
   m_AutoBraking: 1
   m_AutoRepath: 1
-  m_Height: 2
-  m_BaseOffset: 0
+  m_Height: 20
+  m_BaseOffset: 10
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
+--- !u!114 &126164132447161351
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5016220044367589304}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7e39f6090724e4a4a8aadeb042afa2bc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &8675969523428802670
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5016220044367589304}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f0038c16c34866b4f9e25c9c0dc0f7e6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Graph: {fileID: 6620907882753873085, guid: 789c4b58b75e39a4685c394473965040, type: 2}
+  m_BlackboardVariableOverridesList:
+  - rid: 2779002057289892266
+  - rid: 2779002057289892341
+  m_IsInitialised: 0
+  m_IsStarted: 0
+  references:
+    version: 2
+    RefIds:
+    - rid: 2779002057289892266
+      type: {class: 'BlackboardVariable`1[[UnityEngine.GameObject, UnityEngine.CoreModule]]', ns: Unity.Behavior, asm: Unity.Behavior}
+      data:
+        GUID:
+          m_Value0: 1
+          m_Value1: 0
+        Name: Self
+        m_Value: {fileID: 5016220044367589304}
+    - rid: 2779002057289892341
+      type: {class: 'BlackboardVariable`1[[Enemy, Assembly-CSharp]]', ns: Unity.Behavior, asm: Unity.Behavior}
+      data:
+        GUID:
+          m_Value0: 13181307471957405577
+          m_Value1: 13369416054944781535
+        Name: Enemy
+        m_Value: {fileID: 2192763368552057220}
+--- !u!1 &6081201304643148996 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6628326433710970134, guid: bc38bb2b44a62cd4d84a879d45a5f467, type: 3}
+  m_PrefabInstance: {fileID: 1123735621723556306}
+  m_PrefabAsset: {fileID: 0}
+--- !u!60 &4433043058120705835
+PolygonCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6081201304643148996}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_CompositeOperation: 0
+  m_CompositeOrder: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  m_Points:
+    m_Paths:
+    - - {x: 1, y: 2}
+      - {x: 0.04894346, y: 0.009016961}
+      - {x: 1.0122149, y: -2.009017}
+      - {x: 5.9877853, y: -2.009017}
+      - {x: 5.9510565, y: 2.0090172}
+  m_UseDelaunayMesh: 0

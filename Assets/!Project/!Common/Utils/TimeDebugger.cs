@@ -6,6 +6,6 @@ public class TimeDebugger : MonoBehaviour
 
     void Awake()
     {
-        Time.timeScale =  _timeScale;
+        Time.timeScale = _timeScale;
     }
 }

@@ -98,6 +98,7 @@ GameObject:
   - component: {fileID: 1519525405002275733}
   - component: {fileID: 3593156924925266668}
   - component: {fileID: 234732289514107157}
+  - component: {fileID: 8665493842222157731}
   m_Layer: 6
   m_Name: AvoidCollider
   m_TagString: Untagged
@@ -191,6 +192,19 @@ MonoBehaviour:
   _colliderName: 
   _autoSave: 1
   _saveFolder: 
+--- !u!114 &8665493842222157731
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1053901765440366096}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 57305873f60738a4fa3e9ae9e6325122, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Colliders: []
 --- !u!1 &1171868502133147323
 GameObject:
   m_ObjectHideFlags: 0
