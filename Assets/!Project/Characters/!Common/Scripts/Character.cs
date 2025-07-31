@@ -32,6 +32,7 @@ public abstract class Character : MonoBehaviour
         MeleeAttack = GetComponentInChildren<CharacterMeleeAttack>();
         Body = GetComponent<CharacterBody>();
 
-        AnimatorController.Character = ItemManager.Character = StateController.Character = WeaponController.Character = MeleeAttack.Character = Body.Character = this;
+        AnimatorController.Character = ItemManager.Character = StateController.Character =
+        WeaponController.Character = MeleeAttack.Character = Body.Character = Health.Character = this;
     }
 }

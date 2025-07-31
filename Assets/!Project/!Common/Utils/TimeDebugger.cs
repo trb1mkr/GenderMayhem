@@ -4,7 +4,7 @@ public class TimeDebugger : MonoBehaviour
 {
     [SerializeField] float _timeScale = 1;
 
-    void Awake()
+    void OnValidate()
     {
         Time.timeScale = _timeScale;
     }
