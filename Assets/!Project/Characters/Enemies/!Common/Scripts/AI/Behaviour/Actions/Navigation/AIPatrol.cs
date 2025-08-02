@@ -6,8 +6,8 @@ using Unity.Properties;
 using UnityEngine.AI;
 
 [Serializable, GeneratePropertyBag]
-[NodeDescription(name: "Patrol", story: "[AI] patrols", category: "Action", id: "1d9173e3676d2ebad7e89b0839d764bf")]
-public partial class PatrolAction : Action
+[NodeDescription(name: "Patrol Splines", story: "[AI] patrols", category: "Action/Navigation", id: "1d9173e3676d2ebad7e89b0839d764bf")]
+public partial class AIPatrol : Action
 {
     [SerializeReference] public BlackboardVariable<Enemy> AI;
     [SerializeReference] public BlackboardVariable<float> PatrolSpeed = new(0f);
