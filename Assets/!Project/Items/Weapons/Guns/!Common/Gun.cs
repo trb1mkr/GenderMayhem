@@ -7,6 +7,7 @@ using UnityEngine.Events;
 public abstract class Gun : Weapon
 {
     public AudioClip ShotSound;
+    [SerializeField] protected SoundEmitData ShotSoundEmitData;
     public GunUtilities GunUtilities = new GunUtilities();
     public int Ammo, Spread;
 
@@ -33,6 +34,7 @@ public abstract class Gun : Weapon
             Fire();
             StartCoroutine(MuzzleFlash());
             AudioSource.PlayOneShot(ShotSound);
+            AudioSourceEmitter.NotifyListeners(ShotSoundEmitData);
             return true;
         }
         return false;
@@ -47,6 +49,7 @@ public abstract class Gun : Weapon
     public void AltAttack()
     {
         AudioSource.PlayOneShot(AttackSound);
+        AudioSourceEmitter.NotifyListeners(AttackSoundEmitData);
     }
 
     virtual public void Fire() { }

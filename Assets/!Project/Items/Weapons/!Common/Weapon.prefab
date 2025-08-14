@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 330173140155346813}
   - component: {fileID: 483041895577137574}
   - component: {fileID: 3446051962203625489}
+  - component: {fileID: 6333238561136750927}
   m_Layer: 8
   m_Name: Weapon
   m_TagString: Weapon
@@ -297,3 +298,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _lastCollidedRigidbody: {fileID: 0}
   _lastTriggeredRigidbody: {fileID: 0}
+--- !u!114 &6333238561136750927
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7944614581221739865}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 11419eee288379643a96dee0c7948676, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _soundRadius: 200
+  _listenerMask:
+    serializedVersion: 2
+    m_Bits: 64
+  _debugDrawRadius: 1

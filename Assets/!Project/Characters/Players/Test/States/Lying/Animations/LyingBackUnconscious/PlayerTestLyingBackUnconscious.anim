@@ -23,7 +23,7 @@ AnimationClip:
     - time: 0
       value: {fileID: -9009966998744547650, guid: 1133bd3b01c480941b4eb23a6060a55a, type: 3}
     attribute: m_Sprite
-    path: Body
+    path: Torso
     classID: 212
     script: {fileID: 0}
     flags: 2

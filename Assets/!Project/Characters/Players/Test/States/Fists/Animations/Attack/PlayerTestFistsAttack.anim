@@ -34,7 +34,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: CurrentCollider
-    path: Body/BodyCollider
+    path: Torso/TorsoCollider
     classID: 114
     script: {fileID: 11500000, guid: a53c96ea4c345cf47aec1d6c336fb919, type: 3}
     flags: 0
@@ -55,7 +55,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: CurrentCollider
-    path: Body/AttackCollider
+    path: Torso/AttackCollider
     classID: 114
     script: {fileID: 11500000, guid: a53c96ea4c345cf47aec1d6c336fb919, type: 3}
     flags: 0
@@ -95,7 +95,7 @@ AnimationClip:
     - time: 0
       value: {fileID: 162199576, guid: 1d6a343f0cc84d549975726a56a7e785, type: 3}
     attribute: m_Sprite
-    path: Body
+    path: Torso
     classID: 212
     script: {fileID: 0}
     flags: 2
@@ -182,7 +182,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: CurrentCollider
-    path: Body/BodyCollider
+    path: Torso/TorsoCollider
     classID: 114
     script: {fileID: 11500000, guid: a53c96ea4c345cf47aec1d6c336fb919, type: 3}
     flags: 0
@@ -203,7 +203,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: CurrentCollider
-    path: Body/AttackCollider
+    path: Torso/AttackCollider
     classID: 114
     script: {fileID: 11500000, guid: a53c96ea4c345cf47aec1d6c336fb919, type: 3}
     flags: 0

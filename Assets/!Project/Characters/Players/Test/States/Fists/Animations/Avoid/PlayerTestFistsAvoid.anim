@@ -34,7 +34,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: CurrentCollider
-    path: Body/BodyCollider
+    path: Torso/TorsoCollider
     classID: 114
     script: {fileID: 11500000, guid: a53c96ea4c345cf47aec1d6c336fb919, type: 3}
     flags: 0
@@ -55,7 +55,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: CurrentCollider
-    path: Body/AvoidCollider
+    path: Torso/AvoidCollider
     classID: 114
     script: {fileID: 11500000, guid: a53c96ea4c345cf47aec1d6c336fb919, type: 3}
     flags: 0
@@ -78,7 +78,7 @@ AnimationClip:
     attribute: StateId
     path: 
     classID: 114
-    script: {fileID: 11500000, guid: b2babd4c09e380a4a95a9215611d1aa1, type: 3}
+    script: {fileID: 11500000, guid: 22d9da560256819439f3f86968b092d5, type: 3}
     flags: 1
   m_PPtrCurves:
   - serializedVersion: 2
@@ -86,7 +86,7 @@ AnimationClip:
     - time: 0
       value: {fileID: 415182240, guid: 1d6a343f0cc84d549975726a56a7e785, type: 3}
     attribute: m_Sprite
-    path: Body
+    path: Torso
     classID: 212
     script: {fileID: 0}
     flags: 2
@@ -98,7 +98,7 @@ AnimationClip:
   m_ClipBindingConstant:
     genericBindings:
     - serializedVersion: 2
-      path: 2073732236
+      path: 3869152129
       attribute: 0
       script: {fileID: 0}
       typeID: 212
@@ -107,7 +107,7 @@ AnimationClip:
       isIntCurve: 0
       isSerializeReferenceCurve: 0
     - serializedVersion: 2
-      path: 576355979
+      path: 1250468146
       attribute: 1707834855
       script: {fileID: 11500000, guid: a53c96ea4c345cf47aec1d6c336fb919, type: 3}
       typeID: 114
@@ -116,7 +116,7 @@ AnimationClip:
       isIntCurve: 0
       isSerializeReferenceCurve: 0
     - serializedVersion: 2
-      path: 2044688806
+      path: 2779407782
       attribute: 1707834855
       script: {fileID: 11500000, guid: a53c96ea4c345cf47aec1d6c336fb919, type: 3}
       typeID: 114
@@ -127,7 +127,7 @@ AnimationClip:
     - serializedVersion: 2
       path: 0
       attribute: 2056606323
-      script: {fileID: 11500000, guid: b2babd4c09e380a4a95a9215611d1aa1, type: 3}
+      script: {fileID: 11500000, guid: 22d9da560256819439f3f86968b092d5, type: 3}
       typeID: 114
       customType: 0
       isPPtrCurve: 0
@@ -173,7 +173,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: CurrentCollider
-    path: Body/BodyCollider
+    path: Torso/TorsoCollider
     classID: 114
     script: {fileID: 11500000, guid: a53c96ea4c345cf47aec1d6c336fb919, type: 3}
     flags: 0
@@ -194,7 +194,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: CurrentCollider
-    path: Body/AvoidCollider
+    path: Torso/AvoidCollider
     classID: 114
     script: {fileID: 11500000, guid: a53c96ea4c345cf47aec1d6c336fb919, type: 3}
     flags: 0
@@ -217,7 +217,7 @@ AnimationClip:
     attribute: StateId
     path: 
     classID: 114
-    script: {fileID: 11500000, guid: b2babd4c09e380a4a95a9215611d1aa1, type: 3}
+    script: {fileID: 11500000, guid: 22d9da560256819439f3f86968b092d5, type: 3}
     flags: 1
   m_EulerEditorCurves: []
   m_HasGenericRootTransform: 0

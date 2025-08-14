@@ -30,7 +30,7 @@ AnimationClip:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-    path: Body/WeaponPoint
+    path: Torso/WeaponPoint
   m_ScaleCurves: []
   m_FloatCurves:
   - serializedVersion: 2
@@ -50,7 +50,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: CurrentCollider
-    path: Body/BodyCollider
+    path: Torso/TorsoCollider
     classID: 114
     script: {fileID: 11500000, guid: a53c96ea4c345cf47aec1d6c336fb919, type: 3}
     flags: 0
@@ -71,7 +71,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: CurrentCollider
-    path: Body/AvoidCollider
+    path: Torso/AvoidCollider
     classID: 114
     script: {fileID: 11500000, guid: a53c96ea4c345cf47aec1d6c336fb919, type: 3}
     flags: 0
@@ -81,7 +81,7 @@ AnimationClip:
     - time: 0
       value: {fileID: 1048353865, guid: 4c84e3fcc8d5a3c42bc9126a8c572d60, type: 3}
     attribute: m_Sprite
-    path: Body
+    path: Torso
     classID: 212
     script: {fileID: 0}
     flags: 2
@@ -168,7 +168,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalPosition.x
-    path: Body/WeaponPoint
+    path: Torso/WeaponPoint
     classID: 4
     script: {fileID: 0}
     flags: 0
@@ -189,7 +189,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalPosition.y
-    path: Body/WeaponPoint
+    path: Torso/WeaponPoint
     classID: 4
     script: {fileID: 0}
     flags: 0
@@ -210,7 +210,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalPosition.z
-    path: Body/WeaponPoint
+    path: Torso/WeaponPoint
     classID: 4
     script: {fileID: 0}
     flags: 0
@@ -231,7 +231,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: CurrentCollider
-    path: Body/BodyCollider
+    path: Torso/TorsoCollider
     classID: 114
     script: {fileID: 11500000, guid: a53c96ea4c345cf47aec1d6c336fb919, type: 3}
     flags: 0
@@ -252,7 +252,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: CurrentCollider
-    path: Body/AvoidCollider
+    path: Torso/AvoidCollider
     classID: 114
     script: {fileID: 11500000, guid: a53c96ea4c345cf47aec1d6c336fb919, type: 3}
     flags: 0

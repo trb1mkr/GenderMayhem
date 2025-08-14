@@ -322,7 +322,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   StateId: 0
-  TorsoCollider: {fileID: 0}
+  TorsoCollider: {fileID: 5617571445286105248}
   AttackCollider: {fileID: 695899834292155802}
   AvoidCollider: {fileID: 3593156924925266668}
   WeaponPoint: {fileID: 3151917603023310356}
