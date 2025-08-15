@@ -1,4 +1,4 @@
-public class AICheck : AINavigationMode
+public class AIMoveTo : AINavigationMode
 {
     public override void StartNavigation()
     {

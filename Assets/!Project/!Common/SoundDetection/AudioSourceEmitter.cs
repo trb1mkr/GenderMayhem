@@ -13,11 +13,10 @@ public class AudioSourceEmitter : MonoBehaviour
         // Находим все коллайдеры в радиусе
         Collider2D[] colliders  = Physics2D.OverlapCircleAll(transform.position, soundEmitData.SoundRadius, soundEmitData.ListenerMask);
 
-        // Перебираем найденные объекты
         for (int i = 0; i < colliders.Length; i++)
         {
-            var listener = colliders[i].GetComponentInParent<IAudioSourceListener>();
-            listener?.OnSoundDetected(gameObject, soundEmitData.SoundType);
+            var listener = colliders[i].GetComponentInChildren<IAudioSourceListener>();
+            listener?.SoundDetected.Invoke(gameObject, soundEmitData.SoundType);
         }
     }
 

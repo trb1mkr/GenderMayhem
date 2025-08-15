@@ -114,15 +114,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 43a7a34c65a591b4baee77dcd5b1d0b6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ActionEventsGroup:
+    ActionEvents: []
   _sleepVelocity: 0
-  AttackSound: {fileID: 0}
-  PickUpSound: {fileID: 0}
+  _ignoreVelocity: 30
   Rigidbody: {fileID: 0}
   Collider: {fileID: 0}
   AudioSource: {fileID: 0}
+  AudioSourceEmitter: {fileID: 0}
   SpriteRenderer: {fileID: 0}
+  PickUpSound: {fileID: 0}
+  ThrowSound: {fileID: 0}
+  AttackSound: {fileID: 0}
+  Attacked:
+    m_PersistentCalls:
+      m_Calls: []
   HitSound: {fileID: 0}
-  Lethal: 0
+  HitSoundEmitData: {fileID: 11400000, guid: 9bfb4f7edd2105b4387648ac9a71f323, type: 2}
+  IsLethal: 0
   AttackTime: 0
   CooldownTime: 0.125
-  IsCooldown: 0

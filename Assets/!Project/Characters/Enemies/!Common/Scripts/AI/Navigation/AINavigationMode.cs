@@ -29,11 +29,18 @@ public abstract class AINavigationMode : MonoBehaviour
         Stopped?.Invoke();
     }
 
-    public virtual void EndNavigation()
+    protected virtual void EndNavigation()
     {
         Debug.Log(GetType().Name + " ended");
         IsNavigating = false;
         AI.NavMeshAgent.ResetPath();
         Ended?.Invoke();
+    }
+
+    public virtual void TerminateNavigation()
+    {
+        Debug.Log(GetType().Name + " terminated");
+        IsNavigating = false;
+        AI.NavMeshAgent.ResetPath();
     }
 }

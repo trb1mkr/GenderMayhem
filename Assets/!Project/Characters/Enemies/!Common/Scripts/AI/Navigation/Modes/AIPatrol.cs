@@ -104,7 +104,7 @@ public class AIPatrol : AINavigationMode
         if (_restartFromBeginning) SetOriginalValues();
     }
 
-    public override void EndNavigation()
+    protected override void EndNavigation()
     {
         base.EndNavigation();
         if (_restartFromBeginning) SetOriginalValues();

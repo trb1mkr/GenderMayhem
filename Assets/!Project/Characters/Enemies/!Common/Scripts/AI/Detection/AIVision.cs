@@ -11,7 +11,6 @@ public class AIVision : MonoBehaviour
     private bool _isDetecting = false;
 
     [HideInInspector] public UnityEvent<GameObject> VisualDetected;
-    [HideInInspector] public UnityEvent<Vector3> VisualIndirectDetected;
     [HideInInspector] public UnityEvent<GameObject> VisualLost;
     #endregion
 

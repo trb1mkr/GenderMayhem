@@ -293,18 +293,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3ab7fa1ce2aeb2f4f9fa1250444cdb43, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ActionEvents:
-    ActionEvents:
-    - Event:
-        m_PersistentCalls:
-          m_Calls: []
+  ActionEventsGroup:
+    ActionEvents: []
+  _sleepVelocity: 0.1
+  _ignoreVelocity: 30
   Rigidbody: {fileID: 0}
   Collider: {fileID: 0}
   AudioSource: {fileID: 0}
+  AudioSourceEmitter: {fileID: 0}
   SpriteRenderer: {fileID: 0}
-  AttackSound: {fileID: 8300000, guid: d6a902014f09b72458c0448afff655d0, type: 3}
   PickUpSound: {fileID: 8300000, guid: f9ef1bd26a4f2ae4c87a770768743932, type: 3}
+  ThrowSound: {fileID: 0}
+  AttackSound: {fileID: 8300000, guid: d6a902014f09b72458c0448afff655d0, type: 3}
+  AttackSoundEmitData: {fileID: 0}
+  Attacked:
+    m_PersistentCalls:
+      m_Calls: []
   ShotSound: {fileID: 8300000, guid: 9b8560053ff8ed640bff124d3876e56d, type: 3}
+  ShotSoundEmitData: {fileID: 11400000, guid: 244e53023c5e86847a19a4b5afdd73b9, type: 2}
   GunUtilities:
     BulletPoint: {fileID: 0}
     ShellPoint: {fileID: 0}

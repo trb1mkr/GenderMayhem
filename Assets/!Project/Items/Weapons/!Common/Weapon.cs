@@ -8,7 +8,6 @@ abstract public class Weapon : Item
 {
     #region Values
     public AudioClip AttackSound;
-    [SerializeField] protected SoundEmitData AttackSoundEmitData;
 
     [HideInInspector] public UnityEvent Attacked;
     #endregion

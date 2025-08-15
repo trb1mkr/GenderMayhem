@@ -30,6 +30,7 @@ public abstract class CharacterHealth : MonoBehaviour
 
     public virtual void Die(Vector2 point)
     {
+        Debug.Log(gameObject.name + " Died");
         Knockdown(point);
         IsUnconscious = false;
         IsDead = true;
@@ -39,6 +40,7 @@ public abstract class CharacterHealth : MonoBehaviour
 
     public virtual void FallUnconscious(Vector2 point)
     {
+        Debug.Log(gameObject.name + " Knocked");
         Knockdown(point);
         IsUnconscious = true;
         StartCoroutine(StandUp());

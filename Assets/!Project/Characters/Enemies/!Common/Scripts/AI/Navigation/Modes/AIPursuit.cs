@@ -4,6 +4,7 @@ public class AIPursuit : AINavigationMode
     
     private void Update()
     {
+        if (!IsNavigating) return;
         if (AI.TargetGameObject != null)
         {
             // Обновляем путь к цели, если она существует

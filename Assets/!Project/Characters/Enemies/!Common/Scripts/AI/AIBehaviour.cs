@@ -3,7 +3,7 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class AIBehaviour : MonoBehaviour, IAudioSourceListener
+public class AIBehaviour : MonoBehaviour
 {
     #region Data
     [ReadOnly][ShowInInspector] public AINavigationMode NavigationMode;
@@ -15,7 +15,6 @@ public class AIBehaviour : MonoBehaviour, IAudioSourceListener
     [ReadOnly][ShowInInspector] public bool IsLosingTarget;
     [SerializeField] private float _newTargetPositionDeltaThreshold = 5f;
     private Coroutine _targetLost;
-
     #endregion
 
     #region References
@@ -25,9 +24,10 @@ public class AIBehaviour : MonoBehaviour, IAudioSourceListener
     [HideInInspector] public AIPatrol Patrol;
     [HideInInspector] public AIPursuit Pursuit;
     [HideInInspector] public AISearch Search;
-    [HideInInspector] public AICheck Check;
-    [HideInInspector] public AIRotateToDirection Rotation;
+    [HideInInspector] public AIMoveTo Check;
+    [HideInInspector] public AIRotation Rotation;
     [HideInInspector] public AIVision Vision;
+    [HideInInspector] public AIHearing Hearing;
     #endregion
 
     void Awake()
@@ -37,17 +37,18 @@ public class AIBehaviour : MonoBehaviour, IAudioSourceListener
         Patrol = GetComponent<AIPatrol>();
         Pursuit = GetComponent<AIPursuit>();
         Search = GetComponent<AISearch>();
-        Check = GetComponent<AICheck>();
-        Rotation = GetComponent<AIRotateToDirection>();
+        Check = GetComponent<AIMoveTo>();
+        Rotation = GetComponent<AIRotation>();
         Vision = GetComponentInChildren<AIVision>();
+        Hearing = GetComponentInChildren<AIHearing>();
 
-        Movement.AI = Patrol.AI = Pursuit.AI = Search.AI = Check.AI = Rotation.AI = Vision.AI = this;
+        Movement.AI = Patrol.AI = Pursuit.AI = Search.AI = Check.AI = Rotation.AI = Vision.AI = Hearing.AI = this;
     }
 
     private void Start()
     {
-        AddListeners();
         SetNavigationMode(Patrol);
+        Agent.Health.StoodUp += () => SetNavigationMode(Search);
     }
 
     private void AddListeners()
@@ -55,8 +56,35 @@ public class AIBehaviour : MonoBehaviour, IAudioSourceListener
         Vision.VisualDetected.AddListener(OnVisualDetected);
         Vision.VisualLost.AddListener(OnVisualLost);
 
+        Hearing.SoundDetected.AddListener(OnSoundDetected);
+
         Search.Ended += () => SetNavigationMode(Patrol);
         Check.Ended += () => SetNavigationMode(Search);
+    }
+
+    private void RemoveListeners()
+    {
+        Vision.VisualDetected.RemoveListener(OnVisualDetected);
+        Vision.VisualLost.RemoveListener(OnVisualLost);
+
+        Hearing.SoundDetected.RemoveListener(OnSoundDetected);
+
+        Search.Ended -= () => SetNavigationMode(Patrol);
+        Check.Ended -= () => SetNavigationMode(Search);
+    }
+
+    void OnEnable()
+    {
+        AddListeners();
+        Vision.enabled = true;
+    }
+
+    void OnDisable()
+    {
+        RemoveListeners();
+        NavigationMode.TerminateNavigation();
+        Vision.enabled = false;
+        StopAllCoroutines();
     }
 
     #region OnTargetDetected
@@ -68,7 +96,7 @@ public class AIBehaviour : MonoBehaviour, IAudioSourceListener
         SenseDetected(AISenses.Vision, Pursuit, target);
     }
 
-    public void OnSoundDetected(GameObject target, SoundEmitType soundEmitType) =>
+    private void OnSoundDetected(GameObject target, SoundEmitType soundEmitType) =>
         SenseDetected(AISenses.Hearing, Check, target.transform.position);
 
     private void SenseDetected(AISenses newTargetDetectionType, AINavigationMode navigationMode, Vector3 position)

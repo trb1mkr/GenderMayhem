@@ -309,6 +309,7 @@ MonoBehaviour:
   Rigidbody: {fileID: 0}
   Collider: {fileID: 0}
   AudioSource: {fileID: 0}
+  AudioSourceEmitter: {fileID: 0}
   SpriteRenderer: {fileID: 0}
   PickUpSound: {fileID: 0}
   ThrowSound: {fileID: 0}
@@ -317,6 +318,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   HitSound: {fileID: 0}
+  HitSoundEmitData: {fileID: 11400000, guid: a1fc50ebe7031c44394a8f96725dab00, type: 2}
   IsLethal: 1
   AttackTime: 0
   CooldownTime: 0.125

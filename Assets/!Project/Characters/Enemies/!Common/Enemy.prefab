@@ -95,6 +95,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 124594329523156423, guid: e6f260d920b23054d989265f71dc2d4d, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1901896833445047036}
+    - targetCorrespondingSourceObject: {fileID: 124594329523156423, guid: e6f260d920b23054d989265f71dc2d4d, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2796457311485810952}
   m_SourcePrefab: {fileID: 100100000, guid: e6f260d920b23054d989265f71dc2d4d, type: 3}
 --- !u!1 &5333807965469173354 stripped
 GameObject:
@@ -160,9 +163,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d0c0fb1e3ee36ee4ab25f422886c997e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  KnockdownForce: 0
-  KnockbackForce: 0
-  KnockdownTime: 0
+  KnockdownForce: 100
+  KnockbackForce: 10000
+  KnockdownTime: 2
   IsDead: 0
   IsUnconscious: 0
   IsAttackedFromFront: 0
@@ -194,6 +197,7 @@ MonoBehaviour:
   Check: {fileID: 0}
   Rotation: {fileID: 0}
   Vision: {fileID: 0}
+  Hearing: {fileID: 0}
 --- !u!114 &5039962485955441337
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -369,10 +373,20 @@ MonoBehaviour:
   VisualDetected:
     m_PersistentCalls:
       m_Calls: []
-  VisualIndirectDetected:
-    m_PersistentCalls:
-      m_Calls: []
   VisualLost:
     m_PersistentCalls:
       m_Calls: []
+  AI: {fileID: 0}
+--- !u!114 &2796457311485810952
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6628326433710970134}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f71ef3047ed003e44b457ba13de280a8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
   AI: {fileID: 0}

@@ -49,7 +49,6 @@ public abstract class Gun : Weapon
     public void AltAttack()
     {
         AudioSource.PlayOneShot(AttackSound);
-        AudioSourceEmitter.NotifyListeners(AttackSoundEmitData);
     }
 
     virtual public void Fire() { }

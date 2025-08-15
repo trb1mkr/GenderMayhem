@@ -3,6 +3,7 @@ using UnityEngine;
 public abstract class Melee : Weapon
 {
     public AudioClip HitSound;
+    [SerializeField] protected SoundEmitData HitSoundEmitData;
     public bool IsLethal;
     public float AttackTime;
     public float CooldownTime; //с учётом длительности анимации
@@ -15,7 +16,6 @@ public abstract class Melee : Weapon
     public override void Attack()
     {
         AudioSource.PlayOneShot(AttackSound);
-        AudioSourceEmitter.NotifyListeners(AttackSoundEmitData);
         base.Attack();
     }
 }
