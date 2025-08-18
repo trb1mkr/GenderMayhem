@@ -1,169 +1,41 @@
-using Sirenix.OdinInspector;
-using System.Collections;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class AIBehaviour : MonoBehaviour
+public class AIBehaviour: MonoBehaviour
 {
-    #region Data
-    [ReadOnly][ShowInInspector] public AINavigationMode NavigationMode;
-
-    public AISenses? TargetDetectionType; //[ReadOnly][ShowInInspector]
-    [ReadOnly][ShowInInspector] public GameObject TargetGameObject;
-    [ReadOnly][ShowInInspector] public Vector3 TargetPosition;
-    [SerializeField] private float _targetLostDelay;
-    [ReadOnly][ShowInInspector] public bool IsLosingTarget;
-    [SerializeField] private float _newTargetPositionDeltaThreshold = 5f;
-    private Coroutine _targetLost;
-    #endregion
-
     #region References
     [HideInInspector] public Enemy Agent;
     [HideInInspector] public NavMeshAgent NavMeshAgent;
     [HideInInspector] public AIMovement Movement;
-    [HideInInspector] public AIPatrol Patrol;
-    [HideInInspector] public AIPursuit Pursuit;
-    [HideInInspector] public AISearch Search;
-    [HideInInspector] public AIMoveTo Check;
+    [HideInInspector] public AINavigation Navigation;
+    [HideInInspector] public AIDetection Detection;
     [HideInInspector] public AIRotation Rotation;
-    [HideInInspector] public AIVision Vision;
-    [HideInInspector] public AIHearing Hearing;
     #endregion
 
     void Awake()
     {
         NavMeshAgent = GetComponent<NavMeshAgent>();
+        Detection = GetComponent<AIDetection>();
+        Navigation = GetComponent<AINavigation>();
         Movement = GetComponent<AIMovement>();
-        Patrol = GetComponent<AIPatrol>();
-        Pursuit = GetComponent<AIPursuit>();
-        Search = GetComponent<AISearch>();
-        Check = GetComponent<AIMoveTo>();
         Rotation = GetComponent<AIRotation>();
-        Vision = GetComponentInChildren<AIVision>();
-        Hearing = GetComponentInChildren<AIHearing>();
 
-        Movement.AI = Patrol.AI = Pursuit.AI = Search.AI = Check.AI = Rotation.AI = Vision.AI = Hearing.AI = this;
-    }
-
-    private void Start()
-    {
-        SetNavigationMode(Patrol);
-        Agent.Health.StoodUp += () => SetNavigationMode(Search);
-    }
-
-    private void AddListeners()
-    {
-        Vision.VisualDetected.AddListener(OnVisualDetected);
-        Vision.VisualLost.AddListener(OnVisualLost);
-
-        Hearing.SoundDetected.AddListener(OnSoundDetected);
-
-        Search.Ended += () => SetNavigationMode(Patrol);
-        Check.Ended += () => SetNavigationMode(Search);
-    }
-
-    private void RemoveListeners()
-    {
-        Vision.VisualDetected.RemoveListener(OnVisualDetected);
-        Vision.VisualLost.RemoveListener(OnVisualLost);
-
-        Hearing.SoundDetected.RemoveListener(OnSoundDetected);
-
-        Search.Ended -= () => SetNavigationMode(Patrol);
-        Check.Ended -= () => SetNavigationMode(Search);
+        Movement.AI = Rotation.AI = Detection.AI = Navigation.AI = this;
     }
 
     void OnEnable()
     {
-        AddListeners();
-        Vision.enabled = true;
+        Navigation.enabled = true;
+        Detection.enabled = true;
+        Rotation.enabled = true;
     }
 
     void OnDisable()
     {
-        RemoveListeners();
-        NavigationMode.TerminateNavigation();
-        Vision.enabled = false;
-        StopAllCoroutines();
+        Navigation.enabled = false;
+        Detection.enabled = false;
+        Rotation.enabled = false;
     }
-
-    #region OnTargetDetected
-    private void OnVisualDetected(GameObject target)
-    {
-        if (target == TargetGameObject) return;
-        if (_targetLost != null) StopCoroutine(_targetLost);
-        IsLosingTarget = false;
-        SenseDetected(AISenses.Vision, Pursuit, target);
-    }
-
-    private void OnSoundDetected(GameObject target, SoundEmitType soundEmitType) =>
-        SenseDetected(AISenses.Hearing, Check, target.transform.position);
-
-    private void SenseDetected(AISenses newTargetDetectionType, AINavigationMode navigationMode, Vector3 position)
-    {
-        //Debug.Log(newTargetDetectionType);
-        if (TargetGameObject != null) return;
-        if (TargetPosition != Vector3.zero)
-            if (!IsNewTargetRelevant(newTargetDetectionType, TargetPosition, position)) return;
-
-        TargetPosition = position;
-        TargetDetectionType = newTargetDetectionType;
-
-        SetNavigationMode(navigationMode);
-    }
-
-    private void SenseDetected(AISenses newTargetDetectionType, AINavigationMode navigationMode, GameObject target)
-    {
-        //Debug.Log(newTargetDetectionType);
-        if (TargetGameObject != null)
-            if (!IsNewTargetRelevant(newTargetDetectionType, TargetGameObject.transform.position, target.transform.position)) return;
-
-        TargetGameObject = target;
-        TargetDetectionType = newTargetDetectionType;
-
-        SetNavigationMode(navigationMode);
-    }
-
-    private bool IsNewTargetRelevant(AISenses newTargetDetectionType, Vector3 oldPosition, Vector3 newPosition)
-    {
-        //Debug.Log("New sense: " + newTargetDetectionType + ". Old sense: " + TargetDetectionType);
-        if (TargetDetectionType < newTargetDetectionType) return false;
-        if (TargetDetectionType == newTargetDetectionType)
-        {
-            var oldDistance = Vector3.Distance(transform.position, oldPosition);
-            var newDistance = Vector3.Distance(transform.position, newPosition);
-            if (oldDistance - newDistance < _newTargetPositionDeltaThreshold) return false;
-        }
-        return true;
-    }
-
-    private void SetNavigationMode(AINavigationMode navigationMode)
-    {
-        if (NavigationMode && NavigationMode.IsNavigating) NavigationMode.StopNavigation();
-        NavigationMode = navigationMode;
-        NavigationMode.StartNavigation();
-    }
-    #endregion
-
-    #region OnTargetLost
-    private void OnVisualLost(GameObject target)
-    {
-        if (TargetGameObject != target) return;
-        if (TargetGameObject == target && IsLosingTarget) return;
-        _targetLost = StartCoroutine(OnTargetLost(_targetLostDelay));
-    }
-
-    public IEnumerator OnTargetLost(float delay)
-    {
-        IsLosingTarget = true;
-        yield return new WaitForSeconds(delay);
-        TargetGameObject = null;
-        TargetDetectionType = null;
-        yield return new WaitUntil(() => NavigationMode.IsNavigating == false);
-        IsLosingTarget = false;
-        SetNavigationMode(Search);
-    }
-    #endregion
 
     private void OnDrawGizmos() => DrawAgentPath(NavMeshAgent);
 

@@ -3,6 +3,8 @@ using UnityEditor;
 using System.Collections.Generic;
 using Sirenix.OdinInspector;
 using System.Linq;
+using R3;
+using System;
 
 public class PolygonCollider2DAnimator : MonoBehaviour
 {
@@ -17,12 +19,18 @@ public class PolygonCollider2DAnimator : MonoBehaviour
     [SerializeField][PropertyOrder(2)][FoldoutGroup("Save", 0)] private bool _autoSave = true;
     [SerializeField][FolderPath][PropertyOrder(2)][FoldoutGroup("Save", 1)] private string _saveFolder;
 
-    private void FixedUpdate()
+    private void Start()
     {
-        UpdateColliderComponent();
+        var animator = GetComponentInParent<Animator>();
+        Observable.EveryUpdate()
+            .Select(_ => animator.GetCurrentAnimatorStateInfo(0).shortNameHash)
+            .DistinctUntilChanged()
+            .Subscribe(_ => UpdateColliderComponent());
+            //.AddTo(_disposables);
     }
 
-    [Button][PropertyOrder(0)][FoldoutGroup("View", 1)]
+    [Button]
+    [PropertyOrder(0)][FoldoutGroup("View", 1)]
     public void UpdateColliderComponent()
     {
         if (Colliders.Count == 0) return;
@@ -37,9 +45,13 @@ public class PolygonCollider2DAnimator : MonoBehaviour
             Debug.LogError("Collider asset is null!");
             return;
         }
+        if (Colliders[CurrentCollider].Paths == null)
+        {
+            Debug.LogError($"Paths subasset is null for some reason. Fix it.");
+            return;
+        }
 
         _colliderComponent.points = new Vector2[] {};
-        if (Colliders[CurrentCollider].Paths == null) Debug.LogError($"Paths subasset is null for some reason. Fix it.");
         for (int i = 0; i < Colliders[CurrentCollider].Paths.Count; i++)
             _colliderComponent.SetPath(i, Colliders[CurrentCollider].Paths[i].Points);
     }

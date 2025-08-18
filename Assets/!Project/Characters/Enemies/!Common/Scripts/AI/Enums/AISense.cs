@@ -1,4 +1,4 @@
-public enum AISenses : ushort
+public enum AISense : ushort
 {
     Vision,
     VisionIndirect,

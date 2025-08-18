@@ -3,15 +3,15 @@ public class AIMoveTo : AINavigationMode
     public override void StartNavigation()
     {
         base.StartNavigation();
-        AI.NavMeshAgent.SetDestination(AI.TargetPosition);
+        Navigation.AI.NavMeshAgent.SetDestination(Navigation.AI.Detection.TargetPosition);
     }
 
     void Update()
     {
         if (!IsNavigating) return;
-        if (!AI.NavMeshAgent.pathPending && AI.NavMeshAgent.remainingDistance < StoppingDistance)
+        if (!Navigation.AI.NavMeshAgent.pathPending && Navigation.AI.NavMeshAgent.remainingDistance < StoppingDistance)
         {
-            AI.TargetPosition = UnityEngine.Vector3.zero;
+            Navigation.AI.Detection.TargetPosition = UnityEngine.Vector3.zero;
             EndNavigation();
         }
     }

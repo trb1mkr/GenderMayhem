@@ -34,7 +34,7 @@ public class AIPatrol : AINavigationMode
 
     private void Update()
     {
-        if (AI == null || _patrolPaths == null || IsNavigating == false) return;
+        if (Navigation == null || _patrolPaths == null || IsNavigating == false) return;
 
         if (_isWaiting)
         {
@@ -49,11 +49,11 @@ public class AIPatrol : AINavigationMode
         }
         else
         {
-            float distance = AI.NavMeshAgent.remainingDistance;
+            float distance = Navigation.AI.NavMeshAgent.remainingDistance;
             bool destinationReached = distance <= StoppingDistance;
 
             // Check if we've reached the waypoint (ensuring NavMeshAgent has completed path calculation if available)
-            if (destinationReached && (AI.NavMeshAgent == null || !AI.NavMeshAgent.pathPending))
+            if (destinationReached && (Navigation.AI.NavMeshAgent == null || !Navigation.AI.NavMeshAgent.pathPending))
             {
                 _waypointWaitTimer = _patrolWaitTime;
                 _isWaiting = true;
@@ -95,7 +95,7 @@ public class AIPatrol : AINavigationMode
         var _currentKnot = _patrolPaths[_currentPatrolSplineContainer].Spline[_currentPatrolWaypoint];
         var _currentKnotPosition = new Vector3(_currentKnot.Position.x, _currentKnot.Position.y, _currentKnot.Position.z);
         _currentTarget = _patrolPaths[_currentPatrolSplineContainer].transform.position + _currentKnotPosition;
-        AI.NavMeshAgent.SetDestination(_currentTarget);
+        Navigation.AI.NavMeshAgent.SetDestination(_currentTarget);
     }
 
     public override void StopNavigation()

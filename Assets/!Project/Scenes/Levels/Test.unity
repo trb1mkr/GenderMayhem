@@ -15417,15 +15417,15 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 500712095097348665, guid: 51a107147f1a67347933e2d166e77255, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -442.6956
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 500712095097348665, guid: 51a107147f1a67347933e2d166e77255, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -125.829475
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 500712095097348665, guid: 51a107147f1a67347933e2d166e77255, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -0.88638574
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 500712095097348665, guid: 51a107147f1a67347933e2d166e77255, type: 3}
       propertyPath: m_LocalRotation.w
@@ -15454,6 +15454,10 @@ PrefabInstance:
     - target: {fileID: 500712095097348665, guid: 51a107147f1a67347933e2d166e77255, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3745951797843347391, guid: 51a107147f1a67347933e2d166e77255, type: 3}
+      propertyPath: m_Enabled
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3745951797843347391, guid: 51a107147f1a67347933e2d166e77255, type: 3}
       propertyPath: _timeScale

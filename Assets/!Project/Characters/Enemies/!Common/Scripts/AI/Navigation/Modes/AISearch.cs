@@ -29,10 +29,10 @@ public partial class AISearch : AINavigationMode
             // Ищем ближайшую точку на NavMesh
             if (NavMesh.SamplePosition(randomPoint, out NavMeshHit hit, Mathf.Infinity, NavMesh.AllAreas))
             {
-                AI.NavMeshAgent.SetDestination(hit.position);
+                Navigation.AI.NavMeshAgent.SetDestination(hit.position);
 
                 // Ждем пока дойдем до точки
-                yield return new WaitUntil(() => !AI.NavMeshAgent.pathPending && AI.NavMeshAgent.remainingDistance <= AI.NavMeshAgent.stoppingDistance);
+                yield return new WaitUntil(() => !Navigation.AI.NavMeshAgent.pathPending && Navigation.AI.NavMeshAgent.remainingDistance <= Navigation.AI.NavMeshAgent.stoppingDistance);
 
                 // Стоим на точке заданное время
                 yield return new WaitForSeconds(_searchWaitTime);

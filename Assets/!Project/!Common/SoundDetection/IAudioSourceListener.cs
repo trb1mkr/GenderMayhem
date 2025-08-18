@@ -1,7 +1,7 @@
 using UnityEngine;
-using UnityEngine.Events;
+using System;
 
 public interface IAudioSourceListener
 {
-    public UnityEvent<GameObject, SoundEmitType> SoundDetected { get; set; }
+    public Action<GameObject, SoundEmitType> SoundDetected { get; set; }
 }

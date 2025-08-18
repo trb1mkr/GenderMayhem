@@ -10,13 +10,13 @@ public abstract class AINavigationMode : MonoBehaviour
     public Action Stopped;
     public Action Ended;
 
-    [HideInInspector] public AIBehaviour AI;
+    [HideInInspector] public AINavigation Navigation;
 
     public virtual void StartNavigation()
     {
         Debug.Log(GetType().Name + " started");
         IsNavigating = true;
-        AI.NavMeshAgent.stoppingDistance = StoppingDistance;
+        Navigation.AI.NavMeshAgent.stoppingDistance = StoppingDistance;
         Started?.Invoke();
     }
 
@@ -25,7 +25,7 @@ public abstract class AINavigationMode : MonoBehaviour
         Debug.Log(GetType().Name + " stopped");
         IsNavigating = false;
         StopAllCoroutines();
-        AI.NavMeshAgent.ResetPath();
+        Navigation.AI.NavMeshAgent.ResetPath();
         Stopped?.Invoke();
     }
 
@@ -33,7 +33,7 @@ public abstract class AINavigationMode : MonoBehaviour
     {
         Debug.Log(GetType().Name + " ended");
         IsNavigating = false;
-        AI.NavMeshAgent.ResetPath();
+        Navigation.AI.NavMeshAgent.ResetPath();
         Ended?.Invoke();
     }
 
@@ -41,6 +41,6 @@ public abstract class AINavigationMode : MonoBehaviour
     {
         Debug.Log(GetType().Name + " terminated");
         IsNavigating = false;
-        AI.NavMeshAgent.ResetPath();
+        Navigation.AI.NavMeshAgent.ResetPath();
     }
 }

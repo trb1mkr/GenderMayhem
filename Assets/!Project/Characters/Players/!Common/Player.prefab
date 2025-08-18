@@ -345,7 +345,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b057ea23685914249886917e5942f5a2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MovementSpeed: 220
+  MovementSpeed: 120
   MovementDirection: {x: 0, y: 0}
   Player: {fileID: 0}
 --- !u!114 &6218075856115719992
@@ -362,7 +362,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   KnockdownForce: 100
   KnockbackForce: 10000
-  KnockdownTime: 2
+  KnockdownTime: 100000
   IsDead: 0
   IsUnconscious: 0
   IsAttackedFromFront: 0

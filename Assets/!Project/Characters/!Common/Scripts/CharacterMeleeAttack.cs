@@ -9,7 +9,7 @@ public class CharacterMeleeAttack : MonoBehaviour
     private void OnTriggerStay2D(Collider2D other)
     {
         var victim = other.GetComponentInParent<Character>();
-        if (victim != null && victim.Health.IsAlive && Character.StateController.StateId == CharacterStateId.Attack)
+        if (victim != null && victim.Health.IsAlive && victim.StateController.TorsoCollider == other && Character.StateController.StateId == CharacterStateId.Attack)
         {
             if (Character.ItemManager.Item is Melee melee)
             {

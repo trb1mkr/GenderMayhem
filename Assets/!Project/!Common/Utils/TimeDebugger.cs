@@ -4,8 +4,9 @@ public class TimeDebugger : MonoBehaviour
 {
     [SerializeField] float _timeScale = 1;
 
-    void OnValidate()
-    {
-        Time.timeScale = _timeScale;
-    }
+    #if UNITY_EDITOR
+    void OnValidate() => Time.timeScale = _timeScale;
+    #endif
+
+    void Awake() => Time.timeScale = _timeScale;
 }

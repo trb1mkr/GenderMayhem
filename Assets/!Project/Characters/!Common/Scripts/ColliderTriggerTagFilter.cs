@@ -5,7 +5,7 @@ using UnityEngine;
 public class ColliderTriggerTagFilter : MonoBehaviour
 {
     #region Values
-    [ReadOnly] public List<Collider2D> Colliders = new List<Collider2D>();
+    [ReadOnly] public List<Collider2D> Colliders = new();
     #endregion
 
     private void OnTriggerEnter2D(Collider2D collider)

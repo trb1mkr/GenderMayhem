@@ -15,7 +15,7 @@ public class AIMovement : MonoBehaviour
 
     private void Update()
     {
-        Sprint = AI.NavigationMode == AI.Pursuit || AI.NavigationMode == AI.Search;
+        Sprint = AI.Navigation.NavigationMode == AI.Navigation.Pursuit || AI.Navigation.NavigationMode == AI.Navigation.Search;
         AI.NavMeshAgent.speed = Sprint ? _sprintSpeed : _walkSpeed;
     }       
 }

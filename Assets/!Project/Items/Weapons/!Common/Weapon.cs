@@ -20,7 +20,7 @@ abstract public class Weapon : Item
 
     public virtual void Attack()
     {
-        Attacked.Invoke();
         GetComponent<CameraShakeSource>().Shake();
+        Attacked.Invoke();
     }
 }

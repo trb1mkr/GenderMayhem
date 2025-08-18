@@ -1,13 +1,14 @@
 using UnityEngine;
-using UnityEngine.Events;
+using System;
 
 public class AIHearing : MonoBehaviour, IAudioSourceListener
 {
-    [HideInInspector] public UnityEvent<GameObject, SoundEmitType> SoundDetected { get { return _soundDetected; } set {} }
-    //[HideInInspector] public UnityEvent<GameObject, SoundEmitType> SoundDetected = new();
-    private UnityEvent<GameObject, SoundEmitType> _soundDetected = new();
+    #region Data
+    [HideInInspector] public Action<GameObject, SoundEmitType> SoundDetected { get { return _soundDetected; } set { _soundDetected = value; } }
+    private Action<GameObject, SoundEmitType> _soundDetected;
+    #endregion
 
     #region References
-    [HideInInspector] public AIBehaviour AI;
+    [HideInInspector] public AIDetection Detection;
     #endregion
 }
