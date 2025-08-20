@@ -310,7 +310,12 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   ShotSound: {fileID: 8300000, guid: 9b8560053ff8ed640bff124d3876e56d, type: 3}
+  ReloadSound: {fileID: 0}
   ShotSoundEmitData: {fileID: 11400000, guid: 244e53023c5e86847a19a4b5afdd73b9, type: 2}
+  MaxAmmo: 7
+  ReloadTime: 0.25
+  CycleTime: 0.1
+  IsCycling: 0
   GunUtilities:
     BulletPoint: {fileID: 0}
     ShellPoint: {fileID: 0}
@@ -318,5 +323,4 @@ MonoBehaviour:
     Bullet: {fileID: 9041737352635034749, guid: 27105cf3d1647fb4a8f727e7e276f0e6, type: 3}
     Shell: {fileID: 7652202784644121547, guid: 03ce95344eb014341a617eb4a41e9274, type: 3}
     Magazine: {fileID: 1295682356239836410, guid: d3317f3c3c173104186731159f436ed2, type: 3}
-  Ammo: 7
   Spread: 5

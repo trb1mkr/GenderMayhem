@@ -95,6 +95,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 1171868502133147323, guid: e6f260d920b23054d989265f71dc2d4d, type: 3}
       insertIndex: 18
       addedObject: {fileID: 3496866296883264945}
+    - targetCorrespondingSourceObject: {fileID: 1171868502133147323, guid: e6f260d920b23054d989265f71dc2d4d, type: 3}
+      insertIndex: 19
+      addedObject: {fileID: 4942294640086614752}
     - targetCorrespondingSourceObject: {fileID: 124594329523156423, guid: e6f260d920b23054d989265f71dc2d4d, type: 3}
       insertIndex: -1
       addedObject: {fileID: 6185588958993175800}
@@ -330,6 +333,28 @@ MonoBehaviour:
   IsNavigating: 0
   StoppingDistance: 2
   Navigation: {fileID: 0}
+--- !u!114 &4942294640086614752
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5333807965469173354}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1dd70a09791ff3542b856aed8f8b0f4b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Used:
+    m_PersistentCalls:
+      m_Calls: []
+  UseCanceled:
+    m_PersistentCalls:
+      m_Calls: []
+  AltUsed:
+    m_PersistentCalls:
+      m_Calls: []
+  Enemy: {fileID: 0}
 --- !u!1 &6628326433710970134 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 124594329523156423, guid: e6f260d920b23054d989265f71dc2d4d, type: 3}

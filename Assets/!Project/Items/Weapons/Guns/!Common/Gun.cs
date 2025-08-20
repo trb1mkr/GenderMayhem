@@ -3,19 +3,39 @@ using UnityEngine;
 using GenderMayhem.Actions;
 using System.Collections.Generic;
 using UnityEngine.Events;
+using Sirenix.OdinInspector;
+using System;
+using R3;
+using Random = UnityEngine.Random;
 
 public abstract class Gun : Weapon
 {
     public AudioClip ShotSound;
+    public AudioClip ReloadSound;
     [SerializeField] protected SoundEmitData ShotSoundEmitData;
+
+    public int MaxAmmo;
+    public ReactiveProperty<int> Ammo = new();
+    public Action AmmoIsOut;
+    public float ReloadTime;
+    [SerializeField] protected float CycleTime;
+    [ReadOnly] public bool IsCycling = false;
+
     public GunUtilities GunUtilities = new();
-    public int Ammo, Spread;
+    public int Spread;
 
     public override void Awake()
     {
         base.Awake();
         var altUseActions = new List<UnityAction> { new(AltAttack) };
-        ActionEventsGroup.ActionEvents.Add(new ActionEvent(typeof(PlayerInputAction), PlayerInputAction.AltUse, altUseActions));
+        ActionEventsGroup.ActionEvents.Add(new ActionEvent(typeof(ItemAction), ItemAction.AltUse, altUseActions));
+
+        var reloadActions = new List<UnityAction> { new(() => StartCoroutine(Reload())) };
+        ActionEventsGroup.ActionEvents.Add(new ActionEvent(typeof(WeaponAction), WeaponAction.Reload, reloadActions));
+
+        Ammo
+            .Where(ammo => ammo < 1)
+            .Subscribe(_ => AmmoIsOut?.Invoke());
     }
 
     public override void Start()
@@ -26,24 +46,34 @@ public abstract class Gun : Weapon
         GunUtilities.MuzzleFlash = gameObject.transform.GetChild(2).gameObject;
     }
 
-    public bool Shoot()
-    {
-        if (Ammo > 0)
-        {
-            Ammo--;
-            Fire();
-            StartCoroutine(MuzzleFlash());
-            AudioSource.PlayOneShot(ShotSound);
-            AudioSourceEmitter.NotifyListeners(ShotSoundEmitData);
-            return true;
-        }
-        return false;
-    }
-
     public override void Attack()
     {
+        Debug.Log("GunAttack");
         if (Shoot())
             base.Attack();
+    }
+
+    public bool Shoot()
+    {
+        if (Ammo.Value < 1 || IsCycling) return false;
+
+        Ammo.Value--;
+        Fire();
+        StartCoroutine(MuzzleFlash());
+        AudioSource.PlayOneShot(ShotSound);
+        AudioSourceEmitter.NotifyListeners(ShotSoundEmitData);
+        StartCoroutine(Cycle());
+        Debug.Log("Shoot");
+        return true;
+    }
+
+    virtual public void Fire() { }
+
+    virtual public IEnumerator Cycle()
+    {
+        IsCycling = true;
+        yield return new WaitForSeconds(CycleTime);
+        IsCycling = false;
     }
 
     public void AltAttack()
@@ -51,9 +81,13 @@ public abstract class Gun : Weapon
         AudioSource.PlayOneShot(AttackSound);
     }
 
-    virtual public void Fire() { }
-
-    //virtual public void NoAmmo() { }
+    virtual public IEnumerator Reload()
+    {
+        AudioSource.PlayOneShot(ReloadSound);
+        yield return new WaitForSeconds(ReloadTime);
+        SpawnMagazine();
+        Ammo.Value = MaxAmmo;
+    }
 
     IEnumerator MuzzleFlash()
     {

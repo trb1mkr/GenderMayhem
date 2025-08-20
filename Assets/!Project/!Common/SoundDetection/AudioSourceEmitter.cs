@@ -16,7 +16,6 @@ public class AudioSourceEmitter : MonoBehaviour
         for (int i = 0; i < colliders.Length; i++)
         {
             var listener = colliders[i].GetComponentInChildren<IAudioSourceListener>();
-            if (listener != null) Debug.Log(listener);
             listener?.SoundDetected?.Invoke(gameObject, soundEmitData.SoundType);
         }
     }

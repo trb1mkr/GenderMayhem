@@ -2,8 +2,9 @@ using UnityEngine;
 using GenderMayhem.Actions;
 using System.Collections.Generic;
 using UnityEngine.Events;
+using System;
 
-[System.Serializable]
+[Serializable]
 abstract public class Weapon : Item
 {
     #region Values
@@ -16,7 +17,7 @@ abstract public class Weapon : Item
     public virtual void Awake()
     {
         var useActions = new List<UnityAction> { new(Attack) };
-        ActionEventsGroup.ActionEvents.Add(new ActionEvent(typeof(PlayerInputAction), PlayerInputAction.Use, useActions));
+        ActionEventsGroup.ActionEvents.Add(new ActionEvent(typeof(ItemAction), ItemAction.Use, useActions));
     }
 
     public virtual void Attack()

@@ -3,14 +3,20 @@ using UnityEngine.Events;
 using Sirenix.OdinInspector;
 using System.Collections.Generic;
 using System.Linq;
+using UnityEngine;
 
 namespace GenderMayhem.Actions
 {
-    public enum PlayerInputAction
+    public enum ItemAction
     {
         Use,
         UseCanceled,
         AltUse
+    }
+
+    public enum WeaponAction
+    {
+        Reload
     }
 
     [Serializable]
@@ -59,6 +65,7 @@ namespace GenderMayhem.Actions
         public bool InvokeSuitableActions(Enum value)
         {
             var actions = ActionEvents.Where(x => x.Action.ToString() == value.ToString())?.ToList();
+            Debug.Log(actions[0].Event.GetPersistentEventCount());
             actions?.ForEach(x => x.Event.Invoke());
             return actions?.Any() ?? false;
         }

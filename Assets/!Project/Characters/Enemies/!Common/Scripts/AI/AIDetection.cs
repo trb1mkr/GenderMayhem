@@ -158,7 +158,7 @@ public class AIDetection : MonoBehaviour
 
     private void SenseDetected(AISense newTargetDetectionType, Vector3 position)
     {
-        Debug.Log(newTargetDetectionType);
+        //Debug.Log(newTargetDetectionType);
         if (TargetGameObject != null) return;
         if (TargetPosition != Vector3.zero)
             if (!IsNewTargetRelevant(newTargetDetectionType, TargetPosition, position)) return;

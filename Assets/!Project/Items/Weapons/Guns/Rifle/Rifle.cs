@@ -6,7 +6,6 @@ using GenderMayhem.Actions;
 
 public class Rifle : Gun
 {
-    [SerializeField] private float _rateOfFire;
     private Coroutine _autoFire;
 
     public override void Awake()
@@ -14,7 +13,7 @@ public class Rifle : Gun
         base.Awake();
 
         var useCanceledActions = new List<UnityAction> { new(StopAttack) };
-        ActionEventsGroup.ActionEvents.Add(new ActionEvent(typeof(PlayerInputAction), PlayerInputAction.UseCanceled, useCanceledActions));
+        ActionEventsGroup.ActionEvents.Add(new ActionEvent(typeof(ItemAction), ItemAction.UseCanceled, useCanceledActions));
     }
 
     public override void Fire()
@@ -33,15 +32,10 @@ public class Rifle : Gun
 
     public IEnumerator AutoAttack()
     {
-        while (Ammo > 0)
+        while (Ammo.Value > 0)
         {
             base.Attack();
-            yield return new WaitForSeconds(_rateOfFire);
+            yield return new WaitForSeconds(CycleTime);
         }
     }
-
-    // public override void NoAmmo()
-    // {
-    //     Instantiate(GunUtilities.Magazine, gameObject.transform.position, gameObject.transform.rotation);
-    // }
 }

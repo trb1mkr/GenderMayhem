@@ -10,6 +10,7 @@ public class AIBehaviour: MonoBehaviour
     [HideInInspector] public AINavigation Navigation;
     [HideInInspector] public AIDetection Detection;
     [HideInInspector] public AIRotation Rotation;
+    [HideInInspector] public AIWeaponController WeaponController;
     #endregion
 
     void Awake()
@@ -19,8 +20,9 @@ public class AIBehaviour: MonoBehaviour
         Navigation = GetComponent<AINavigation>();
         Movement = GetComponent<AIMovement>();
         Rotation = GetComponent<AIRotation>();
+        WeaponController = GetComponent<AIWeaponController>();
 
-        Movement.AI = Rotation.AI = Detection.AI = Navigation.AI = this;
+        Movement.AI = Rotation.AI = Detection.AI = Navigation.AI = WeaponController.AI = this;
     }
 
     void OnEnable()

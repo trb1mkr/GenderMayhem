@@ -28,11 +28,11 @@ public class PlayerControls : MonoBehaviour
         if (context.performed)
         {
             if (Player.WeaponController.IsCooldown) return;
-            if (Player.ItemManager.Item.ActionEventsGroup.InvokeSuitableActions(PlayerInputAction.Use))
+            if (Player.ItemManager.Item.ActionEventsGroup.InvokeSuitableActions(ItemAction.Use))
                 Used.Invoke();
         }
         if (context.canceled)
-            if (Player.ItemManager.Item.ActionEventsGroup.InvokeSuitableActions(PlayerInputAction.UseCanceled))
+            if (Player.ItemManager.Item.ActionEventsGroup.InvokeSuitableActions(ItemAction.UseCanceled))
                 UseCanceled.Invoke();
     }
 
@@ -40,7 +40,7 @@ public class PlayerControls : MonoBehaviour
     {
         if (context.performed && Player.StateController.StateId == CharacterStateId.Idle)
         {
-            if (Player.ItemManager.Item.ActionEventsGroup.InvokeSuitableActions(PlayerInputAction.AltUse))
+            if (Player.ItemManager.Item.ActionEventsGroup.InvokeSuitableActions(ItemAction.AltUse))
                 AltUsed.Invoke();
         }
     }
