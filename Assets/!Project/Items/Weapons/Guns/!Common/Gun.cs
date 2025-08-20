@@ -8,7 +8,7 @@ public abstract class Gun : Weapon
 {
     public AudioClip ShotSound;
     [SerializeField] protected SoundEmitData ShotSoundEmitData;
-    public GunUtilities GunUtilities = new GunUtilities();
+    public GunUtilities GunUtilities = new();
     public int Ammo, Spread;
 
     public override void Awake()

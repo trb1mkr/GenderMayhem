@@ -1,7 +1,12 @@
 public class AIPursuit : AINavigationMode
 {
     private bool _hasPath = false;
-    
+
+    void Start()
+    {
+        Navigation.AI.Agent.ItemManager.ItemChanged += () => { if (Navigation.AI.Agent.ItemManager.Item is Weapon weapon) StoppingDistance = weapon.AttackDistance; };
+    }
+
     private void Update()
     {
         if (!IsNavigating) return;

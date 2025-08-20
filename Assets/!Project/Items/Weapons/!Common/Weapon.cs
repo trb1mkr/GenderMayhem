@@ -7,6 +7,7 @@ using UnityEngine.Events;
 abstract public class Weapon : Item
 {
     #region Values
+    public float AttackDistance;
     public AudioClip AttackSound;
 
     [HideInInspector] public UnityEvent Attacked;

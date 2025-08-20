@@ -125,6 +125,7 @@ MonoBehaviour:
   SpriteRenderer: {fileID: 0}
   PickUpSound: {fileID: 0}
   ThrowSound: {fileID: 0}
+  AttackDistance: 18
   AttackSound: {fileID: 0}
   Attacked:
     m_PersistentCalls:

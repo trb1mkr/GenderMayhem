@@ -333,8 +333,8 @@ MonoBehaviour:
   SpriteRenderer: {fileID: 0}
   PickUpSound: {fileID: 8300000, guid: f9ef1bd26a4f2ae4c87a770768743932, type: 3}
   ThrowSound: {fileID: 0}
+  AttackDistance: 150
   AttackSound: {fileID: 8300000, guid: d6a902014f09b72458c0448afff655d0, type: 3}
-  AttackSoundEmitData: {fileID: 0}
   Attacked:
     m_PersistentCalls:
       m_Calls: []

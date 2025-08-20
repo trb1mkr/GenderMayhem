@@ -1,10 +1,17 @@
 using UnityEngine;
 using System.Collections;
 using System;
+using Sirenix.OdinInspector;
 
 public class AIRotation : MonoBehaviour
 {
     #region Data
+    [SerializeField] private float _aimingThreshold = 5f;
+    private Vector3 _lastPredictedPosition;
+    [ShowInInspector, ReadOnly] private bool _isAimed;
+    public Vector3 LastPredictedPosition => _lastPredictedPosition;
+    public bool IsAimed => _isAimed;
+
     public Action LookedAround;
     private Coroutine _rotationCoroutine;
     #endregion
@@ -15,10 +22,13 @@ public class AIRotation : MonoBehaviour
 
     void Start()
     {
-        AI.Agent.Health.StoodUp += () => StartRotation(RotateAround(360f));
-        AI.Navigation.NavigationModeChanged += NavigationMode => { if (NavigationMode && NavigationMode == AI.Navigation.Pursuit && AI.Detection.LoseCoroutine == null) StartRotation(RotateToTarget(AI.Detection.TargetGameObject)); };
-        AI.Navigation.NavigationModeChanged += NavigationMode => { if (NavigationMode && NavigationMode != AI.Navigation.Pursuit) StartRotation(RotateToMoveDirection()); };
+        AI.Navigation.Pursuit.Started += () => { if (AI.Detection.LoseCoroutine == null && AI.Agent.ItemManager.Item is Melee) StartRotation(RotateToAimAt(AI.Detection.TargetGameObject)); };
+        AI.Navigation.Pursuit.Started += () => { if (AI.Detection.LoseCoroutine == null && AI.Agent.ItemManager.Item is Gun) StartRotation(RotateToAimAheadOf(AI.Detection.TargetGameObject)); };
+        AI.Navigation.Search.Started += () => StartRotation(RotateToMoveDirection());
+        AI.Navigation.Patrol.Started += () => StartRotation(RotateToMoveDirection());
+        AI.Navigation.MoveTo.Started += () => StartRotation(RotateToMoveDirection());
         AI.Detection.TargetGameObjectLost += () => StartRotation(RotateToMoveDirection());
+        AI.Agent.Health.StoodUp += () => StartRotation(RotateAround(360f));
 
         StartRotation(RotateToMoveDirection());
     }
@@ -54,7 +64,7 @@ public class AIRotation : MonoBehaviour
         }
     }
 
-    private IEnumerator RotateToTarget(GameObject target)
+    private IEnumerator RotateToAimAt(GameObject target)
     {
         while (target != null)
         {
@@ -67,6 +77,29 @@ public class AIRotation : MonoBehaviour
                 targetRotation,
                 AI.NavMeshAgent.angularSpeed * Time.deltaTime
             );
+            yield return null;
+        }
+    }
+
+    private IEnumerator RotateToAimAheadOf(GameObject target)
+    {
+        while (true)
+        {
+            // Предсказание позиции
+            float distance = Vector3.Distance(transform.position, target.transform.position);
+            float travelTime = distance / ((Gun)AI.Agent.ItemManager.Item).GunUtilities.Bullet.GetComponent<Bullet>().Force;
+            _lastPredictedPosition = target.transform.position + (Vector3)target.GetComponent<Rigidbody2D>().linearVelocity * travelTime;
+
+            // Поворот к цели
+            Vector3 aimDirection = (_lastPredictedPosition - transform.position).normalized;
+            float targetAngle = Mathf.Atan2(aimDirection.y, aimDirection.x) * Mathf.Rad2Deg;
+            Quaternion targetRotation = Quaternion.Euler(0, 0, targetAngle);
+            transform.rotation = Quaternion.RotateTowards(transform.rotation, targetRotation, AI.NavMeshAgent.angularSpeed * 50f * Time.deltaTime);
+
+            //Debug.Log(Vector3.Angle(transform.right, aimDirection));
+            // Проверка наведения
+            _isAimed = Vector3.Angle(transform.right, aimDirection) <= _aimingThreshold;
+
             yield return null;
         }
     }

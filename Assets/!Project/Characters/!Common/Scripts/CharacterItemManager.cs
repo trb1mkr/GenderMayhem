@@ -1,7 +1,7 @@
 using UnityEngine;
-using UnityEngine.Events;
 using System.Collections;
 using System;
+using Sirenix.OdinInspector;
 
 public class CharacterItemManager : MonoBehaviour
 {
@@ -20,11 +20,18 @@ public class CharacterItemManager : MonoBehaviour
     [HideInInspector] public Character Character;
     public Item Item;
     [SerializeField] private Weapon _fists;
+    [OnValueChanged("SetUpStarterItem"), SerializeField] private GameObject _starterItem; 
     #endregion
 
     void Awake()
     {
-        Item = _fists;
+        if (!Item) Item = _fists;
+    }
+
+    void Start()
+    {
+        ItemChanged?.Invoke();
+        ItemPickedUp?.Invoke();
     }
 
     public GameObject GetTargetItem()
@@ -92,11 +99,24 @@ public class CharacterItemManager : MonoBehaviour
         Item = _fists;
 
         ItemChanged?.Invoke();
+        ItemThrowed?.Invoke();
     }
 
     private IEnumerator UnIgnoreCharacter(Item item)
     {
         yield return new WaitForSeconds(0.5f);
         item.Rigidbody.IgnoreCollisions(Character.Rigidbody, false);
+    }
+
+    private void SetUpStarterItem()
+    {
+        if (_starterItem == null) Item = _fists;
+        if (GetComponent<CharacterStateController>().WeaponPoint.childCount != 0) DestroyImmediate(GetComponent<CharacterStateController>().WeaponPoint.GetChild(0).gameObject);
+
+        if (_starterItem != null)
+        Item = Instantiate(_starterItem, transform.position, transform.rotation, GetComponent<CharacterStateController>().WeaponPoint).GetComponent<Item>();
+        Item.GetComponent<SpriteRenderer>().enabled = false;
+        Item.GetComponent<Rigidbody2D>().IgnoreCollisions(Item.transform.parent.GetComponentInParent<Rigidbody2D>(), true);
+        Item.GetComponent<Rigidbody2D>().simulated = false;
     }
 }

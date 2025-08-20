@@ -47,7 +47,7 @@ public abstract class Item : MonoBehaviour
         if (character != null && collision.collider == character.StateController.TorsoCollider)
         {
             Vector2 collisionVelocity = Rigidbody.linearVelocity; //- character.Rigidbody.linearVelocity;
-            var lastTouched = GetComponent<LastTouchedRigidbody>();
+            var lastTouched = GetComponent<LastRigidbody>();
             if (collisionVelocity.magnitude * Rigidbody.mass > character.Health.KnockdownForce) //lastTouched.LastCollidedRigidbody != character.Rigidbody && 
                 character.Health.FallUnconscious(collision.contacts[0].point);
         }

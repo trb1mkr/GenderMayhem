@@ -32,7 +32,7 @@ public class AINavigation : MonoBehaviour
 
     void OnDisable()
     {
-        NavigationMode.TerminateNavigation();
+        if (NavigationMode) NavigationMode.TerminateNavigation();
         NavigationMode = null;
     }
 

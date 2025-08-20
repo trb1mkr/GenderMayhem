@@ -20,6 +20,7 @@ public class PlayerMovement : MonoBehaviour
 
     public void Move()
     {
+        //Player.Rigidbody.linearVelocity = new Vector2(MovementDirection.x * MovementSpeed, MovementDirection.y * MovementSpeed);
         Player.Rigidbody.AddForce(new Vector2(MovementDirection.x * MovementSpeed, MovementDirection.y * MovementSpeed) * 1000f, ForceMode2D.Force);
         if (MovementDirection.magnitude == 0) Player.Rigidbody.linearVelocity = Vector2.zero;
     }

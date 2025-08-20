@@ -24,6 +24,10 @@ PrefabInstance:
       propertyPath: m_WasSpriteAssigned
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 3135572533559559132, guid: bc38bb2b44a62cd4d84a879d45a5f467, type: 3}
+      propertyPath: _aimingThreshold
+      value: 15
+      objectReference: {fileID: 0}
     - target: {fileID: 3195218592598531925, guid: bc38bb2b44a62cd4d84a879d45a5f467, type: 3}
       propertyPath: _newTargetPositionDeltaThreshold
       value: 1
