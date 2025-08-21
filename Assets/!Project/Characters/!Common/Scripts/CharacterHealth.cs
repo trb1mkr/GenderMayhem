@@ -67,7 +67,7 @@ public abstract class CharacterHealth : MonoBehaviour
     
     protected virtual void ChangeComponentsState(bool state)
     {
-
+        Character.enabled = state;
     }
 
     // private void RemoveComponents()

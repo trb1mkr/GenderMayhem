@@ -1,10 +1,21 @@
+using UnityEngine;
+using R3;
+
 public class AIPursuit : AINavigationMode
 {
+    [SerializeField] private SerializableReactiveProperty<float> _dynamicStoppingDistance;
     private bool _hasPath = false;
 
     void Start()
     {
-        Navigation.AI.Agent.ItemManager.ItemChanged += () => { if (Navigation.AI.Agent.ItemManager.Item is Weapon weapon) StoppingDistance = weapon.AttackDistance; };
+        //Navigation.AI.Agent.ItemManager.ItemChanged += () => { if (Navigation.AI.Agent.ItemManager.Item is Weapon weapon) _dynamicStoppingDistance.Value = weapon.AttackDistance; };
+        //Navigation.AI.Detection.TargetGameObjectDetected
+        Started += () => { if (Navigation.AI.Agent.ItemManager.Item is Weapon weapon) _dynamicStoppingDistance.Value = weapon.AttackDistance; };
+        Navigation.AI.Detection.TargetGameObjectLost += () => _dynamicStoppingDistance.Value = StoppingDistance;
+
+        //is navigating происходит позже, чем обнаруживается цель
+        _dynamicStoppingDistance.Subscribe(stoppingDistance => { if (IsNavigating) { Debug.Log("abba"); Navigation.AI.NavMeshAgent.stoppingDistance = stoppingDistance; } });
+        _dynamicStoppingDistance.Value = StoppingDistance;
     }
 
     private void Update()

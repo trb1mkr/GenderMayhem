@@ -5,7 +5,7 @@ using Sirenix.OdinInspector;
 public abstract class AINavigationMode : MonoBehaviour
 {
     [ReadOnly] public bool IsNavigating;
-    [SerializeField] protected float StoppingDistance = 0.1f;
+    [SerializeField] protected float StoppingDistance = 2f;
     public Action Started;
     public Action Stopped;
     public Action Ended;

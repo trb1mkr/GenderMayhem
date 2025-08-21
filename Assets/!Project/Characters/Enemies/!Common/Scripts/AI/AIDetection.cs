@@ -104,6 +104,7 @@ public class AIDetection : MonoBehaviour
             {
                 StopCoroutine(LoseCoroutine);
                 LoseCoroutine = null;
+                TargetGameObjectDetected?.Invoke(); //
             }
 
             if (TargetGameObject != player)
@@ -136,6 +137,8 @@ public class AIDetection : MonoBehaviour
 
     private bool HasDirectVisionToTarget(GameObject target)
     {
+        if (target.GetComponent<Player>().enabled == false) return false;
+        
         var hits = Physics2D.LinecastAll(
             AI.Agent.transform.position,
             target.transform.position,

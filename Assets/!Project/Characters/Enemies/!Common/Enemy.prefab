@@ -197,6 +197,7 @@ MonoBehaviour:
   Navigation: {fileID: 0}
   Detection: {fileID: 0}
   Rotation: {fileID: 0}
+  WeaponController: {fileID: 0}
 --- !u!114 &290552390318995188
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -263,7 +264,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d6cd88048d4b6be47a51e5e6959d1b1d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _aimingThreshold: 5
+  _aimingThreshold: 15
   AI: {fileID: 0}
 --- !u!114 &-879843458838801680
 MonoBehaviour:
@@ -296,8 +297,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   IsNavigating: 0
-  StoppingDistance: 18
+  StoppingDistance: 2
   Navigation: {fileID: 0}
+  _dynamicStoppingDistance:
+    value: 0
 --- !u!114 &6523843939148982614
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -354,7 +357,7 @@ MonoBehaviour:
   AltUsed:
     m_PersistentCalls:
       m_Calls: []
-  Enemy: {fileID: 0}
+  AI: {fileID: 0}
 --- !u!1 &6628326433710970134 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 124594329523156423, guid: e6f260d920b23054d989265f71dc2d4d, type: 3}

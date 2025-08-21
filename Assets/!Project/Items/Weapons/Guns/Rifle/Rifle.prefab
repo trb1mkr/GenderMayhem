@@ -441,8 +441,10 @@ MonoBehaviour:
   ReloadSound: {fileID: 0}
   ShotSoundEmitData: {fileID: 11400000, guid: 63c1ec0fc0501624f91b070a7892d9fe, type: 2}
   MaxAmmo: 20
+  Ammo:
+    value: 0
   ReloadTime: 0.45
-  CycleTime: 0.1
+  CycleTime: 0.025
   IsCycling: 0
   GunUtilities:
     BulletPoint: {fileID: 0}

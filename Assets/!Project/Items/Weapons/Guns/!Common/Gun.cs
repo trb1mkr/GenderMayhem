@@ -15,7 +15,7 @@ public abstract class Gun : Weapon
     [SerializeField] protected SoundEmitData ShotSoundEmitData;
 
     public int MaxAmmo;
-    public ReactiveProperty<int> Ammo = new();
+    public SerializableReactiveProperty<int> Ammo;
     public Action AmmoIsOut;
     public float ReloadTime;
     [SerializeField] protected float CycleTime;
@@ -33,6 +33,8 @@ public abstract class Gun : Weapon
         var reloadActions = new List<UnityAction> { new(() => StartCoroutine(Reload())) };
         ActionEventsGroup.ActionEvents.Add(new ActionEvent(typeof(WeaponAction), WeaponAction.Reload, reloadActions));
 
+        Ammo.Value = MaxAmmo;
+
         Ammo
             .Where(ammo => ammo < 1)
             .Subscribe(_ => AmmoIsOut?.Invoke());
@@ -48,7 +50,6 @@ public abstract class Gun : Weapon
 
     public override void Attack()
     {
-        Debug.Log("GunAttack");
         if (Shoot())
             base.Attack();
     }
@@ -63,7 +64,6 @@ public abstract class Gun : Weapon
         AudioSource.PlayOneShot(ShotSound);
         AudioSourceEmitter.NotifyListeners(ShotSoundEmitData);
         StartCoroutine(Cycle());
-        Debug.Log("Shoot");
         return true;
     }
 

@@ -3,22 +3,9 @@ using UnityEngine.Events;
 using Sirenix.OdinInspector;
 using System.Collections.Generic;
 using System.Linq;
-using UnityEngine;
 
 namespace GenderMayhem.Actions
 {
-    public enum ItemAction
-    {
-        Use,
-        UseCanceled,
-        AltUse
-    }
-
-    public enum WeaponAction
-    {
-        Reload
-    }
-
     [Serializable]
     public class ActionEvent
     {
@@ -54,20 +41,6 @@ namespace GenderMayhem.Actions
                 return Enum.GetValues(ActionType).Cast<Enum>();
 
             return Enumerable.Empty<Enum>();
-        }
-    }
-
-    [Serializable]
-    public class ActionEventsGroup
-    {
-        public List<ActionEvent> ActionEvents = new();
-
-        public bool InvokeSuitableActions(Enum value)
-        {
-            var actions = ActionEvents.Where(x => x.Action.ToString() == value.ToString())?.ToList();
-            Debug.Log(actions[0].Event.GetPersistentEventCount());
-            actions?.ForEach(x => x.Event.Invoke());
-            return actions?.Any() ?? false;
         }
     }
 }

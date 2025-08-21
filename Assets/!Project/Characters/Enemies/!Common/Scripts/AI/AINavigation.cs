@@ -41,7 +41,6 @@ public class AINavigation : MonoBehaviour
         AI.Rotation.LookedAround += () => SetNavigationMode(Search);
         AI.Detection.TargetGameObjectDetected += () => SetNavigationMode(Pursuit);
         AI.Detection.TargetPositionDetected += () => SetNavigationMode(MoveTo);
-        //AI.Detection.TargetGameObjectLost += () => SetNavigationMode(Search);
 
         Pursuit.Ended += () => SetNavigationMode(Search);
         Search.Ended += () => SetNavigationMode(Patrol);
@@ -50,10 +49,11 @@ public class AINavigation : MonoBehaviour
 
     private void RemoveListeners()
     {
+        AI.Rotation.LookedAround -= () => SetNavigationMode(Search);
         AI.Detection.TargetGameObjectDetected -= () => SetNavigationMode(Pursuit);
         AI.Detection.TargetPositionDetected -= () => SetNavigationMode(MoveTo);
-        AI.Detection.TargetGameObjectLost -= () => SetNavigationMode(Search);
 
+        Pursuit.Ended -= () => SetNavigationMode(Search);
         Search.Ended -= () => SetNavigationMode(Patrol);
         MoveTo.Ended -= () => SetNavigationMode(Search);
     }

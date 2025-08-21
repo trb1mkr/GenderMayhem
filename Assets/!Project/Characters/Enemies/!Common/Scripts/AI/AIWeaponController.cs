@@ -15,38 +15,48 @@ public class AIWeaponController : MonoBehaviour
     {
         Used.AddListener(AI.Agent.StateController.HandleUsed);
 
-        AI.Navigation.Pursuit.Started += () => StartCoroutine(TryUse());
-        AI.Navigation.Pursuit.Ended += CancelUse;
+        AI.Detection.TargetGameObjectDetected += () => StartCoroutine(TryAttack());
+        AI.Detection.TargetGameObjectLost += () => StopCoroutine(TryAttack());
+        AI.Detection.TargetGameObjectLost += CancelAttack;
 
-        ((Gun)AI.Agent.ItemManager.Item).AmmoIsOut += () => AI.Agent.ItemManager.Item.ActionEventsGroup.InvokeSuitableActions(WeaponAction.Reload); // переписать,чтобы оно подписывалось
+        AI.Agent.ItemManager.ItemPickedUp += () => { if (AI.Agent.ItemManager.Item is Gun gun) gun.AmmoIsOut += () => AI.Agent.ItemManager.Item.ActionEventsGroup.InvokeSuitableActions(WeaponAction.Reload); };
+        //неправильно
+        //AI.Agent.ItemManager.ItemThrowed += () => { if (AI.Agent.ItemManager.Item is Gun gun) gun.AmmoIsOut -= () => AI.Agent.ItemManager.Item.ActionEventsGroup.InvokeSuitableActions(WeaponAction.Reload); };
+
+        if (AI.Agent.ItemManager.Item is Gun gun) gun.AmmoIsOut += () => AI.Agent.ItemManager.Item.ActionEventsGroup.InvokeSuitableActions(WeaponAction.Reload);
     }
 
-    private IEnumerator TryUse()
+    private IEnumerator TryAttack()
     {
         while (true)
         {
             if (AI.Rotation.IsAimed)
             {
-                if ((Weapon)AI.Agent.ItemManager.Item is Gun)
-                    Use();
-                if ((Weapon)AI.Agent.ItemManager.Item is Melee &&
-                    Vector3.Distance(transform.position, AI.Detection.TargetGameObject.transform.position) + 5 < AI.NavMeshAgent.stoppingDistance)
-                    Use();
+                if (AI.Agent.ItemManager.Item is Gun)
+                    Attack();
+                if (AI.Agent.ItemManager.Item is Melee &&
+                    Vector3.Distance(transform.position, AI.Detection.TargetGameObject.transform.position) < AI.NavMeshAgent.stoppingDistance + 5)
+                {
+                    Debug.Log("Melee use");
+                    Attack();
+                }
+                        
             }
             yield return null;
         }
     }
 
-    private void Use()
+    private void Attack()
     {
+        Debug.Log("Cool " + AI.Agent.WeaponController.IsCooldown);
         if (AI.Agent.WeaponController.IsCooldown) return;
         if (AI.Agent.ItemManager.Item.ActionEventsGroup.InvokeSuitableActions(ItemAction.Use))
             Used.Invoke();
     }
 
-    private void CancelUse()
+    private void CancelAttack()
     {
-        StopAllCoroutines();
+        StopCoroutine(TryAttack());
         if (AI.Agent.ItemManager.Item.ActionEventsGroup.InvokeSuitableActions(ItemAction.UseCanceled))
             UseCanceled.Invoke();
     }

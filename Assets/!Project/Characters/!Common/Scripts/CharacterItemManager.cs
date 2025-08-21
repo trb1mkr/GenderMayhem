@@ -87,8 +87,6 @@ public class CharacterItemManager : MonoBehaviour
         if (Character.StateController.StateId == CharacterStateId.Attack) return;
         if (Item == _fists) return;
 
-        ItemThrowed.Invoke();
-
         Item.SpriteRenderer.enabled = true;
         _characterIgnoreCoroutine = StartCoroutine(UnIgnoreCharacter(Item));
         Item.Rigidbody.simulated = true;
@@ -113,10 +111,12 @@ public class CharacterItemManager : MonoBehaviour
         if (_starterItem == null) Item = _fists;
         if (GetComponent<CharacterStateController>().WeaponPoint.childCount != 0) DestroyImmediate(GetComponent<CharacterStateController>().WeaponPoint.GetChild(0).gameObject);
 
-        if (_starterItem != null)
-        Item = Instantiate(_starterItem, transform.position, transform.rotation, GetComponent<CharacterStateController>().WeaponPoint).GetComponent<Item>();
-        Item.GetComponent<SpriteRenderer>().enabled = false;
-        Item.GetComponent<Rigidbody2D>().IgnoreCollisions(Item.transform.parent.GetComponentInParent<Rigidbody2D>(), true);
-        Item.GetComponent<Rigidbody2D>().simulated = false;
+        if (_starterItem != null && _starterItem.GetComponent<Item>() != null)
+        {
+            Item = Instantiate(_starterItem, transform.position, transform.rotation, GetComponent<CharacterStateController>().WeaponPoint).GetComponent<Item>();
+            Item.GetComponent<SpriteRenderer>().enabled = false;
+            Item.GetComponent<Rigidbody2D>().IgnoreCollisions(Item.transform.parent.GetComponentInParent<Rigidbody2D>(), true);
+            Item.GetComponent<Rigidbody2D>().simulated = false;
+        }
     }
 }
