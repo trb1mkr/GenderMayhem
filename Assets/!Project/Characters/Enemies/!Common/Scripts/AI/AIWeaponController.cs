@@ -30,17 +30,13 @@ public class AIWeaponController : MonoBehaviour
     {
         while (true)
         {
-            if (AI.Rotation.IsAimed)
+            if (AI.Agent.ItemManager.Item is Gun && AI.Rotation.IsAimed)
+                Attack();
+            if (AI.Agent.ItemManager.Item is Melee &&
+                Vector3.Distance(transform.position, AI.Detection.TargetGameObject.transform.position) < AI.NavMeshAgent.stoppingDistance + 5)
             {
-                if (AI.Agent.ItemManager.Item is Gun)
-                    Attack();
-                if (AI.Agent.ItemManager.Item is Melee &&
-                    Vector3.Distance(transform.position, AI.Detection.TargetGameObject.transform.position) < AI.NavMeshAgent.stoppingDistance + 5)
-                {
-                    Debug.Log("Melee use");
-                    Attack();
-                }
-                        
+                Debug.Log("Melee use");
+                Attack();
             }
             yield return null;
         }

@@ -22,7 +22,7 @@ abstract public class Weapon : Item
 
     public virtual void Attack()
     {
-        GetComponent<CameraShakeSource>().Shake();
+        if (GetComponentInParent<Player>() != null) GetComponent<CameraShakeSource>().Shake();
         Attacked.Invoke();
     }
 }

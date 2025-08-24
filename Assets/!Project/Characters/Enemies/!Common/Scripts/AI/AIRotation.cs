@@ -77,6 +77,11 @@ public class AIRotation : MonoBehaviour
                 targetRotation,
                 AI.NavMeshAgent.angularSpeed * Time.deltaTime
             );
+
+            Vector3 aimDirection = (target.transform.position - transform.position).normalized;
+            Debug.Log(Vector3.Angle(transform.right, aimDirection));
+            _isAimed = Vector3.Angle(transform.right, aimDirection) <= _aimingThreshold;
+
             yield return null;
         }
     }
@@ -91,14 +96,15 @@ public class AIRotation : MonoBehaviour
             _lastPredictedPosition = target.transform.position + (Vector3)target.GetComponent<Rigidbody2D>().linearVelocity * travelTime;
 
             // Поворот к цели
-            Vector3 aimDirection = (_lastPredictedPosition - transform.position).normalized;
+            Vector2 aimDirection = ((Vector2)_lastPredictedPosition - (Vector2)transform.position).normalized;
+
             float targetAngle = Mathf.Atan2(aimDirection.y, aimDirection.x) * Mathf.Rad2Deg;
             Quaternion targetRotation = Quaternion.Euler(0, 0, targetAngle);
             transform.rotation = Quaternion.RotateTowards(transform.rotation, targetRotation, AI.NavMeshAgent.angularSpeed * 50f * Time.deltaTime);
 
-            //Debug.Log(Vector3.Angle(transform.right, aimDirection));
             // Проверка наведения
-            _isAimed = Vector3.Angle(transform.right, aimDirection) <= _aimingThreshold;
+            _isAimed = Vector2.Angle(transform.right, aimDirection) <= _aimingThreshold;
+            //Debug.Log(Vector2.Angle(transform.right, aimDirection));
 
             yield return null;
         }

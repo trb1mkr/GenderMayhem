@@ -4,13 +4,12 @@ using System.Collections.Generic;
 using Sirenix.OdinInspector;
 using System.Linq;
 using R3;
-using System;
 
 public class PolygonCollider2DAnimator : MonoBehaviour
 {
     [SerializeField] private PolygonCollider2D _colliderComponent;
     public int CurrentCollider;
-    public List<PC2DPaths> Colliders = new List<PC2DPaths>();
+    public List<PC2DPaths> Colliders = new();
 
     [SerializeField][PropertyOrder(0)][FoldoutGroup("View", 0)] private bool _autoUpdateColliderComponent = true;
 
