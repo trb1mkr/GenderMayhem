@@ -16,8 +16,8 @@ public class PlayerControls : MonoBehaviour
 
     private void Start() //потом переснести отсюда
     {
-        AltUsed.AddListener(Player.StateController.HandleAltUsed);
-        Used.AddListener(Player.StateController.HandleUsed);
+        AltUsed.AddListener(Player.StateController.OnAltUsed);
+        Used.AddListener(Player.StateController.OnUsed);
     }
 
     public void OnMove(InputAction.CallbackContext context) =>

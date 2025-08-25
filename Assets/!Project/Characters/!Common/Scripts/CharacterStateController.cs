@@ -1,6 +1,8 @@
 using UnityEngine;
 using System;
 using Sirenix.OdinInspector;
+using System.Collections;
+using Unity.VisualScripting;
 
 public class CharacterStateController : MonoBehaviour
 {
@@ -22,16 +24,17 @@ public class CharacterStateController : MonoBehaviour
         SetWeaponId();
         StateId = CharacterStateId.Idle;
         Character.ItemManager.ItemChanged += SetWeaponId;
-        // Character.WeaponController.CooldownEnded += HandleCooldownEnded;
-        // Character.ItemManager.ItemThrowed += HandleItemThrowed;
+        Character.WeaponController.CooldownEnded += OnCooldownEnded;
+        Character.ItemManager.ItemThrowed += OnItemThrowed;
+        Character.AnimatorController.AttackAnimationStarted += time => StartCoroutine(EndAttack(time));
     }
 
     private void Update()
     {
-        // if (Character.AvoidList.Colliders.Count > 0)
-        //     StateId = CharacterStateId.Avoid;
-        // else if (StateId == CharacterStateId.Avoid)
-        //     StateId = CharacterStateId.Idle;
+        if (Character.AvoidList.Colliders.Count > 0)
+            StateId = CharacterStateId.Avoid;
+        else if (StateId == CharacterStateId.Avoid)
+            StateId = CharacterStateId.Idle;
     }
 
     void SetWeaponId()
@@ -42,43 +45,25 @@ public class CharacterStateController : MonoBehaviour
             throw new ArgumentException($"Weapon type '{((Weapon)Character.ItemManager.Item).GetType().Name}' not found in WeaponId enum.");
     }
 
-    public void HandleAltUsed()
+    public void OnAltUsed()
     {
-        //if (Character.ItemManager.Item is Gun)
-        //StateId = CharacterStateId.Attack;
-    }
-
-    [Button]
-    public void HandleUsed()
-    {
-        Debug.Log("Button clicked");
-        Debug.Log(Character.ItemManager.Item is Melee);
-        if (Character.ItemManager.Item is Melee)
-        {
+        if (Character.ItemManager.Item is Gun)
             StateId = CharacterStateId.Attack;
-            Debug.Log("State attk " + StateId);
-        }
     }
 
-    //public void HandleItemThrowed() => StateId = CharacterStateId.Idle;
+    public void OnUsed()
+    {
+        if (Character.ItemManager.Item is Melee)
+            StateId = CharacterStateId.Attack;
+    }
 
-    //private void HandleCooldownEnded() => StateId = CharacterStateId.Idle;
-}
+    public void OnItemThrowed() => StateId = CharacterStateId.Idle;
 
-public enum WeaponId
-{
-    Fists = 0,
-    Knife = 1,
-    Bat = 2,
-    Katana = 3,
-    Pistol = 4,
-    Shotgun = 5,
-    Rifle = 6
-}
+    private void OnCooldownEnded() => StateId = CharacterStateId.Idle;
 
-public enum CharacterStateId
-{
-    Idle = 0,
-    Attack = 1,
-    Avoid = 2
+    private IEnumerator EndAttack(float time)
+    {
+        yield return new WaitForSeconds(time);
+        StateId = CharacterStateId.Idle;
+    }
 }

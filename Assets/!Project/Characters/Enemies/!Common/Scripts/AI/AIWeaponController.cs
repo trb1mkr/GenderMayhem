@@ -13,7 +13,7 @@ public class AIWeaponController : MonoBehaviour
 
     private void Start()
     {
-        Used.AddListener(AI.Agent.StateController.HandleUsed);
+        Used.AddListener(AI.Agent.StateController.OnUsed);
 
         AI.Detection.TargetGameObjectDetected += () => StartCoroutine(TryAttack());
         AI.Detection.TargetGameObjectLost += () => StopCoroutine(TryAttack());
