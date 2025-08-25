@@ -37,7 +37,6 @@ public class CharacterWeaponController : MonoBehaviour
 
     IEnumerator Cooldown()
     {
-        Debug.Log("Cooldown");
         IsCooldown = true;
         yield return new WaitForSeconds(CooldownTime);
         IsCooldown = false;

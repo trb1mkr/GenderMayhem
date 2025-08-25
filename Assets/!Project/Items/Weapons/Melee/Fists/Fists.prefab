@@ -125,7 +125,7 @@ MonoBehaviour:
   SpriteRenderer: {fileID: 0}
   PickUpSound: {fileID: 0}
   ThrowSound: {fileID: 0}
-  AttackDistance: 18
+  AttackDistance: 15
   AttackSound: {fileID: 0}
   Attacked:
     m_PersistentCalls:
@@ -133,5 +133,4 @@ MonoBehaviour:
   HitSound: {fileID: 0}
   HitSoundEmitData: {fileID: 11400000, guid: 9bfb4f7edd2105b4387648ac9a71f323, type: 2}
   IsLethal: 0
-  AttackTime: 0
   CooldownTime: 0.125

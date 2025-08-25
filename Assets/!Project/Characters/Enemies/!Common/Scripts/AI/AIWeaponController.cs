@@ -5,7 +5,9 @@ using System.Collections;
 
 public class AIWeaponController : MonoBehaviour
 {
+    public float MeleeAttackDelay;
     [HideInInspector] public UnityEvent Used, UseCanceled, AltUsed;
+    private Coroutine _tryAttackCoroutine;
 
     #region References
     [HideInInspector] public AIBehaviour AI;
@@ -15,15 +17,17 @@ public class AIWeaponController : MonoBehaviour
     {
         Used.AddListener(AI.Agent.StateController.OnUsed);
 
-        AI.Detection.TargetGameObjectDetected += () => StartCoroutine(TryAttack());
-        AI.Detection.TargetGameObjectLost += () => StopCoroutine(TryAttack());
+        AI.Detection.TargetGameObjectDetected += () => _tryAttackCoroutine = StartCoroutine(TryAttack());
+        AI.Detection.TargetGameObjectLost += () => { if (_tryAttackCoroutine != null) StopCoroutine(_tryAttackCoroutine); };
         AI.Detection.TargetGameObjectLost += CancelAttack;
 
-        AI.Agent.ItemManager.ItemPickedUp += () => { if (AI.Agent.ItemManager.Item is Gun gun) gun.AmmoIsOut += () => AI.Agent.ItemManager.Item.ActionEventsGroup.InvokeSuitableActions(WeaponAction.Reload); };
+        AI.Agent.ItemManager.ItemPickedUp += () => { if (AI.Agent.ItemManager.Item is Gun gun)
+            gun.AmmoIsOut += () => AI.Agent.ItemManager.Item.ActionEventsGroup.InvokeSuitableActions(WeaponAction.Reload); };
         //неправильно
         //AI.Agent.ItemManager.ItemThrowed += () => { if (AI.Agent.ItemManager.Item is Gun gun) gun.AmmoIsOut -= () => AI.Agent.ItemManager.Item.ActionEventsGroup.InvokeSuitableActions(WeaponAction.Reload); };
 
-        if (AI.Agent.ItemManager.Item is Gun gun) gun.AmmoIsOut += () => AI.Agent.ItemManager.Item.ActionEventsGroup.InvokeSuitableActions(WeaponAction.Reload);
+        if (AI.Agent.ItemManager.Item is Gun gun)
+            gun.AmmoIsOut += () => AI.Agent.ItemManager.Item.ActionEventsGroup.InvokeSuitableActions(WeaponAction.Reload);
     }
 
     private IEnumerator TryAttack()
@@ -32,11 +36,10 @@ public class AIWeaponController : MonoBehaviour
         {
             if (AI.Agent.ItemManager.Item is Gun && AI.Rotation.IsAimed)
                 Attack();
-            if (AI.Agent.ItemManager.Item is Melee &&
+            if (AI.Agent.ItemManager.Item is Melee && //ошибка
                 Vector3.Distance(transform.position, AI.Detection.TargetGameObject.transform.position) < AI.NavMeshAgent.stoppingDistance + 5)
             {
-                yield return new WaitForSeconds(0.1f);
-                Debug.Log("Melee use");
+                yield return new WaitForSeconds(MeleeAttackDelay);
                 Attack();
             }
             yield return null;
@@ -52,7 +55,7 @@ public class AIWeaponController : MonoBehaviour
 
     private void CancelAttack()
     {
-        StopCoroutine(TryAttack());
+        if (_tryAttackCoroutine != null) StopCoroutine(_tryAttackCoroutine);
         if (AI.Agent.ItemManager.Item.ActionEventsGroup.InvokeSuitableActions(ItemAction.UseCanceled))
             UseCanceled.Invoke();
     }

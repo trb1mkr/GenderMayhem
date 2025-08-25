@@ -6,7 +6,7 @@ using GenderMayhem.Actions;
 
 public class Rifle : Gun
 {
-    private Coroutine _autoFire;
+    private Coroutine _autoFireCoroutine;
 
     public override void Awake()
     {
@@ -23,11 +23,15 @@ public class Rifle : Gun
     }
 
     public override void Attack() =>
-        _autoFire = StartCoroutine(AutoAttack());
+        _autoFireCoroutine ??= StartCoroutine(AutoAttack());
 
     public void StopAttack()
     {
-        if (_autoFire != null) StopCoroutine(_autoFire);
+        if (_autoFireCoroutine != null)
+        {
+            StopCoroutine(_autoFireCoroutine);
+            _autoFireCoroutine = null;
+        }
     }
 
     public IEnumerator AutoAttack()
@@ -37,5 +41,6 @@ public class Rifle : Gun
             base.Attack();
             yield return new WaitForSeconds(CycleTime);
         }
+        _autoFireCoroutine = null;
     }
 }

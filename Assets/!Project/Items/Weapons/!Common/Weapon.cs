@@ -22,7 +22,6 @@ abstract public class Weapon : Item
 
     public virtual void Attack()
     {
-        Debug.Log("Attacked");
         if (GetComponentInParent<Player>() != null) GetComponent<CameraShakeSource>().Shake();
         Attacked.Invoke();
     }

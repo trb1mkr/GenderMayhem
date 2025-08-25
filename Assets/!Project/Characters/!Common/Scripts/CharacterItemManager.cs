@@ -2,6 +2,7 @@ using UnityEngine;
 using System.Collections;
 using System;
 using Sirenix.OdinInspector;
+using UnityEditor;
 
 public class CharacterItemManager : MonoBehaviour
 {
@@ -20,7 +21,7 @@ public class CharacterItemManager : MonoBehaviour
     [HideInInspector] public Character Character;
     public Item Item;
     [SerializeField] private Weapon _fists;
-    [OnValueChanged("SetUpStarterItem"), SerializeField] private GameObject _starterItem; 
+    [OnValueChanged("SetUpStarterItem"), SerializeField] private GameObject _starterItem;
     #endregion
 
     void Awake()
@@ -106,6 +107,7 @@ public class CharacterItemManager : MonoBehaviour
         item.Rigidbody.IgnoreCollisions(Character.Rigidbody, false);
     }
 
+#if UNITY_EDITOR
     private void SetUpStarterItem()
     {
         if (_starterItem == null) Item = _fists;
@@ -113,10 +115,11 @@ public class CharacterItemManager : MonoBehaviour
 
         if (_starterItem != null && _starterItem.GetComponent<Item>() != null)
         {
-            Item = Instantiate(_starterItem, transform.position, transform.rotation, GetComponent<CharacterStateController>().WeaponPoint).GetComponent<Item>();
+            Item = ((GameObject)PrefabUtility.InstantiatePrefab(_starterItem, GetComponent<CharacterStateController>().WeaponPoint)).GetComponent<Item>();
             Item.GetComponent<SpriteRenderer>().enabled = false;
             Item.GetComponent<Rigidbody2D>().IgnoreCollisions(Item.transform.parent.GetComponentInParent<Rigidbody2D>(), true);
             Item.GetComponent<Rigidbody2D>().simulated = false;
         }
     }
+#endif
 }
