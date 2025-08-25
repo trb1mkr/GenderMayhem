@@ -79,7 +79,7 @@ public class AIRotation : MonoBehaviour
             );
 
             Vector3 aimDirection = (target.transform.position - transform.position).normalized;
-            Debug.Log(Vector3.Angle(transform.right, aimDirection));
+            //Debug.Log(Vector3.Angle(transform.right, aimDirection));
             _isAimed = Vector3.Angle(transform.right, aimDirection) <= _aimingThreshold;
 
             yield return null;

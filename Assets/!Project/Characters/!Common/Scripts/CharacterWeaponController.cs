@@ -33,13 +33,11 @@ public class CharacterWeaponController : MonoBehaviour
         else CooldownTime = 0;
     }
 
-    void StartCooldown()
-    {
-        StartCoroutine(Cooldown());
-    }
+    void StartCooldown() => StartCoroutine(Cooldown());
 
     IEnumerator Cooldown()
     {
+        Debug.Log("Cooldown");
         IsCooldown = true;
         yield return new WaitForSeconds(CooldownTime);
         IsCooldown = false;

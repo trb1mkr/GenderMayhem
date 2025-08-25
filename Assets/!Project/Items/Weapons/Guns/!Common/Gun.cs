@@ -27,8 +27,8 @@ public abstract class Gun : Weapon
     public override void Awake()
     {
         base.Awake();
-        var altUseActions = new List<UnityAction> { new(AltAttack) };
-        ActionEventsGroup.ActionEvents.Add(new ActionEvent(typeof(ItemAction), ItemAction.AltUse, altUseActions));
+        // var altUseActions = new List<UnityAction> { new(AltAttack) };
+        // ActionEventsGroup.ActionEvents.Add(new ActionEvent(typeof(ItemAction), ItemAction.AltUse, altUseActions));
 
         var reloadActions = new List<UnityAction> { new(() => StartCoroutine(Reload())) };
         ActionEventsGroup.ActionEvents.Add(new ActionEvent(typeof(WeaponAction), WeaponAction.Reload, reloadActions));

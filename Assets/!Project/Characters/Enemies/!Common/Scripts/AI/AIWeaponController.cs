@@ -28,13 +28,14 @@ public class AIWeaponController : MonoBehaviour
 
     private IEnumerator TryAttack()
     {
-        while (true)
+        while (true && AI.Agent.ItemManager.Item)
         {
             if (AI.Agent.ItemManager.Item is Gun && AI.Rotation.IsAimed)
                 Attack();
             if (AI.Agent.ItemManager.Item is Melee &&
                 Vector3.Distance(transform.position, AI.Detection.TargetGameObject.transform.position) < AI.NavMeshAgent.stoppingDistance + 5)
             {
+                yield return new WaitForSeconds(0.1f);
                 Debug.Log("Melee use");
                 Attack();
             }
@@ -44,7 +45,6 @@ public class AIWeaponController : MonoBehaviour
 
     private void Attack()
     {
-        Debug.Log("Cool " + AI.Agent.WeaponController.IsCooldown);
         if (AI.Agent.WeaponController.IsCooldown) return;
         if (AI.Agent.ItemManager.Item.ActionEventsGroup.InvokeSuitableActions(ItemAction.Use))
             Used.Invoke();

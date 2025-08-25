@@ -14,7 +14,7 @@ public class AIPursuit : AINavigationMode
         Navigation.AI.Detection.TargetGameObjectLost += () => _dynamicStoppingDistance.Value = StoppingDistance;
 
         //is navigating происходит позже, чем обнаруживается цель
-        _dynamicStoppingDistance.Subscribe(stoppingDistance => { if (IsNavigating) { Debug.Log("abba"); Navigation.AI.NavMeshAgent.stoppingDistance = stoppingDistance; } });
+        _dynamicStoppingDistance.Subscribe(stoppingDistance => { if (IsNavigating) { Navigation.AI.NavMeshAgent.stoppingDistance = stoppingDistance; } });
         _dynamicStoppingDistance.Value = StoppingDistance;
     }
 

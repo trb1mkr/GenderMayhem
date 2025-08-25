@@ -22,16 +22,16 @@ public class CharacterStateController : MonoBehaviour
         SetWeaponId();
         StateId = CharacterStateId.Idle;
         Character.ItemManager.ItemChanged += SetWeaponId;
-        Character.WeaponController.CooldownEnded += HandleCooldownEnded;
-        Character.ItemManager.ItemThrowed += HandleItemThrowed;
+        // Character.WeaponController.CooldownEnded += HandleCooldownEnded;
+        // Character.ItemManager.ItemThrowed += HandleItemThrowed;
     }
 
     private void Update()
     {
-        if (Character.AvoidList.Colliders.Count > 0)
-            StateId = CharacterStateId.Avoid;
-        else if (StateId == CharacterStateId.Avoid)
-            StateId = CharacterStateId.Idle;
+        // if (Character.AvoidList.Colliders.Count > 0)
+        //     StateId = CharacterStateId.Avoid;
+        // else if (StateId == CharacterStateId.Avoid)
+        //     StateId = CharacterStateId.Idle;
     }
 
     void SetWeaponId()
@@ -48,15 +48,21 @@ public class CharacterStateController : MonoBehaviour
         //StateId = CharacterStateId.Attack;
     }
 
+    [Button]
     public void HandleUsed()
     {
+        Debug.Log("Button clicked");
+        Debug.Log(Character.ItemManager.Item is Melee);
         if (Character.ItemManager.Item is Melee)
+        {
             StateId = CharacterStateId.Attack;
+            Debug.Log("State attk " + StateId);
+        }
     }
 
-    public void HandleItemThrowed() => StateId = CharacterStateId.Idle;
+    //public void HandleItemThrowed() => StateId = CharacterStateId.Idle;
 
-    private void HandleCooldownEnded() => StateId = CharacterStateId.Idle;
+    //private void HandleCooldownEnded() => StateId = CharacterStateId.Idle;
 }
 
 public enum WeaponId

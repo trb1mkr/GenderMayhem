@@ -19,5 +19,6 @@ public class CharacterAnimatorController : MonoBehaviour
         Character.Animator.SetBool("Dead", Character.Health.IsDead);
         Character.Animator.SetInteger("Weapon", (int)Character.StateController.WeaponId);
         Character.Animator.SetInteger("State", (int)Character.StateController.StateId);
+        //if (GetComponent<Enemy>()) Debug.Log(Character.StateController.StateId);
     }
 }
