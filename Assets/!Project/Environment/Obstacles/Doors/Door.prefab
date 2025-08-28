@@ -283,6 +283,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 48a429c695cdf354ab5abe764276d5db, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _punchSound: {fileID: 8300000, guid: c868c6b1d3b5d9b4bb8660a94a56d87e, type: 3}
+  _creakSound: {fileID: 8300000, guid: 06625697fb0ae894cb623e89855cbf6c, type: 3}
+  _creakVelocity: 100
+  _creakChance: 0.35
 --- !u!114 &-9175205202634645965
 MonoBehaviour:
   m_ObjectHideFlags: 0

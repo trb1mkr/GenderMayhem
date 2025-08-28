@@ -8,12 +8,17 @@ public class AIDetection : MonoBehaviour
 {
     #region Data
     public AISense? TargetDetectionType; //[ReadOnly][ShowInInspector]
+    public AITarget? TargetType;
     [ReadOnly][ShowInInspector] public GameObject TargetGameObject;
     [ReadOnly][ShowInInspector] public Vector3 TargetPosition;
 
     [SerializeField] private float _newTargetPositionDeltaThreshold = 5f;
-    [SerializeField] private float _targetLostDelay = 2f;
-    [SerializeField] private float _targetDetectionTime = 1f;
+
+    [SerializeField] private float _playerDetectionTime = 1f;
+    [SerializeField] private float _playerLostDelay = 2f;
+    [SerializeField] private float _weaponDetectionTime = 0.2f;
+    [SerializeField] private float _weaponLostDelay = 0f;
+
 
     public Coroutine LoseCoroutine;
     public Coroutine DetectCoroutine;
@@ -22,7 +27,7 @@ public class AIDetection : MonoBehaviour
     // [HideInInspector] public Action<Vector3> SoundDetected;
     // [HideInInspector] public Action<GameObject> VisualLost;
 
-    public Action TargetGameObjectDetected;
+    public Action<AITarget> TargetGameObjectDetected;
     public Action TargetGameObjectLost;
     public Action TargetPositionDetected;
     #endregion
@@ -39,11 +44,13 @@ public class AIDetection : MonoBehaviour
         Hearing = GetComponentInChildren<AIHearing>();
 
         Vision.Detection = Hearing.Detection = this;
+
+        AI.Agent.ItemManager.ItemPickedUp += () => { if (AI.Agent.ItemManager.Item == TargetGameObject) { LoseTargetCoroutine(_weaponLostDelay); } };
     }
 
     void Start()
     {
-        Hearing.SoundDetected += (target, emitType) => OnSoundDetected(target, emitType);
+        Hearing.SoundDetected += (target, emitType) => OnSoundDetected(target, AITarget.Sound);
     }
 
     void OnEnable()
@@ -64,67 +71,62 @@ public class AIDetection : MonoBehaviour
 
     private void FixedUpdate()
     {
-        DetectPlayer();
+        if (AI.Agent.ItemManager.Item is Fists) DetectTarget<Weapon>("Items");
+        DetectTarget<Player>("Characters");
     }
 
-    private void DetectPlayer()
+    private void DetectTarget<T>(string targetLayer) where T : MonoBehaviour
     {
         if (DetectCoroutine != null) return;
 
-        GameObject player = Vision.FOVObjects.FirstOrDefault(go => go.GetComponentInParent<Player>() != null);
-        
-        if (player == null)
+        GameObject target = Vision.FOVObjects.FirstOrDefault(go => go.GetComponentInParent<T>() != null);
+
+        if (target == null)
         {
-            if (TargetGameObject != null && LoseCoroutine == null) LoseCoroutine = StartCoroutine(LoseTargetCoroutine());
+            if (TargetGameObject != null && LoseCoroutine == null) LoseCoroutine = StartCoroutine(LoseTargetCoroutine(_playerLostDelay));
             return;
         }
 
-        player = player.GetComponentInParent<Player>().gameObject;
+        target = target.GetComponentInParent<T>().gameObject;
 
         var hits = Physics2D.LinecastAll(
             AI.Agent.transform.position,
-            player.transform.position,
-            Vision.VisibleLayers
+            target.transform.position,
+            LayerMask.GetMask(targetLayer, "Obstacles")
         );
 
-        bool hasClearView = false;
+        bool hasDirectVision = HasDirectVisionToTarget(target);
 
-        foreach (var hit in hits)
+        if (hasDirectVision)
         {
-            if (hit.transform == null || hit.transform == AI.Agent.transform) continue;
-
-            Player hitPlayer = hit.transform.GetComponentInParent<Player>();
-            if (hitPlayer && hitPlayer.gameObject == player) hasClearView = true;
-            else break;
-        }
-
-        if (hasClearView)
-        {
-            if (LoseCoroutine != null)
+            if (LoseCoroutine != null && TargetGameObject == target) //теряем цель, но снова обнаружили
             {
                 StopCoroutine(LoseCoroutine);
                 LoseCoroutine = null;
-                TargetGameObjectDetected?.Invoke(); //
+                TargetGameObjectDetected?.Invoke(AITarget.VisionPlayer);
             }
 
-            if (TargetGameObject != player)
-                DetectCoroutine = StartCoroutine(DetectTargetCoroutine(player));
+            if (TargetGameObject != target) //обнаружили новую цель
+            {
+                AITarget targetType = typeof(T) == typeof(Player) ? AITarget.VisionPlayer : AITarget.VisionWeapon;
+                DetectCoroutine = StartCoroutine(DetectTargetCoroutine(target, targetType, _playerDetectionTime));
+            }
         }
-        else if (TargetGameObject != null && LoseCoroutine == null)
-            LoseCoroutine = StartCoroutine(LoseTargetCoroutine());
+        else if (TargetGameObject != null && LoseCoroutine == null) //не видим цель, начинаем терять её
+            LoseCoroutine = StartCoroutine(LoseTargetCoroutine(_playerLostDelay));
     }
 
-    private IEnumerator DetectTargetCoroutine(GameObject player)
+    private IEnumerator DetectTargetCoroutine(GameObject target, AITarget targetType, float detectionTime)
     {
-        yield return new WaitForSeconds(_targetDetectionTime);
-        OnVisualDetected(player);
+        yield return new WaitForSeconds(detectionTime);
+        OnVisualDetected(target, targetType);
         DetectCoroutine = null;
     }
 
-    private IEnumerator LoseTargetCoroutine()
+    private IEnumerator LoseTargetCoroutine(float lostDelay)
     {
         TargetGameObjectLost?.Invoke();
-        yield return new WaitForSeconds(_targetLostDelay);
+        yield return new WaitForSeconds(lostDelay);
 
         if (TargetGameObject != null && !HasDirectVisionToTarget(TargetGameObject))
         {
@@ -137,7 +139,7 @@ public class AIDetection : MonoBehaviour
 
     private bool HasDirectVisionToTarget(GameObject target)
     {
-        if (target.GetComponent<Player>().enabled == false) return false;
+        if (target.GetComponent<Player>() && target.GetComponent<Player>().enabled == false) return false; //костыль
         
         var hits = Physics2D.LinecastAll(
             AI.Agent.transform.position,
@@ -150,44 +152,46 @@ public class AIDetection : MonoBehaviour
             hit.transform == target.transform);
     }
 
-    private void OnVisualDetected(GameObject target)
+    private void OnVisualDetected(GameObject target, AITarget targetType)
     {
         if (target == TargetGameObject) return;
-        SenseDetected(AISense.Vision, target);
+        SenseDetected(AISense.Vision, targetType, target);
     }
 
-    private void OnSoundDetected(GameObject target, SoundEmitType soundEmitType) =>
-        SenseDetected(AISense.Hearing, target.transform.position);
+    private void OnSoundDetected(GameObject target, AITarget targetType) =>
+        SenseDetected(AISense.Hearing, targetType, target.transform.position);
 
-    private void SenseDetected(AISense newTargetDetectionType, Vector3 position)
+    private void SenseDetected(AISense targetDetectionType, AITarget targetType, Vector3 targetPosition)
     {
         //Debug.Log(newTargetDetectionType);
         if (TargetGameObject != null) return;
         if (TargetPosition != Vector3.zero)
-            if (!IsNewTargetRelevant(newTargetDetectionType, TargetPosition, position)) return;
+            if (!IsNewTargetRelevant(targetDetectionType, targetType, TargetPosition, targetPosition)) return;
 
-        TargetPosition = position;
-        TargetDetectionType = newTargetDetectionType;
+        TargetPosition = targetPosition;
+        TargetDetectionType = targetDetectionType;
+        TargetType = null;
 
         TargetPositionDetected?.Invoke();
     }
 
-    private void SenseDetected(AISense newTargetDetectionType, GameObject target)
+    private void SenseDetected(AISense targetDetectionType, AITarget targetType, GameObject target)
     {
-        //Debug.Log(newTargetDetectionType);
         if (TargetGameObject != null)
-            if (!IsNewTargetRelevant(newTargetDetectionType, TargetGameObject.transform.position, target.transform.position)) return;
+            if (!IsNewTargetRelevant(targetDetectionType, targetType, TargetGameObject.transform.position, target.transform.position)) return;
 
         TargetGameObject = target;
-        TargetDetectionType = newTargetDetectionType;
+        TargetDetectionType = targetDetectionType;
+        TargetType = targetType;
 
-        TargetGameObjectDetected?.Invoke();
+        TargetGameObjectDetected?.Invoke(targetType);
     }
 
-    private bool IsNewTargetRelevant(AISense newTargetDetectionType, Vector3 oldPosition, Vector3 newPosition)
+    private bool IsNewTargetRelevant(AISense newTargetDetectionType, AITarget newTargetType, Vector3 oldPosition, Vector3 newPosition)
     {
         //Debug.Log("New sense: " + newTargetDetectionType + ". Old sense: " + TargetDetectionType);
         if (TargetDetectionType < newTargetDetectionType) return false;
+        if (TargetType < newTargetType) return false;
         if (TargetDetectionType == newTargetDetectionType)
         {
             var oldDistance = Vector3.Distance(transform.position, oldPosition);

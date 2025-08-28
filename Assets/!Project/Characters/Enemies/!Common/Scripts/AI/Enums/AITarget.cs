@@ -1,5 +1,6 @@
-public enum AITarget : ushort
+public enum AITarget
 {
-    Player,
-    Weapon
+    VisionPlayer = 0,
+    VisionWeapon = 1,
+    Sound = -1
 }

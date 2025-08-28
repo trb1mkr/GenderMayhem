@@ -5,19 +5,19 @@ public class Glass : MonoBehaviour
 {
     #region Values
     public bool IsBroken;
-    public Sprite BrokenGlass;
-    public AudioClip GlassBreak;
-    public AudioClip GlassWalk;
+    public Sprite Broken;
+    public AudioClip Break;
+    public AudioClip Walk;
     [MinValue(0)][MaxValue(1)] public float GlassWalkPlayChance;
     #endregion
 
     public void BreakGlass()
     {
         var spriteRenderer = GetComponent<SpriteRenderer>();
-        if (spriteRenderer.sprite == BrokenGlass) return;
-        spriteRenderer.sprite = BrokenGlass;
+        if (spriteRenderer.sprite == Broken) return;
+        spriteRenderer.sprite = Broken;
         spriteRenderer.size = new Vector2(spriteRenderer.size.x, 16);
-        GetComponent<AudioSource>().PlayOneShot(GlassBreak);
+        GetComponent<AudioSource>().PlayOneShot(Break);
         GetComponent<BoxCollider2D>().isTrigger = true;
         IsBroken = true;
     }
@@ -25,10 +25,10 @@ public class Glass : MonoBehaviour
     void OnTriggerStay2D(Collider2D collider)
     {
         if (!IsBroken) return;
-        if (Random.value > GlassWalkPlayChance || !collider.attachedRigidbody.TryGetComponent(out Character _)) return;
+        if (Random.value > GlassWalkPlayChance || collider.GetComponent<Character>() == null || (collider.GetComponent<Character>() && collider.GetComponent<Character>().StateController.TorsoCollider != collider)) return;
         if (collider.attachedRigidbody.linearVelocity.magnitude == 0) return; // потом если не будет работать для ии, то сделать через is
         
-        GetComponent<AudioSource>().PlayOneShot(GlassWalk);
+        GetComponent<AudioSource>().PlayOneShot(Walk);
     }
 
     void OnCollisionEnter2D(Collision2D collision)

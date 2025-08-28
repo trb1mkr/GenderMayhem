@@ -17,7 +17,7 @@ public class AIWeaponController : MonoBehaviour
     {
         Used.AddListener(AI.Agent.StateController.OnUsed);
 
-        AI.Detection.TargetGameObjectDetected += () => _tryAttackCoroutine = StartCoroutine(TryAttack());
+        AI.Detection.TargetGameObjectDetected += (targetType) => { if (targetType == AITarget.VisionPlayer) _tryAttackCoroutine = StartCoroutine(TryAttack()); if (targetType == AITarget.VisionWeapon) StartCoroutine(TryPickUp());};
         AI.Detection.TargetGameObjectLost += () => { if (_tryAttackCoroutine != null) StopCoroutine(_tryAttackCoroutine); };
         AI.Detection.TargetGameObjectLost += CancelAttack;
 
@@ -28,6 +28,16 @@ public class AIWeaponController : MonoBehaviour
 
         if (AI.Agent.ItemManager.Item is Gun gun)
             gun.AmmoIsOut += () => AI.Agent.ItemManager.Item.ActionEventsGroup.InvokeSuitableActions(WeaponAction.Reload);
+    }
+
+    private IEnumerator TryPickUp()
+    {
+        while (true)
+        {
+            AI.Agent.ItemManager.PickUp();
+            if (AI.Agent.ItemManager.Item is not Fists) yield break;
+            yield return null;
+        }
     }
 
     private IEnumerator TryAttack()
