@@ -23,6 +23,9 @@ public class AIBehaviour: MonoBehaviour
         WeaponController = GetComponent<AIWeaponController>();
 
         Movement.AI = Rotation.AI = Detection.AI = Navigation.AI = WeaponController.AI = this;
+
+        NavMesh.pathfindingIterationsPerFrame = 5000;
+        NavMesh.avoidancePredictionTime = 4f; 
     }
 
     void OnEnable()

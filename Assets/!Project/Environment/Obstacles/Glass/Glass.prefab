@@ -78,7 +78,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -1906441219
-  m_SortingLayer: 4
+  m_SortingLayer: 5
   m_SortingOrder: 1
   m_Sprite: {fileID: 21300000, guid: 114741b0ae490164387956d1c7cf6365, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -177,9 +177,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   IsBroken: 0
-  BrokenGlass: {fileID: 21300000, guid: 9b89c18276e472143be4d4bbf05807f4, type: 3}
-  GlassBreak: {fileID: 8300000, guid: 8c0e4c27418f72f419a9af2b50b99721, type: 3}
-  GlassWalk: {fileID: 8300000, guid: b8c8e9e0ce6782a489e7e8af01314eed, type: 3}
+  Broken: {fileID: 21300000, guid: 9b89c18276e472143be4d4bbf05807f4, type: 3}
+  Break: {fileID: 8300000, guid: 8c0e4c27418f72f419a9af2b50b99721, type: 3}
+  Walk: {fileID: 8300000, guid: b8c8e9e0ce6782a489e7e8af01314eed, type: 3}
   GlassWalkPlayChance: 0.05
 --- !u!82 &6143523197203270562
 AudioSource:

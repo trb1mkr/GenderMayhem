@@ -9,6 +9,7 @@ public class AIDetection : MonoBehaviour
     #region Data
     public AISense? TargetDetectionType; //[ReadOnly][ShowInInspector]
     public AITarget? TargetType;
+    public string TargetLayer;
     [ReadOnly][ShowInInspector] public GameObject TargetGameObject;
     [ReadOnly][ShowInInspector] public Vector3 TargetPosition;
 
@@ -44,13 +45,12 @@ public class AIDetection : MonoBehaviour
         Hearing = GetComponentInChildren<AIHearing>();
 
         Vision.Detection = Hearing.Detection = this;
-
-        AI.Agent.ItemManager.ItemPickedUp += () => { if (AI.Agent.ItemManager.Item == TargetGameObject) { LoseTargetCoroutine(_weaponLostDelay); } };
     }
 
     void Start()
     {
         Hearing.SoundDetected += (target, emitType) => OnSoundDetected(target, AITarget.Sound);
+        AI.Agent.ItemManager.ItemPickedUp += () => { if (AI.Agent.ItemManager.Item.gameObject == TargetGameObject) { Debug.Log("hhhh"); LoseTarget(); } };
     }
 
     void OnEnable()
@@ -71,13 +71,15 @@ public class AIDetection : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (AI.Agent.ItemManager.Item is Fists) DetectTarget<Weapon>("Items");
+        //if (AI.Agent.ItemManager.Item is Fists) DetectTarget<Weapon>("Items");
         DetectTarget<Player>("Characters");
     }
 
     private void DetectTarget<T>(string targetLayer) where T : MonoBehaviour
     {
         if (DetectCoroutine != null) return;
+
+        TargetLayer = targetLayer;
 
         GameObject target = Vision.FOVObjects.FirstOrDefault(go => go.GetComponentInParent<T>() != null);
 
@@ -137,19 +139,30 @@ public class AIDetection : MonoBehaviour
         LoseCoroutine = null;
     }
 
+    private void LoseTarget()
+    {
+        TargetGameObject = null;
+        LoseCoroutine = null;
+        TargetGameObjectLost?.Invoke();
+    }
+
     private bool HasDirectVisionToTarget(GameObject target)
     {
         if (target.GetComponent<Player>() && target.GetComponent<Player>().enabled == false) return false; //костыль
-        
+
         var hits = Physics2D.LinecastAll(
             AI.Agent.transform.position,
             target.transform.position,
-            Vision.VisibleLayers
+            LayerMask.GetMask(TargetLayer, "Obstacles")
         );
 
-        return hits.All(hit => 
-            hit.transform == AI.Agent.transform || 
-            hit.transform == target.transform);
+        foreach (var hit in hits)
+        {
+            if (hit.transform == AI.Agent.transform || hit.transform.IsChildOf(AI.Agent.transform)) continue;
+            if (hit.transform == target.transform || hit.transform.IsChildOf(target.transform)) return true;
+            else break;
+        }
+        return false;
     }
 
     private void OnVisualDetected(GameObject target, AITarget targetType)

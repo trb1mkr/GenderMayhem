@@ -8,6 +8,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 124594329523156423, guid: e6f260d920b23054d989265f71dc2d4d, type: 3}
+      propertyPath: m_Layer
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 1171868502133147323, guid: e6f260d920b23054d989265f71dc2d4d, type: 3}
       propertyPath: m_Name
       value: Enemy
@@ -210,11 +214,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7ec52ecf20dc59344850486e68a678ba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  TargetLayer: 
   TargetGameObject: {fileID: 0}
   TargetPosition: {x: 0, y: 0, z: 0}
   _newTargetPositionDeltaThreshold: 5
-  _targetLostDelay: 0.4
-  _targetDetectionTime: 0.2
+  _playerDetectionTime: 1
+  _playerLostDelay: 2
+  _weaponDetectionTime: 0.2
+  _weaponLostDelay: 0
   AI: {fileID: 0}
   Vision: {fileID: 0}
   Hearing: {fileID: 0}
@@ -297,7 +304,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   IsNavigating: 0
-  StoppingDistance: 2
+  StoppingDistance: 18
   Navigation: {fileID: 0}
   _dynamicStoppingDistance:
     value: 0
@@ -348,6 +355,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1dd70a09791ff3542b856aed8f8b0f4b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  MeleeAttackDelay: 0.12
   Used:
     m_PersistentCalls:
       m_Calls: []

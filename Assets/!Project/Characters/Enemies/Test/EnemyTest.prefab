@@ -172,10 +172,6 @@ PrefabInstance:
       propertyPath: _newTargetPositionDeltaThreshold
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 4942294640086614752, guid: bc38bb2b44a62cd4d84a879d45a5f467, type: 3}
-      propertyPath: MeleeAttackDelay
-      value: 0.1
-      objectReference: {fileID: 0}
     - target: {fileID: 5035949310106089638, guid: bc38bb2b44a62cd4d84a879d45a5f467, type: 3}
       propertyPath: m_Controller
       value: 

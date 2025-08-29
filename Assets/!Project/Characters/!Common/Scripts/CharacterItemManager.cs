@@ -115,6 +115,7 @@ public class CharacterItemManager : MonoBehaviour
 
         if (_starterItem != null && _starterItem.GetComponent<Item>() != null)
         {
+            if (!EditorUtility.IsPersistent(_starterItem)) throw new Exception("GameObject must be prefab!");
             Item = ((GameObject)PrefabUtility.InstantiatePrefab(_starterItem, GetComponent<CharacterStateController>().WeaponPoint)).GetComponent<Item>();
             Item.GetComponent<SpriteRenderer>().enabled = false;
             Item.GetComponent<Rigidbody2D>().IgnoreCollisions(Item.transform.parent.GetComponentInParent<Rigidbody2D>(), true);
