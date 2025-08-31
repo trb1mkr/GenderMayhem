@@ -9,7 +9,6 @@ public class AIRotation : MonoBehaviour
     [SerializeField] private float _aimingThreshold = 5f;
     private Vector3 _lastPredictedPosition;
     [ShowInInspector, ReadOnly] private bool _isAimed;
-    public Vector3 LastPredictedPosition => _lastPredictedPosition;
     public bool IsAimed => _isAimed;
 
     public Action LookedAround;
@@ -22,6 +21,12 @@ public class AIRotation : MonoBehaviour
 
     void Start()
     {
+        AddListeners();
+        StartRotation(RotateToMoveDirection());
+    }
+
+    private void AddListeners()
+    {
         AI.Navigation.Pursuit.Started += () => { if (AI.Detection.LoseCoroutine == null && AI.Agent.ItemManager.Item is Melee) StartRotation(RotateToAimAt(AI.Detection.TargetGameObject)); };
         AI.Navigation.Pursuit.Started += () => { if (AI.Detection.LoseCoroutine == null && AI.Agent.ItemManager.Item is Gun) StartRotation(RotateToAimAheadOf(AI.Detection.TargetGameObject)); };
         AI.Navigation.Search.Started += () => StartRotation(RotateToMoveDirection());
@@ -29,8 +34,6 @@ public class AIRotation : MonoBehaviour
         AI.Navigation.MoveTo.Started += () => StartRotation(RotateToMoveDirection());
         AI.Detection.TargetGameObjectLost += () => StartRotation(RotateToMoveDirection());
         AI.Agent.Health.StoodUp += () => StartRotation(RotateAround(360f));
-
-        StartRotation(RotateToMoveDirection());
     }
 
     void OnDisable()

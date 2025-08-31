@@ -17,11 +17,14 @@ public abstract class Gun : Weapon
     public int MaxAmmo;
     public SerializableReactiveProperty<int> Ammo;
     public Action AmmoIsOut;
-    public float ReloadTime;
     [SerializeField] protected float CycleTime;
     [ReadOnly] public bool IsCycling = false;
 
+    public float ReloadTime;
+    public bool IsReloading;
+
     public GunUtilities GunUtilities = new();
+    private float _muzzleFlashTime = 0.05f;
     public int Spread;
 
     public override void Awake()
@@ -83,8 +86,12 @@ public abstract class Gun : Weapon
 
     virtual public IEnumerator Reload()
     {
+        yield return new WaitForSeconds(_muzzleFlashTime);
+        IsReloading = true;
         AudioSource.PlayOneShot(ReloadSound);
         yield return new WaitForSeconds(ReloadTime);
+        IsReloading = false;
+        yield return null;
         SpawnMagazine();
         Ammo.Value = MaxAmmo;
     }
@@ -92,7 +99,7 @@ public abstract class Gun : Weapon
     IEnumerator MuzzleFlash()
     {
         GunUtilities.MuzzleFlash.GetComponent<SpriteRenderer>().enabled = true;
-        yield return new WaitForSeconds(0.05f);
+        yield return new WaitForSeconds(_muzzleFlashTime);
         GunUtilities.MuzzleFlash.GetComponent<SpriteRenderer>().enabled = false;
     }
 

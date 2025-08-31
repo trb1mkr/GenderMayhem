@@ -6,6 +6,7 @@ using System;
 public abstract class CharacterHealth : MonoBehaviour
 {
     #region Values
+    [SerializeField] private bool _invulnerable = false;
     public float KnockdownForce;
     public float KnockbackForce;
     public float KnockdownTime;
@@ -30,6 +31,8 @@ public abstract class CharacterHealth : MonoBehaviour
 
     public virtual void Die(Vector2 point)
     {
+        if (_invulnerable) return;
+
         Debug.Log(gameObject.name + " Died");
         Knockdown(point);
         IsUnconscious = false;
@@ -40,6 +43,8 @@ public abstract class CharacterHealth : MonoBehaviour
 
     public virtual void FallUnconscious(Vector2 point)
     {
+        if (_invulnerable) return;
+
         Debug.Log(gameObject.name + " Knocked");
         Knockdown(point);
         IsUnconscious = true;

@@ -5,15 +5,22 @@ using System.Collections;
 
 public class AIWeaponController : MonoBehaviour
 {
+    #region Values
     public float MeleeAttackDelay;
     [HideInInspector] public UnityEvent Used, UseCanceled, AltUsed;
     private Coroutine _tryAttackCoroutine;
+    #endregion
 
     #region References
     [HideInInspector] public AIBehaviour AI;
     #endregion
 
     private void Start()
+    {
+        AddListeners();
+    }
+
+    private void AddListeners()
     {
         Used.AddListener(AI.Agent.StateController.OnUsed);
 
@@ -22,13 +29,16 @@ public class AIWeaponController : MonoBehaviour
         AI.Detection.TargetGameObjectLost += CancelAttack;
 
         AI.Agent.ItemManager.ItemPickedUp += () => { if (AI.Agent.ItemManager.Item is Gun gun)
-            gun.AmmoIsOut += () => AI.Agent.ItemManager.Item.ActionEventsGroup.InvokeSuitableActions(WeaponAction.Reload); };
+            gun.AmmoIsOut += () => Reload(); };
         //неправильно
         //AI.Agent.ItemManager.ItemThrowed += () => { if (AI.Agent.ItemManager.Item is Gun gun) gun.AmmoIsOut -= () => AI.Agent.ItemManager.Item.ActionEventsGroup.InvokeSuitableActions(WeaponAction.Reload); };
 
         if (AI.Agent.ItemManager.Item is Gun gun)
-            gun.AmmoIsOut += () => AI.Agent.ItemManager.Item.ActionEventsGroup.InvokeSuitableActions(WeaponAction.Reload);
+            gun.AmmoIsOut += () => Reload();
     }
+
+    private void Reload() =>
+        AI.Agent.ItemManager.Item.ActionEventsGroup.InvokeSuitableActions(WeaponAction.Reload);
 
     private IEnumerator TryPickUp()
     {

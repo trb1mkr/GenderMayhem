@@ -2,7 +2,6 @@ using UnityEngine;
 using System;
 using Sirenix.OdinInspector;
 using System.Collections;
-using Unity.VisualScripting;
 
 public class CharacterStateController : MonoBehaviour
 {
@@ -31,7 +30,7 @@ public class CharacterStateController : MonoBehaviour
 
     private void Update()
     {
-        if (Character.AvoidList.Colliders.Count > 0)
+        if (Character.AvoidList.Colliders.Count > 0 || (Character.ItemManager.Item is Gun gun && gun.IsReloading))
             StateId = CharacterStateId.Avoid;
         else if (StateId == CharacterStateId.Avoid)
             StateId = CharacterStateId.Idle;

@@ -9,7 +9,7 @@ public class AIDetection : MonoBehaviour
     #region Data
     public AISense? TargetDetectionType; //[ReadOnly][ShowInInspector]
     public AITarget? TargetType;
-    public string TargetLayer;
+    private string _targetLayer;
     [ReadOnly][ShowInInspector] public GameObject TargetGameObject;
     [ReadOnly][ShowInInspector] public Vector3 TargetPosition;
 
@@ -19,7 +19,6 @@ public class AIDetection : MonoBehaviour
     [SerializeField] private float _playerLostDelay = 2f;
     [SerializeField] private float _weaponDetectionTime = 0.2f;
     [SerializeField] private float _weaponLostDelay = 0f;
-
 
     public Coroutine LoseCoroutine;
     public Coroutine DetectCoroutine;
@@ -71,7 +70,7 @@ public class AIDetection : MonoBehaviour
 
     private void FixedUpdate()
     {
-        //if (AI.Agent.ItemManager.Item is Fists) DetectTarget<Weapon>("Items");
+        if (AI.Agent.ItemManager.Item is Fists) DetectTarget<Weapon>("Items");
         DetectTarget<Player>("Characters");
     }
 
@@ -79,7 +78,7 @@ public class AIDetection : MonoBehaviour
     {
         if (DetectCoroutine != null) return;
 
-        TargetLayer = targetLayer;
+        _targetLayer = targetLayer;
 
         GameObject target = Vision.FOVObjects.FirstOrDefault(go => go.GetComponentInParent<T>() != null);
 
@@ -153,7 +152,7 @@ public class AIDetection : MonoBehaviour
         var hits = Physics2D.LinecastAll(
             AI.Agent.transform.position,
             target.transform.position,
-            LayerMask.GetMask(TargetLayer, "Obstacles")
+            LayerMask.GetMask(_targetLayer, "Obstacles")
         );
 
         foreach (var hit in hits)

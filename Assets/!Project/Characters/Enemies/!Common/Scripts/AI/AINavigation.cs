@@ -36,7 +36,7 @@ public class AINavigation : MonoBehaviour
         NavigationMode = null;
     }
 
-     private void AddListeners()
+    private void AddListeners()
     {
         AI.Rotation.LookedAround += () => SetNavigationMode(Search);
         AI.Detection.TargetGameObjectDetected += (targetType) => { if (targetType == AITarget.VisionPlayer) SetNavigationMode(Pursuit); else SetNavigationMode(MoveTo); };
