@@ -12,7 +12,7 @@ public class Parallax2D : MonoBehaviour
     {
         // Set default camera if it hasn't been assigned in the editor
         if (cam == null) {
-            cam = GameObject.FindObjectOfType<Camera>();
+            cam = FindAnyObjectByType<Camera>();
         }
 
         // Initianl Setup

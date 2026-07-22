@@ -1,0 +1,61 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bf464fbb740946c4983b657d25e59c8b, type: 3}
+  m_Name: LoggerConfig
+  m_EditorClassIdentifier: Assembly-CSharp-Editor::Azen.Logger.LoggerConfig
+  EnableAllLogs: 1
+  EditorOnly: 1
+  categories:
+  - Category: 3
+    Enabled: 1
+    TagColor: {r: 1, g: 0, b: 0, a: 1}
+    Emoji: "\u274C"
+  - Category: 12
+    Enabled: 1
+    TagColor: {r: 1, g: 0.8, b: 0, a: 1}
+    Emoji: "\u26A0\uFE0F"
+  - Category: 10
+    Enabled: 1
+    TagColor: {r: 0.5019608, g: 0.5019608, b: 0.5019608, a: 1}
+    Emoji: "\u2699\uFE0F"
+  - Category: 11
+    Enabled: 1
+    TagColor: {r: 1, g: 0, b: 0.8940464, a: 1}
+    Emoji: "\U0001F5A5\uFE0F"
+  - Category: 6
+    Enabled: 1
+    TagColor: {r: 0.47821483, g: 0.015686274, b: 1, a: 1}
+    Emoji: "\U0001F310"
+  - Category: 5
+    Enabled: 0
+    TagColor: {r: 0.10503024, g: 1, b: 0, a: 1}
+    Emoji: "\U0001F3AE"
+  - Category: 4
+    Enabled: 1
+    TagColor: {r: 0, g: 0.4220158, b: 1, a: 1}
+    Emoji: "\u2B50"
+  - Category: 2
+    Enabled: 1
+    TagColor: {r: 1, g: 0.98463297, b: 0, a: 1}
+    Emoji: "\U0001F50A"
+  - Category: 8
+    Enabled: 1
+    TagColor: {r: 1, g: 0.37034237, b: 0, a: 1}
+    Emoji: "\u26A1"
+  - Category: 7
+    Enabled: 0
+    TagColor: {r: 1, g: 1, b: 1, a: 1}
+    Emoji: "\U0001F4DD"
+  - Category: 13
+    Enabled: 0
+    TagColor: {r: 0, g: 0, b: 0, a: 1}
+    Emoji: "\U0001F9F0"

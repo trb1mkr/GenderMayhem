@@ -12,7 +12,7 @@ public class MultiTargetTrigger2D : Trigger2D
     /// <param name="other"></param>
     public override void Activate(Collider2D other)
     {
-        Camera2D cam = GameObject.FindObjectOfType<Camera2D>();
+        Camera2D cam = FindAnyObjectByType<Camera2D>();
         if (cam == null) return;
 
         cam.AddTargets(targets);
@@ -24,7 +24,7 @@ public class MultiTargetTrigger2D : Trigger2D
     /// <param name="other"></param>
     public override void Deactivate(Collider2D other)
     {
-        Camera2D cam = GameObject.FindObjectOfType<Camera2D>();
+        Camera2D cam = FindAnyObjectByType<Camera2D>();
         if (cam == null) return;
 
         cam.ClearAllTargetsExceptPlayer();
